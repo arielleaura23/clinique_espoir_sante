@@ -7,7 +7,7 @@
 <x-hero
     title='<span class="hero-title-main">Venez<span class="hero-title-highlight"> consulter chez nous!</span></span>'
     description="Réservez facilement vos rendez-vous médicaux en ligne, avec des médecins qualifiés et disponibles."
-    :button="view('components.bouton', ['icon' => 'assets/img/rdv.png', 'slot' => 'Prendre un rdv', 'href' => '/prendre-rdv'])->render()"
+    :button="view('components.bouton', ['icon' => 'assets/img/rdv.png', 'slot' => 'Prendre un rdv', 'href' => '/prise_rdv'])->render()"
     mask="assets/img/exclude.png"
     photo="assets/img/doctor1.png"
 />

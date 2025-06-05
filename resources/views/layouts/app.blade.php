@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Clinique Espoir Santé')</title>
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
 </head>
 <body>
     @include('components.header')
@@ -15,5 +16,8 @@
     </main>
 
     @include('components.footer')
+
+    <script src="{{asset('assets/js/script.js')}}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </body>
 </html>

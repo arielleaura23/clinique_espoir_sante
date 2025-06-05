@@ -42,5 +42,9 @@ class HomeController extends Controller
     {
         return view('pharmacie');
     }
+    public function prise_rdv()
+    {
+        return view('prise_rdv');
+    }
 
 }

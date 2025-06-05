@@ -28,4 +28,5 @@ Route::get('/events', [HomeController::class, 'events'])->name('events');
 Route::get('/guide_patient', [HomeController::class, 'guide_patient'])->name('guide_patient');
 Route::get('/medecins', [HomeController::class, 'medecins'])->name('medecins');
 Route::get('/pharmacie', [HomeController::class, 'pharmacie'])->name('pharmacie');
+Route::get('/prise_rdv', [HomeController::class, 'prise_rdv'])->name('prise_rdv');
 

@@ -40,10 +40,28 @@
                         </div>
                     </div>
                     <div class="header-lang">
-                        <span><img src="{{ asset('assets/img/chevron_down.png') }}" width="20" height="20"
-                                alt="chevron_down"></span>
-                        <img class="flag-icon" src="{{ asset('assets/img/drapeau_france.png') }}" alt="FR">
-                        <span class="lang-label">FR</span>
+                        <div class="lang-switcher">
+                            <div class="lang-switcher-selected"
+                                onclick="document.querySelector('.lang-switcher-dropdown').classList.toggle('show')">
+                                <span><img src="{{ asset('assets/img/chevron_down.png') }}" width="20"
+                                        height="20" alt="chevron_down"></span>
+                                <img class="flag-icon" src="{{ asset('assets/img/drapeau_france.png') }}"
+                                    alt="FR">
+                                <span class="lang-label">FR</span>
+                            </div>
+                            <div class="lang-switcher-dropdown">
+                                <div class="lang-switcher-option">
+                                    <img class="flag-icon" src="{{ asset('assets/img/drapeau_anglais.png') }}"
+                                        alt="FR">
+                                    <span class="lang-label">EN</span>
+                                </div>
+                                <div class="lang-switcher-option">
+                                    <img class="flag-icon" src="{{ asset('assets/img/drapeau_france.png') }}"
+                                        alt="FR">
+                                    <span class="lang-label">FR</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

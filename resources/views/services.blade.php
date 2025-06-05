@@ -10,7 +10,7 @@
         :button="view('components.bouton', [
             'icon' => 'assets/img/rdv.png',
             'slot' => 'Prendre un rdv',
-            'href' => '/prendre-rdv',
+            'href' => '/prise_rdv',
         ])->render()" mask="assets/img/exclude.png" />
 
 
