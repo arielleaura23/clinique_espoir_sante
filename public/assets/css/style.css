@@ -7,18 +7,13 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding-left: 24px;
-    padding-right: 24px;
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    padding: 0 16px;
 }
 
 .section {
     width: 100%;
-    margin: 120px 0;
+    margin-top: 120px;
+    margin-bottom: 120px;
     position: relative;
     overflow: hidden;
 }
@@ -306,12 +301,18 @@
 }
 .hero-cta {
     position: relative;
-    width: 264px;
-    height: 60px;
+    padding: 10px 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 10px;
+    width: fit-content;
+}
+.cta-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .chat {
@@ -368,9 +369,6 @@
 .cta-icon {
     width: 25px;
     height: 25px;
-    position: absolute;
-    left: 39px;
-    top: 17px;
     z-index: 3;
 }
 .hero-mask {
@@ -393,22 +391,24 @@
     position: relative;
     width: 100%;
     padding: 60px 0;
-    background: #f8faff;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 40px;
+    justify-content: space-between;
 }
 .about-section .container {
     flex-direction: row;
     align-items: flex-start;
     gap: 40px;
 }
+.about-content {
+    display: flex;
+    gap: 40px;
+}
 .about-container {
     display: flex;
     flex-direction: column;
     gap: 18px;
-    max-width: 500px;
+    width: 50%;
     z-index: 2;
 }
 .about-title-en {
@@ -459,7 +459,7 @@
     width: 100%;
 }
 .about-image {
-    width: 500px;
+    width: 50%;
     height: 300px;
     object-fit: cover;
     z-index: 1;
@@ -1466,7 +1466,7 @@
 
 /* Section Mot du Directeur Général */
 .director-message-section {
-    width: 100%;
+    margin: 0 auto;
     max-width: 900px;
     display: flex;
     flex-direction: column;
@@ -1530,7 +1530,7 @@
 }
 
 .faq-section {
-    width: 100%;
+    margin: 0 auto;
     max-width: 900px;
     display: flex;
     flex-direction: column;
@@ -1670,6 +1670,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+    margin: 0 auto;
 }
 .at-clinic-header {
     text-align: center;
@@ -1776,11 +1777,12 @@
 }
 
 .appointment-form-title {
-    font-size: 22px;
+    font-size: 28px;
     font-weight: bold;
     color: #1d77fe;
     margin-bottom: 8px;
     text-align: center;
+    font-family: "Inter", sans-serif;
 }
 
 .appointment-form-clinic {
@@ -1892,17 +1894,10 @@
     z-index: 0;
 }
 
-
-
-
 /* section pharmacie */
 .pharmacy-section {
-    background: #fff;
-    border-radius: 16px;
-    padding: 32px 24px;
-    max-width: 1200px;
+    background: #f8faff;
     margin: 40px auto;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
 }
 
 .pharmacy-header {
@@ -1915,6 +1910,7 @@
     font-weight: bold;
     color: #1d77fe;
     margin-bottom: 8px;
+    font-family: "Inter", sans-serif;
 }
 
 .pharmacy-header-desc {
@@ -1936,7 +1932,7 @@
     border: 1.5px solid #a8dfff;
     border-radius: 7px 0 0 7px;
     font-size: 15px;
-    width: 260px;
+    width: 800px;
     outline: none;
     background: #f8faff;
     color: #222;
@@ -1959,7 +1955,7 @@
 }
 
 .pharmacy-search-btn:hover {
-    background: #155bb5;
+    background: #a8dfff;
 }
 
 .pharmacy-products-grid {
@@ -1967,25 +1963,39 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     justify-items: center;
+    margin: 0 auto;
+    max-width: 900px;
 }
 
 .pharmacy-product-card {
-    background: #f8faff;
+    background: #fff;
     border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    padding: 18px 16px 20px 16px;
-    width: 210px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 30px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
     position: relative;
+    gap: 20px;
 }
 
-.pharmacy-product-img {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
+.pharmacy-product-img-wrapper {
+    width: 200px;
+    height: 130px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
     margin-bottom: 12px;
+}
+.pharmacy-product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .pharmacy-product-info {
@@ -2002,6 +2012,7 @@
     color: #1d77fe;
     margin-bottom: 4px;
     text-align: center;
+    font-family: "Inter", sans-serif;
 }
 
 .pharmacy-product-status {
@@ -2023,28 +2034,23 @@
     background: #ffe0e0;
     color: #e53935;
 }
+.stock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pharmacy-bell-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
 
 .pharmacy-product-price {
     font-size: 15px;
     color: #333;
     font-weight: 600;
     margin-bottom: 6px;
-}
-
-.pharmacy-product-buy-btn {
-    background: #1d77fe;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 8px 18px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.pharmacy-product-buy-btn:hover {
-    background: #155bb5;
 }
 
 /* Responsive */
@@ -2058,3 +2064,538 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* contact section */
+.contact-section {
+    margin: 40px auto;
+    position: relative;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.contact-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.contact-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1d77fe;
+    margin-bottom: 8px;
+    font-family: "Inter", sans-serif;
+}
+
+.contact-desc {
+    font-size: 15px;
+    color: #757575;
+    margin-bottom: 18px;
+}
+
+.image-contact {
+    width: 30%;
+}
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 40%;
+}
+
+.contact-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.contact-label {
+    font-size: 15px;
+    color: #757575;
+    font-weight: 500;
+}
+
+.required {
+    color: #e53935;
+    margin-left: 2px;
+}
+
+.contact-input {
+    padding: 12px 14px;
+    border: 1px solid #757575;
+    border-radius: 7px;
+    font-size: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #f8faff;
+    color: #222;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    font-family: "Inter", Arial, sans-serif;
+}
+
+.contact-input:focus {
+    border-color: #1d77fe;
+    background: #fff;
+    box-shadow: 0 0 0 2px #e3f1ff;
+}
+
+.contact-submit-btn {
+    margin-top: 16px;
+    background: #1d77fe;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 14px 0;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(29, 119, 254, 0.08);
+    transition: background 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.5px;
+}
+
+.contact-submit-btn:hover {
+    background: #155bb5;
+    box-shadow: 0 4px 16px rgba(29, 119, 254, 0.12);
+}
+
+.contact-bg-img {
+    width: 350px;
+    pointer-events: none;
+}
+
+/* register css */
+/* .formulaire-d-inscription,
+.formulaire-d-inscription * {
+  box-sizing: border-box;
+}
+.formulaire-d-inscription {
+  background: #a8dfff;
+  height: 1942px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(9.5px);
+}
+.inscription {
+  position: absolute;
+  inset: 0;
+}
+.rectangle-30 {
+  background: #ffffff;
+  width: 1146px;
+  height: 1704px;
+  position: absolute;
+  left: 147px;
+  top: 119px;
+}
+.frame-1000002282 {
+  background: var(--miscellaneous-floating-tab-text-selected, #007aff);
+  border-radius: 16px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 680px;
+  height: 221.38px;
+  position: absolute;
+  left: 380px;
+  top: 338.59px;
+  overflow: hidden;
+}
+.welcome-to-clinic-register {
+  color: #ffffff;
+  text-align: left;
+  position: relative;
+  align-self: stretch;
+}
+.welcome-to-clinic-register-span {
+  font-family: "InstrumentSans-Regular", sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+}
+.welcome-to-clinic-register-span2 {
+  font-family: "InstrumentSans-Bold", sans-serif;
+  font-size: 36px;
+  font-weight: 700;
+}
+.group-1 {
+  flex-shrink: 0;
+  width: 38.58%;
+  height: 107.27%;
+  position: absolute;
+  right: -1.96%;
+  left: 63.39%;
+  bottom: -25.37%;
+  top: 18.1%;
+  overflow: visible;
+}
+.frame-1000002283 {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 680px;
+  height: 551.09px;
+  position: absolute;
+  left: 380px;
+  top: 648.1px;
+}
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.nom {
+  text-align: left;
+  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+  font-size: var(--title-font-size, 20px);
+  font-weight: var(--title-font-weight, 400);
+  position: relative;
+  align-self: stretch;
+}
+.nom-span {
+  color: var(--title-color, rgba(0, 13, 51, 0.4));
+}
+.nom-span2 {
+  color: rgba(245, 31, 20, 0.4);
+}
+.frame {
+  border-radius: 4px;
+  border-style: solid;
+  border-color: var(--border-color, rgba(0, 32, 128, 0.2));
+  border-width: 1px;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 0px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  height: 58px;
+  position: relative;
+  overflow: hidden;
+}
+.email {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.email2 {
+  text-align: left;
+  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+  font-size: var(--title-font-size, 20px);
+  font-weight: var(--title-font-weight, 400);
+  position: relative;
+  align-self: stretch;
+}
+.email-2-span {
+  color: var(--title-color, rgba(0, 13, 51, 0.4));
+}
+.email-2-span2 {
+  color: rgba(245, 31, 20, 0.4);
+}
+.dob {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.date-de-naissance {
+  text-align: left;
+  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+  font-size: var(--title-font-size, 20px);
+  font-weight: var(--title-font-weight, 400);
+  position: relative;
+  align-self: stretch;
+}
+.date-de-naissance-span {
+  color: var(--title-color, rgba(0, 13, 51, 0.4));
+}
+.date-de-naissance-span2 {
+  color: rgba(245, 31, 20, 0.4);
+}
+.sexe {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.sexe2 {
+  text-align: left;
+  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+  font-size: var(--title-font-size, 20px);
+  font-weight: var(--title-font-weight, 400);
+  position: relative;
+  align-self: stretch;
+}
+.sexe-2-span {
+  color: var(--title-color, rgba(0, 13, 51, 0.4));
+}
+.sexe-2-span2 {
+  color: rgba(245, 31, 20, 0.4);
+}
+.password {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-self: stretch;
+  flex-shrink: 0;
+  position: relative;
+}
+.mot-de-passe {
+  text-align: left;
+  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+  font-size: var(--title-font-size, 20px);
+  font-weight: var(--title-font-weight, 400);
+  position: relative;
+  align-self: stretch;
+}
+.mot-de-passe-span {
+  color: var(--title-color, rgba(0, 13, 51, 0.4));
+}
+.mot-de-passe-span2 {
+  color: rgba(245, 31, 20, 0.4);
+}
+.bouton {
+  width: 671px;
+  height: 70.85px;
+  position: absolute;
+  left: 380px;
+  top: 1418.2px;
+}
+.rounded-rectangle {
+  background: #1d77fe;
+  border-radius: 30px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  right: 0%;
+  left: 0%;
+  bottom: 0%;
+  top: 0%;
+}
+.enregistrer {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  position: absolute;
+  right: 19.22%;
+  left: 18.45%;
+  width: 62.33%;
+  bottom: 25.93%;
+  top: 25.93%;
+  height: 48.15%;
+}
+.ou {
+  width: 671px;
+  height: 14px;
+  position: static;
+}
+.line-2 {
+  background: rgba(217, 217, 217, 0.4);
+  margin-top: -1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.4);
+  border-width: 1px 0 0 0;
+  width: 305.01px;
+  height: 0px;
+  position: absolute;
+  left: 380px;
+  top: 1532.56px;
+  transform-origin: 0 0;
+  transform: rotate(-0.427deg) scale(1, 1);
+}
+.line-3 {
+  margin-top: -1px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.4);
+  border-width: 1px 0 0 0;
+  width: 313px;
+  height: 0px;
+  position: absolute;
+  left: 738px;
+  top: 1530.82px;
+  transform-origin: 0 0;
+  transform: rotate(0deg) scale(1, 1);
+}
+.ou2 {
+  color: #000d33;
+  text-align: center;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: absolute;
+  left: 700px;
+  top: 1522.07px;
+  width: 31px;
+  height: 14px;
+}
+.wirh-google {
+  width: 671px;
+  height: 42.86px;
+  position: static;
+}
+.rectangle-32 {
+  background: #ffffff;
+  border-radius: 30px;
+  width: 671px;
+  height: 42.86px;
+  position: absolute;
+  left: 380px;
+  top: 1586.07px;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.5);
+}
+.inscrivez-vous-avec-google {
+  color: rgba(0, 13, 51, 0.4);
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: absolute;
+  left: 614px;
+  top: 1595.7px;
+  width: 281px;
+  height: 22.74px;
+}
+.flat-color-icons-google {
+  width: 28.06px;
+  height: 28.06px;
+  position: absolute;
+  left: 563.97px;
+  top: 1591.29px;
+  overflow: visible;
+  aspect-ratio: 1;
+}
+.with-fcbk {
+  width: 671px;
+  height: 59.48px;
+  position: static;
+}
+.rectangle-33 {
+  background: #ffffff;
+  border-radius: 30px;
+  width: 671px;
+  height: 42.86px;
+  position: absolute;
+  left: 377px;
+  top: 1679.45px;
+  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.5);
+}
+.inscrivez-vous-avec-facebook {
+  color: rgba(0, 13, 51, 0.4);
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: absolute;
+  left: 613px;
+  top: 1688.2px;
+  width: 279px;
+  height: 22.74px;
+}
+.ic-twotone-facebook {
+  width: 57.91px;
+  height: 57.91px;
+  position: absolute;
+  left: 561.22px;
+  top: 1681.02px;
+  overflow: visible;
+  aspect-ratio: 1;
+}
+.group-17 {
+  position: absolute;
+  inset: 0;
+}
+.avez-vous-deja-un-compte {
+  color: #1d77fe;
+  text-align: left;
+  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+  font-size: var(--title-font-size, 20px);
+  font-weight: var(--title-font-weight, 400);
+  position: absolute;
+  left: 813px;
+  top: 1330px;
+  width: 263px;
+  height: 20.01px;
+}
+.remember {
+  width: 166px;
+  height: 20.01px;
+  position: static;
+}
+.remenber-me {
+  color: var(--title-color, rgba(0, 13, 51, 0.4));
+  text-align: left;
+  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+  font-size: var(--title-font-size, 20px);
+  font-weight: var(--title-font-weight, 400);
+  position: absolute;
+  left: 405px;
+  top: 1330px;
+  width: 141px;
+  height: 20.01px;
+}
+.rectangle-31 {
+  background: #d9d9d9;
+  border-radius: 2px;
+  width: 20px;
+  height: 16.67px;
+  position: absolute;
+  left: 380px;
+  top: 1331.67px;
+}
+ */
+
+.registration-form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.registration-form-header {
+    background: blue;
+    display: flex;
+    justify-content: space-between;
+}
+.registration-form {
+    padding: 30px;
+}
+.welcome-message {
+    color: white;
+    padding-left: 30px;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 22px;
+}
+

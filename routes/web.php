@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,8 @@ Route::get('/guide_patient', [HomeController::class, 'guide_patient'])->name('gu
 Route::get('/medecins', [HomeController::class, 'medecins'])->name('medecins');
 Route::get('/pharmacie', [HomeController::class, 'pharmacie'])->name('pharmacie');
 Route::get('/prise_rdv', [HomeController::class, 'prise_rdv'])->name('prise_rdv');
+
+
+Route::get('/register', [AuthController::class, 'register'])->name('show.register');
+Route::get('/login', [AuthController::class, 'login'])->name('show.login');
 
