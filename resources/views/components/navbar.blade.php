@@ -12,7 +12,7 @@
                                 src="{{ asset('assets/img/chevron_down.png') }}" width="20" height="20"
                                 alt="chevron_down"></span></a>
                     {{-- <div class="nav-dropdown"></div> --}}
-                    <a class="nav-login-btn">
+                    <a href="{{route('show.login')}}" class="nav-login-btn">
                         <div class="login-bg"></div>
                         <div class="login-text">Se connecter</div>
                     </a>

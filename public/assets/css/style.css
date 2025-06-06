@@ -1851,6 +1851,21 @@
     border-color: #1d77fe;
     background: #fff;
 }
+input:focus {
+    outline: none;
+    border-color: #1d77fe;
+    background: #fff;
+}
+/* input{
+    padding: 10px 12px!important;
+    border: 1px solid #757575!important;
+    border-radius: 6px!important;
+    font-size: 15px!important;
+    width: 100%!important;
+    box-sizing: border-box!important;
+    background: #f8faff!important;
+    color: #757575!important;
+} */
 
 .form-input-icon {
     position: relative;
@@ -2171,414 +2186,324 @@
 }
 
 /* register css */
-/* .formulaire-d-inscription,
-.formulaire-d-inscription * {
-  box-sizing: border-box;
+.registration-form,
+.registration-form * {
+    box-sizing: border-box;
 }
-.formulaire-d-inscription {
-  background: #a8dfff;
-  height: 1942px;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(9.5px);
+.registration-form {
+    background: #a8dfff;
+    /* height: 100vh; */
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(9.5px);
 }
 .inscription {
-  position: absolute;
-  inset: 0;
+    position: absolute;
+    inset: 0;
 }
-.rectangle-30 {
-  background: #ffffff;
-  width: 1146px;
-  height: 1704px;
-  position: absolute;
-  left: 147px;
-  top: 119px;
+.background-rectangle {
+    background: #ffffff;
+    width: 600px;
+    padding: 30px 60px;
+    margin: 40px auto;
 }
-.frame-1000002282 {
-  background: var(--miscellaneous-floating-tab-text-selected, #007aff);
-  border-radius: 16px;
-  padding: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 680px;
-  height: 221.38px;
-  position: absolute;
-  left: 380px;
-  top: 338.59px;
-  overflow: hidden;
+.header-section {
+    background: #1d77fe;
+    padding: 20px 40px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    overflow: hidden;
+    border-radius: 24px;
+    position: relative;
 }
-.welcome-to-clinic-register {
-  color: #ffffff;
-  text-align: left;
-  position: relative;
-  align-self: stretch;
+.welcome-title {
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
-.welcome-to-clinic-register-span {
-  font-family: "InstrumentSans-Regular", sans-serif;
-  font-size: 40px;
-  font-weight: 400;
+.welcome-text {
+    font-family: "inter-Regular", sans-serif;
+    font-size: 20px;
 }
-.welcome-to-clinic-register-span2 {
-  font-family: "InstrumentSans-Bold", sans-serif;
-  font-size: 36px;
-  font-weight: 700;
+.clinic-register-text {
+    font-family: "inter-Bold", sans-serif;
+    font-size: 20px;
 }
-.group-1 {
-  flex-shrink: 0;
-  width: 38.58%;
-  height: 107.27%;
-  position: absolute;
-  right: -1.96%;
-  left: 63.39%;
-  bottom: -25.37%;
-  top: 18.1%;
-  overflow: visible;
+.logo-image {
+    flex-shrink: 0;
+    width: 130px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
 }
-.frame-1000002283 {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  width: 680px;
-  height: 551.09px;
-  position: absolute;
-  left: 380px;
-  top: 648.1px;
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 45px 0;
 }
-.name {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+.name-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4 px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: stretch;
+    flex-shrink: 0;
+    position: relative;
 }
-.nom {
-  text-align: left;
-  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
-  font-size: var(--title-font-size, 20px);
-  font-weight: var(--title-font-weight, 400);
-  position: relative;
-  align-self: stretch;
+.name-label {
+    text-align: left;
+    font-family: var(--title-font-family, "inter-Regular", sans-serif);
+    font-size: 18px;
+    font-weight: 400;
+    position: relative;
+    align-self: stretch;
 }
-.nom-span {
-  color: var(--title-color, rgba(0, 13, 51, 0.4));
+.label-text {
+    color: #757575;
+    font-size: 14px;
 }
-.nom-span2 {
-  color: rgba(245, 31, 20, 0.4);
+.required-asterisk {
+    color: rgba(245, 31, 20, 0.4);
 }
-.frame {
-  border-radius: 4px;
-  border-style: solid;
-  border-color: var(--border-color, rgba(0, 32, 128, 0.2));
-  border-width: 1px;
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  gap: 0px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  height: 58px;
-  position: relative;
-  overflow: hidden;
+.input-field {
+    border: 1px solid #757575;
+    padding: 10px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: stretch;
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px!important;
+    font-size: 15px!important;
+    width: 100%!important;
+    box-sizing: border-box!important;
+    background: #f8faff!important;
+    color: #757575!important;
 }
-.email {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+.email-field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: stretch;
+    flex-shrink: 0;
+    position: relative;
 }
-.email2 {
-  text-align: left;
-  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
-  font-size: var(--title-font-size, 20px);
-  font-weight: var(--title-font-weight, 400);
-  position: relative;
-  align-self: stretch;
+.email-label {
+    text-align: left;
+    font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+    font-size: var(--title-font-size, 20px);
+    font-weight: var(--title-font-weight, 400);
+    position: relative;
+    align-self: stretch;
 }
-.email-2-span {
-  color: var(--title-color, rgba(0, 13, 51, 0.4));
+.dob-field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: stretch;
+    flex-shrink: 0;
+    position: relative;
 }
-.email-2-span2 {
-  color: rgba(245, 31, 20, 0.4);
+.dob-label {
+    text-align: left;
+    font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+    font-size: var(--title-font-size, 20px);
+    font-weight: var(--title-font-weight, 400);
+    position: relative;
+    align-self: stretch;
 }
-.dob {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+.gender-field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: stretch;
+    flex-shrink: 0;
+    position: relative;
 }
-.date-de-naissance {
-  text-align: left;
-  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
-  font-size: var(--title-font-size, 20px);
-  font-weight: var(--title-font-weight, 400);
-  position: relative;
-  align-self: stretch;
+.gender-label {
+    text-align: left;
+    font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+    font-size: var(--title-font-size, 20px);
+    font-weight: var(--title-font-weight, 400);
+    position: relative;
+    align-self: stretch;
 }
-.date-de-naissance-span {
-  color: var(--title-color, rgba(0, 13, 51, 0.4));
+.password-field {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    align-self: stretch;
+    flex-shrink: 0;
+    position: relative;
 }
-.date-de-naissance-span2 {
-  color: rgba(245, 31, 20, 0.4);
+.password-label {
+    text-align: left;
+    font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
+    font-size: var(--title-font-size, 20px);
+    font-weight: var(--title-font-weight, 400);
+    position: relative;
+    align-self: stretch;
 }
-.sexe {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+.submit-button {
+    background: #1d77fe;
+    border-radius: 30px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #757575;
 }
-.sexe2 {
-  text-align: left;
-  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
-  font-size: var(--title-font-size, 20px);
-  font-weight: var(--title-font-weight, 400);
-  position: relative;
-  align-self: stretch;
+
+.button-text {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Inter-Regular", sans-serif;
+    font-weight: 400;
 }
-.sexe-2-span {
-  color: var(--title-color, rgba(0, 13, 51, 0.4));
+.divider-section {
+    margin: 30px 0;
+    display: flex;
+
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    justify-content: center;
 }
-.sexe-2-span2 {
-  color: rgba(245, 31, 20, 0.4);
+.divider-line-left {
+    width: 200px;
+    border-style: solid;
+    border-color: #757575;
+    height: 0px;
 }
-.password {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  align-items: flex-start;
-  justify-content: flex-start;
-  align-self: stretch;
-  flex-shrink: 0;
-  position: relative;
+.divider-line-right {
+    width: 200px;
+    border-style: solid;
+    border-color: #757575;
+    height: 0px;
 }
-.mot-de-passe {
-  text-align: left;
-  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
-  font-size: var(--title-font-size, 20px);
-  font-weight: var(--title-font-weight, 400);
-  position: relative;
-  align-self: stretch;
+
+.divider-text {
+    color: #757575;
+    text-align: center;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
 }
-.mot-de-passe-span {
-  color: var(--title-color, rgba(0, 13, 51, 0.4));
+
+.btn-connect-social {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
 }
-.mot-de-passe-span2 {
-  color: rgba(245, 31, 20, 0.4);
+
+.google-button {
+    width: 100%;
+    padding: 8px;
+    position: static;
+    background: #ffffff;
+    border-radius: 30px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid #757575;
 }
-.bouton {
-  width: 671px;
-  height: 70.85px;
-  position: absolute;
-  left: 380px;
-  top: 1418.2px;
+
+.google-button-text {
+    color: rgba(0, 13, 51, 0.4);
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
 }
-.rounded-rectangle {
-  background: #1d77fe;
-  border-radius: 30px;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  right: 0%;
-  left: 0%;
-  bottom: 0%;
-  top: 0%;
+.google-icon {
+    width: 20px;
+    height: 20px;
+    overflow: visible;
+    aspect-ratio: 1;
 }
-.enregistrer {
-  color: #ffffff;
-  text-align: center;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 32px;
-  font-weight: 400;
-  position: absolute;
-  right: 19.22%;
-  left: 18.45%;
-  width: 62.33%;
-  bottom: 25.93%;
-  top: 25.93%;
-  height: 48.15%;
+.facebook-button {
+    width: 671px;
+    height: 59.48px;
+    position: static;
 }
-.ou {
-  width: 671px;
-  height: 14px;
-  position: static;
+.facebook-button-background {
+    background: #ffffff;
+    border-radius: 30px;
+    width: 671px;
+    height: 42.86px;
+    position: absolute;
+    left: 377px;
+    top: 1679.45px;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.5);
 }
-.line-2 {
-  background: rgba(217, 217, 217, 0.4);
-  margin-top: -1px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.4);
-  border-width: 1px 0 0 0;
-  width: 305.01px;
-  height: 0px;
-  position: absolute;
-  left: 380px;
-  top: 1532.56px;
-  transform-origin: 0 0;
-  transform: rotate(-0.427deg) scale(1, 1);
+.facebook-button-text {
+    color: rgba(0, 13, 51, 0.4);
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    position: absolute;
+    left: 613px;
+    top: 1688.2px;
+    width: 279px;
+    height: 22.74px;
 }
-.line-3 {
-  margin-top: -1px;
-  border-style: solid;
-  border-color: rgba(0, 0, 0, 0.4);
-  border-width: 1px 0 0 0;
-  width: 313px;
-  height: 0px;
-  position: absolute;
-  left: 738px;
-  top: 1530.82px;
-  transform-origin: 0 0;
-  transform: rotate(0deg) scale(1, 1);
-}
-.ou2 {
-  color: #000d33;
-  text-align: center;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  position: absolute;
-  left: 700px;
-  top: 1522.07px;
-  width: 31px;
-  height: 14px;
-}
-.wirh-google {
-  width: 671px;
-  height: 42.86px;
-  position: static;
-}
-.rectangle-32 {
-  background: #ffffff;
-  border-radius: 30px;
-  width: 671px;
-  height: 42.86px;
-  position: absolute;
-  left: 380px;
-  top: 1586.07px;
-  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.5);
-}
-.inscrivez-vous-avec-google {
-  color: rgba(0, 13, 51, 0.4);
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  position: absolute;
-  left: 614px;
-  top: 1595.7px;
-  width: 281px;
-  height: 22.74px;
-}
-.flat-color-icons-google {
-  width: 28.06px;
-  height: 28.06px;
-  position: absolute;
-  left: 563.97px;
-  top: 1591.29px;
-  overflow: visible;
-  aspect-ratio: 1;
-}
-.with-fcbk {
-  width: 671px;
-  height: 59.48px;
-  position: static;
-}
-.rectangle-33 {
-  background: #ffffff;
-  border-radius: 30px;
-  width: 671px;
-  height: 42.86px;
-  position: absolute;
-  left: 377px;
-  top: 1679.45px;
-  box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.5);
-}
-.inscrivez-vous-avec-facebook {
-  color: rgba(0, 13, 51, 0.4);
-  text-align: left;
-  font-family: "Inter-Regular", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  position: absolute;
-  left: 613px;
-  top: 1688.2px;
-  width: 279px;
-  height: 22.74px;
-}
-.ic-twotone-facebook {
-  width: 57.91px;
-  height: 57.91px;
-  position: absolute;
-  left: 561.22px;
-  top: 1681.02px;
-  overflow: visible;
-  aspect-ratio: 1;
+.facebook-icon {
+    width: 57.91px;
+    height: 57.91px;
+    position: absolute;
+    left: 561.22px;
+    top: 1681.02px;
+    overflow: visible;
+    aspect-ratio: 1;
 }
 .group-17 {
-  position: absolute;
-  inset: 0;
+    position: absolute;
+    inset: 0;
 }
-.avez-vous-deja-un-compte {
-  color: #1d77fe;
-  text-align: left;
-  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
-  font-size: var(--title-font-size, 20px);
-  font-weight: var(--title-font-weight, 400);
-  position: absolute;
-  left: 813px;
-  top: 1330px;
-  width: 263px;
-  height: 20.01px;
+.login-link {
+    color: #1d77fe;
+    text-align: left;
 }
-.remember {
-  width: 166px;
-  height: 20.01px;
-  position: static;
+.remember-section {
+    position: static;
+    align-items: center;
+    display: flex;
+    gap: 3px;
 }
-.remenber-me {
-  color: var(--title-color, rgba(0, 13, 51, 0.4));
-  text-align: left;
-  font-family: var(--title-font-family, "InstrumentSans-Regular", sans-serif);
-  font-size: var(--title-font-size, 20px);
-  font-weight: var(--title-font-weight, 400);
-  position: absolute;
-  left: 405px;
-  top: 1330px;
-  width: 141px;
-  height: 20.01px;
+.remember-label {
+    color: var(--title-color, rgba(0, 13, 51, 0.4));
+    text-align: left;
 }
-.rectangle-31 {
-  background: #d9d9d9;
-  border-radius: 2px;
-  width: 20px;
-  height: 16.67px;
-  position: absolute;
-  left: 380px;
-  top: 1331.67px;
+.remember-checkbox {
+    background: #d9d9d9;
+    border-radius: 2px;
+    width: 15px;
+    height: 15px;
 }
- */
 
-.registration-form-container {
+.questions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* .registration-form-container {
     max-width: 500px;
     margin: 0 auto;
     background: #fff;
@@ -2597,5 +2522,375 @@
     padding-left: 30px;
     font-family: "Inter-Bold", sans-serif;
     font-size: 22px;
+} */
+
+
+
+/* doctors section */
+.nos-medecins {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
 }
+
+.titre-section {
+  font-size: clamp(28px, 5vw, 50px);
+  color: #1d77fe;
+  margin-bottom: 40px;
+  font-family: "PlusJakartaSans-Bold", sans-serif;
+}
+
+.doctors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.doctor-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-8px);
+}
+
+.doctor-card img {
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.doctor-card h3 {
+  margin: 16px 0 8px;
+  font-size: 24px;
+  color: #1d77fe;
+  font-family: "PlusJakartaSans-Bold", sans-serif;
+}
+
+.doctor-card .specialty {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 16px;
+  font-family: "Inter", sans-serif;
+}
+
+.doctors-content{
+        display: flex
+;
+    flex-direction: column;
+    gap: 50px;
+
+}
+
+
+/* emergency doctors */
+.emergency-section,
+.emergency-section * {
+  box-sizing: border-box;
+}
+
+.emergency-section {
+  height: 428px;
+  position: relative;
+}
+
+.emergency-box {
+  width: 631px;
+  height: 380px;
+  position: static;
+}
+
+.blue-box {
+  background: #1d77fe;
+  width: 631px;
+  height: 380px;
+  position: absolute;
+  left: 575px;
+  top: 0px;
+}
+
+.emergency-title {
+  color: #ffffff;
+  text-align: center;
+  font-family: "Inter-Medium", sans-serif;
+  font-size: 40px;
+  font-weight: 500;
+  position: absolute;
+  left: 613.31px;
+  top: 24.32px;
+  width: 549.07px;
+  height: 82.08px;
+}
+
+.emergency-description {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  position: absolute;
+  left: 617.56px;
+  top: 127.68px;
+  width: 532.04px;
+  height: 131.48px;
+}
+
+.emergency-phone {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  position: absolute;
+  left: 740px;
+  top: 272px;
+  width: 429px;
+  height: 58px;
+}
+
+.call-icon-group {
+  width: 110px;
+  height: 106px;
+  position: static;
+}
+
+.white-circle {
+  background: #ffffff;
+  border-radius: 50%;
+  width: 110px;
+  height: 106px;
+  position: absolute;
+  left: 622px;
+  top: 245px;
+}
+
+.call-icon {
+  width: 3.32%;
+  height: 40px;
+  position: absolute;
+  right: 42.21%;
+  left: 54.48%;
+  top: 278px;
+  overflow: visible;
+  aspect-ratio: 1;
+}
+
+.priority-title {
+  color: #1d77fe;
+  text-align: left;
+  font-family: "ArchivoBlack-Regular", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  position: absolute;
+  left: 0px;
+  top: 57px;
+  width: 528px;
+  height: 104px;
+}
+
+.priority-text {
+  color: #757575;
+  text-align: left;
+  font-family: "Inter-Regular", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  position: absolute;
+  left: 2px;
+  top: 212px;
+  width: 488px;
+  height: 216px;
+}
+
+
+
+/* contact doctors */
+.contact-section,
+.contact-section * {
+  box-sizing: border-box;
+}
+.contact-section {
+  position: relative;
+}
+
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  width: 347px;
+  height: 170px;
+  position: absolute;
+  left: 295px;
+  top: 0;
+}
+
+.contact-title {
+  color: #1d77fe;
+  text-align: center;
+  font-family: "PlusJakartaSans-Bold", sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  position: relative;
+  width: 807px;
+}
+
+.contact-cards {
+  width: 992px;
+  height: 233px;
+  position: static;
+}
+
+.contact-card {
+  width: 233px;
+  height: 233px;
+  position: static;
+}
+
+.card-bg-blue {
+  background: #a8dfff;
+  width: 233px;
+  height: 233px;
+  position: absolute;
+}
+
+.card-bg-darkblue {
+  background: #1d77fe;
+  width: 233px;
+  height: 233px;
+  position: absolute;
+}
+
+.contact-info {
+  position: static;
+}
+
+.contact-label {
+  color: #1d77fe;
+  text-align: left;
+  font-family: "ArchivoBlack-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  position: absolute;
+}
+
+.contact-text {
+  color: #1d77fe;
+  text-align: left;
+  font-family: "WorkSans-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  position: absolute;
+}
+
+/* Spécifique pour chaque élément (en reprenant les positions d'origine) */
+.contact-label:nth-of-type(1) {
+  left: 30px;
+  top: 276px;
+}
+.contact-text:nth-of-type(1) {
+  left: 30px;
+  top: 328px;
+}
+
+.contact-label:nth-of-type(2) {
+  color: #a8dfff;
+  left: 283px;
+  top: 275px;
+}
+.contact-text:nth-of-type(2) {
+  color: #a8dfff;
+  left: 283px;
+  top: 306px;
+}
+.contact-text:nth-of-type(3) {
+  color: #a8dfff;
+  left: 283px;
+  top: 330px;
+}
+
+.contact-label:nth-of-type(3) {
+  left: 536px;
+  top: 276px;
+}
+.contact-text:nth-of-type(4) {
+  left: 536px;
+  top: 328px;
+}
+
+.contact-label:nth-of-type(4) {
+  left: 789px;
+  top: 276px;
+}
+.contact-text:nth-of-type(5) {
+  left: 789px;
+  top: 307px;
+}
+.contact-text:nth-of-type(6) {
+  left: 789px;
+  top: 328px;
+  width: 162px;
+}
+
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  left: 532px;
+  top: 221px;
+  overflow: visible;
+}
+
+/* Icônes */
+.icon-phone {
+  width: 4.03%;
+  height: 40px;
+  position: absolute;
+  right: 92.44%;
+  left: 3.53%;
+  top: 225px;
+  overflow: visible;
+  aspect-ratio: 1;
+}
+
+.icon-time {
+  background: #a8dfff;
+  width: 4.03%;
+  height: 40px;
+  position: absolute;
+  right: 16.43%;
+  left: 79.54%;
+  top: 221px;
+  aspect-ratio: 1;
+}
+
+.icon-location {
+  background: #1d77fe;
+  width: 4.54%;
+  height: 45px;
+  position: absolute;
+  right: 66.94%;
+  left: 28.53%;
+  top: 220px;
+  aspect-ratio: 1;
+}
+
+.icon-inner {
+  width: 66.67%;
+  height: 83.33%;
+  position: absolute;
+  right: 16.67%;
+  left: 16.67%;
+  bottom: 8.33%;
+  top: 8.33%;
+  overflow: visible;
+}
+
+
 
