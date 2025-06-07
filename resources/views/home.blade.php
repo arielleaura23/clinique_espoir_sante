@@ -238,15 +238,18 @@
 
 
 
-    <div class="partenaires-section section">
-        <div class="partenaires-bg"></div>
-        <div class="container">
-            <div class="partenaires-list">
-                <img class="partenaire-logo" src="{{ asset('assets/img/logo_minesup.webp') }}" alt="Minesup" />
-                <img class="partenaire-logo" src="{{ asset('assets/img/logo_minsante-2.webp') }}" alt="Minsanté" />
-                <img class="partenaire-logo" src="{{ asset('assets/img/logo_minfi.webp') }}" alt="Minfi" />
+    <div class="partenaires-section section" style="    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+
+        <div class="partenaires-bg">
+            <div class="container">
+                <div class="partenaires-list">
+                    <img class="partenaire-logo" src="{{ asset('assets/img/logo_minesup.webp') }}" alt="Minesup" />
+                    <img class="partenaire-logo" src="{{ asset('assets/img/logo_minsante-2.webp') }}" alt="Minsanté" />
+                    <img class="partenaire-logo" src="{{ asset('assets/img/logo_minfi.webp') }}" alt="Minfi" />
+                </div>
             </div>
         </div>
+
 
     </div>
 

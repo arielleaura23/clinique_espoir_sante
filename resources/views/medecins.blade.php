@@ -70,99 +70,134 @@
 
 
 
-    <div class="container section">
-        <section class="emergency-section">
+
+    <section class="emergency-section">
+        <div class="container section">
             <div class="emergency-box">
-                <div class="blue-box"></div>
+                <div class="white-box">
+                    <div class="priority-title">
+                        Votre santé est notre priorité
+                    </div>
 
-                <div class="emergency-title">
-                    Interventions d’urgence médicales
+                    <div class="priority-text">
+                        En cas d&#039;urgence, chaque seconde compte. Notre équipe médicale est
+                        disponible 24h/24 et 7j/7 pour vous apporter une prise en charge rapide,
+                        efficace et humaine, dans les moments où vous en avez le plus besoin.
+                    </div>
                 </div>
+                <div class="blue-box">
+                    <div class="emergency-title">
+                        Interventions d’urgence médicales
+                    </div>
 
-                <div class="emergency-description">
-                    Appelez-nous sans hésiter si vous avez besoin d&#039;assistance immédiate
-                    ou si vous êtes témoin d&#039;une situation urgente.
-                </div>
+                    <div class="emergency-description">
+                        Appelez-nous sans hésiter si vous avez besoin d&#039;assistance immédiate
+                        ou si vous êtes témoin d&#039;une situation urgente.
+                    </div>
 
-                <div class="emergency-phone">(237) 655-41-88-41</div>
 
-                <div class="call-icon-group">
-                    <div class="white-circle"></div>
-                    <img class="call-icon" src="{{asset('assets/img/phone.png')}}" alt="Appel d'urgence" />
+
+                    <div class="call-icon-group">
+                        <div class="white-circle">
+                            <img class="call-icon" src="{{ asset('assets/img/phone.png') }}" alt="Appel d'urgence" />
+                        </div>
+
+                        <div class="call-number">
+                            <div class="emergency-phone">(237) 655-41-88-41</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="priority-title">
-                Votre santé est notre priorité
+
+
+    </section>
+
+
+    <section class="partners">
+            <div class="before-consultation-header">
+        <div class="before-consultation-title">Partenaires</div>
+    </div>
+    <div class="partenaires-section section" style="    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+
+        <div class="partenaires-bg">
+            <div class="container">
+                <div class="partenaires-list">
+                    <img class="partenaire-logo" src="{{ asset('assets/img/logo_minesup.webp') }}" alt="Minesup" />
+                    <img class="partenaire-logo" src="{{ asset('assets/img/logo_minsante-2.webp') }}" alt="Minsanté" />
+                    <img class="partenaire-logo" src="{{ asset('assets/img/logo_minfi.webp') }}" alt="Minfi" />
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    </section>
+
+
+    <div class="container section">
+        <div class="contact-section">
+            <div class="before-consultation-header">
+                <div class="before-consultation-title">Contact</div>
             </div>
 
-            <div class="priority-text">
-                En cas d&#039;urgence, chaque seconde compte. Notre équipe médicale est
-                disponible 24h/24 et 7j/7 pour vous apporter une prise en charge rapide,
-                efficace et humaine, dans les moments où vous en avez le plus besoin.
+            <div class="contact-cards">
+                <!-- Carte Emergency -->
+                <div class="contact-card">
+                    <div class="card-bg-blue">
+                        <div class="contact-info">
+                            <img class="contact-icon" src="{{ asset('assets/img/phone_sky_blue.png') }}" />
+                            <div class="contact-label">Emergency</div>
+                            <div class="contact-text">(237) 655-41-88-41</div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte Adresse -->
+                <div class="contact-card">
+                    <div class="card-bg-blue card-bg-darkblue">
+                        <div class="contact-info">
+                            <img class="contact-icon" src="{{ asset('assets/img/location_blue.png') }}" />
+                            <div class="contact-label">Address</div>
+                            <div class="contact-text">Mendong</div>
+                            <div class="contact-text">Yaounde,Cameroun</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Carte Email -->
+                <div class="contact-card">
+                    <div class="card-bg-blue">
+                        <div class="contact-info">
+                            <img class="contact-icon" src="{{ asset('assets/img/email_sky_blue.png') }}" />
+                            <div class="contact-label">Email</div>
+                            <div class="contact-text">abomoarielle@gmail.com</div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Carte Emploi du temps -->
+                <div class="contact-card">
+                    <div class="card-bg-blue">
+                        <div class="contact-info">
+                            <img class="contact-icon" src="{{ asset('assets/img/time_sky_blue.png') }}" />
+                            <div class="contact-label">Emploi de temps</div>
+                            <div class="contact-text">08:00-20:00</div>
+                            <div class="contact-text">Tous les jours</div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
-        </section>
-
+        </div>
     </div>
 
-
-{{-- <div class="contact-section">
-  <div class="contact-header">
-    <div class="contact-title">Contact</div>
-  </div>
-
-  <div class="contact-cards">
-    <!-- Carte Emergency -->
-    <div class="contact-card">
-      <div class="card-bg-blue"></div>
-      <div class="contact-info">
-        <div class="contact-label">Emergency</div>
-        <div class="contact-text">(237) 655-41-88=41</div>
-      </div>
-    </div>
-
-    <!-- Carte Adresse -->
-    <div class="contact-card">
-      <div class="card-bg-darkblue"></div>
-      <div class="contact-info">
-        <div class="contact-label">Address</div>
-        <div class="contact-text">Menndong</div>
-        <div class="contact-text">Yaounde,Cameroun</div>
-      </div>
-    </div>
-
-    <!-- Carte Email -->
-    <div class="contact-card">
-      <div class="card-bg-blue"></div>
-      <div class="contact-info">
-        <div class="contact-label">Email</div>
-        <div class="contact-text">abomoarielle@gmail.com</div>
-        <img class="contact-icon" src="component0.svg" />
-      </div>
-    </div>
-
-    <!-- Carte Emploi du temps -->
-    <div class="contact-card">
-      <div class="card-bg-blue"></div>
-      <div class="contact-info">
-        <div class="contact-label">Emploi de temps</div>
-        <div class="contact-text">08:00-20:00</div>
-        <div class="contact-text">Tous les jours</div>
-      </div>
-    </div>
-
-    <!-- Icônes -->
-    <img class="icon-phone" src="tdesign-call-10.svg" />
-
-    <div class="icon-time">
-      <img class="icon-inner" src="group0.svg" />
-    </div>
-
-    <div class="icon-location">
-      <img class="icon-inner" src="group1.svg" />
-    </div>
-  </div>
-</div> --}}
 
 
 

@@ -46,5 +46,10 @@ class HomeController extends Controller
     {
         return view('prise_rdv');
     }
+    public function blog_details()
+    {
+        return view('blog_details');
+    }
+
 
 }
