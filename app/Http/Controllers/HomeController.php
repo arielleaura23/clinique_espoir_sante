@@ -54,6 +54,10 @@ class HomeController extends Controller
     {
         return view('chat');
     }
+    public function product_details()
+    {
+        return view('product_details');
+    }
 
 
 }

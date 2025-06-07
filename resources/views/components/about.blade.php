@@ -14,7 +14,7 @@
                         et approche humaine pour garantir votre bien-être au quotidien.
                     </div>
 
-                    <x-bouton>Contactez nous</x-bouton>
+                    <x-bouton href="{{route('contact')}}">Contactez nous</x-bouton>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                     </div>
                     <div class="chat-message">Envoyez-nous un message</div>
                 </div> --}}
-            <a href="#" class="chat">
+            <a href="{{route('chat')}}" class="chat">
                 <div class="chat-bg"></div>
                 <div class="chat-icon">
                     <img src="{{ asset('assets/img/chat.png') }}" alt="Chat" />

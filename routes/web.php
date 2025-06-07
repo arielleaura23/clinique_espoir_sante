@@ -34,6 +34,7 @@ Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/blog_details', [HomeController::class, 'blog_details'])->name('blog_details');
 Route::get('/events', [HomeController::class, 'events'])->name('events');
 Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
+Route::get('/product_details', [HomeController::class, 'product_details'])->name('product_details');
 
 
 Route::get('/register', [AuthController::class, 'register'])->name('show.register');
