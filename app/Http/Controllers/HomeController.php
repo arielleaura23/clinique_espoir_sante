@@ -50,6 +50,10 @@ class HomeController extends Controller
     {
         return view('blog_details');
     }
+    public function chat()
+    {
+        return view('chat');
+    }
 
 
 }

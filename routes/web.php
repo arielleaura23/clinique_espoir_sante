@@ -33,6 +33,7 @@ Route::get('/prise_rdv', [HomeController::class, 'prise_rdv'])->name('prise_rdv'
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/blog_details', [HomeController::class, 'blog_details'])->name('blog_details');
 Route::get('/events', [HomeController::class, 'events'])->name('events');
+Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
 
 
 Route::get('/register', [AuthController::class, 'register'])->name('show.register');
