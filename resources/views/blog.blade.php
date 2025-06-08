@@ -24,8 +24,8 @@
                         <span class="date">Lundi, 02 nov 2024</span>
                         <span class="author"><img src="{{ asset('assets/img/people.png') }}" alt="" /> By
                             Arie</span>
-                        <span class="views"><img src="{{ asset('assets/img/eye.png') }}" alt="" /> 55</span>
-                        <span class="likes"><img src="{{ asset('assets/img/heart.png') }}" alt="" /> 23</span>
+                        <span class="author"><img src="{{ asset('assets/img/eye.png') }}" alt="" /> 55</span>
+                        <span class="author"><img src="{{ asset('assets/img/heart.png') }}" alt="" /> 23</span>
                     </div>
 
                     <h2 class="title">La passion de redonner la santé</h2>
@@ -94,37 +94,41 @@
             <div class="recent-posts-container">
                 <h2 class="recent-posts-title">Recent posts</h2>
 
-                <div class="post">
-                    <img src="{{ asset('assets/img/do8.png') }}" alt="Post image" class="post-img">
-                    <div class="post-content">
-                        <div class="post-date">Mercredi, 02 jan 2025</div>
-                        <div class="post-text">Le test de VIH/SIDA<br />n’est négligé par certains</div>
+                <div class="list_of_posts">
+                    <div class="post">
+                        <img src="{{ asset('assets/img/do8.png') }}" alt="Post image" class="post-img">
+                        <div class="post-content">
+                            <div class="post-date">Mercredi, 02 jan 2025</div>
+                            <div class="post-text">Le test de VIH/SIDA<br />n’est négligé par certains</div>
+                        </div>
+                    </div>
+
+                    <div class="post">
+                        <img src="{{ asset('assets/img/do8.png') }}" alt="Post image" class="post-img">
+                        <div class="post-content">
+                            <div class="post-date">Mercredi, 02 jan 2025</div>
+                            <div class="post-text">Le test de VIH/SIDA<br />n’est négligé par certains</div>
+                        </div>
+                    </div>
+
+                    <div class="post">
+                        <img src="{{ asset('assets/img/do8.png') }}" alt="Post image" class="post-img">
+                        <div class="post-content">
+                            <div class="post-date">Mercredi, 02 jan 2025</div>
+                            <div class="post-text">Le test de VIH/SIDA<br />n’est négligé par certains</div>
+                        </div>
+                    </div>
+
+                    <div class="post">
+                        <img src="{{ asset('assets/img/do8.png') }}" alt="Post image" class="post-img">
+                        <div class="post-content">
+                            <div class="post-date">Mercredi, 02 jan 2025</div>
+                            <div class="post-text">Le test de VIH/SIDA<br />n’est négligé par certains</div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="post">
-                    <img src="{{ asset('assets/img/do8.png') }}" alt="Post image" class="post-img">
-                    <div class="post-content">
-                        <div class="post-date">Mercredi, 02 jan 2025</div>
-                        <div class="post-text">Le test de VIH/SIDA<br />n’est négligé par certains</div>
-                    </div>
-                </div>
 
-                <div class="post">
-                    <img src="{{ asset('assets/img/do8.png') }}" alt="Post image" class="post-img">
-                    <div class="post-content">
-                        <div class="post-date">Mercredi, 02 jan 2025</div>
-                        <div class="post-text">Le test de VIH/SIDA<br />n’est négligé par certains</div>
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="{{ asset('assets/img/do8.png') }}" alt="Post image" class="post-img">
-                    <div class="post-content">
-                        <div class="post-date">Mercredi, 02 jan 2025</div>
-                        <div class="post-text">Le test de VIH/SIDA<br />n’est négligé par certains</div>
-                    </div>
-                </div>
             </div>
 
             <div class="categories-container">

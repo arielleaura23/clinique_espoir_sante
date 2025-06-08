@@ -48,31 +48,31 @@
                 'title' => 'Kinésithérapie',
                 'description' => 'Soins pour soulager les douleurs ou récupérer après une intervention.',
             ],
-        ]" :button="view('components.bouton', ['slot' => 'Voir plus', 'href' => '/services'])->render()" background="1" {{-- retire cette ligne si tu ne veux pas de bg --}}
+        ]" :button="view('components.bouton', ['slot' => 'Voir plus', 'href' => '/services'])->render()" button_position="top" background="1" {{-- retire cette ligne si tu ne veux pas de bg --}} />
 
-    />
 
 
 
     <div class="count-section section">
-        <div class="container">
-            <div class="count-bg"></div>
-            <div class="count-list">
-                <div class="count-item">
-                    <span class="count-number">10<span class="count-k">K</span><span class="count-plus">+</span></span>
-                    <div class="count-label">Clients satisfaits</div>
-                </div>
-                <div class="count-item">
-                    <span class="count-number">100<span class="count-plus">+</span></span>
-                    <div class="count-label">Membres de l’équipe</div>
-                </div>
-                <div class="count-item">
-                    <span class="count-number">500<span class="count-plus">+</span></span>
-                    <div class="count-label">Témoignages</div>
-                </div>
-                <div class="count-item">
-                    <span class="count-number">3<span class="count-plus">+</span></span>
-                    <div class="count-label">Années d’expérience</div>
+        <div class="count-bg">
+            <div class="container">
+                <div class="count-list">
+                    <div class="count-item">
+                        <span class="count-number">10<span class="count-k">K</span><span class="count-plus">+</span></span>
+                        <div class="count-label">Clients satisfaits</div>
+                    </div>
+                    <div class="count-item">
+                        <span class="count-number">100<span class="count-plus">+</span></span>
+                        <div class="count-label">Membres de l’équipe</div>
+                    </div>
+                    <div class="count-item">
+                        <span class="count-number">500<span class="count-plus">+</span></span>
+                        <div class="count-label">Témoignages</div>
+                    </div>
+                    <div class="count-item">
+                        <span class="count-number">3<span class="count-plus">+</span></span>
+                        <div class="count-label">Années d’expérience</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -208,29 +208,30 @@
 
     <div class="newsletter-section section">
 
-        <div class="newsletter-bg"></div>
-        <div class="container">
-            <div class="news">
-                <div class="news-info">
-                    <div class="newsletter-title">Abonnez-vous à notre newsletter</div>
-                    <div class="newsletter-description">
-                        Restez informé<br />
-                        Notre Newsletter<br />
-                        Recevez en exclusivité les dernières nouvelles sur nos services, des conseils santé, et des
-                        informations sur les événements à venir.
+        <div class="newsletter-bg">
+            <div class="container">
+                <div class="news">
+                    <div class="news-info">
+                        <div class="newsletter-title">Abonnez-vous à notre newsletter</div>
+                        <div class="newsletter-description">
+                            Restez informé<br />
+                            Notre Newsletter<br />
+                            Recevez en exclusivité les dernières nouvelles sur nos services, des conseils santé, et des
+                            informations sur les événements à venir.
+                        </div>
                     </div>
+                    <form class="newsletter-form">
+                        <div class="newsletter-input-group">
+                            <span class="newsletter-input-icon">
+                                <img src="{{ asset('assets/img/email.png') }}" alt="Email" />
+                            </span>
+                            <input class="newsletter-input" type="email" placeholder="Votre adresse email ..." />
+                            <button class="newsletter-btn" type="submit">
+                                <img src="{{ asset('assets/img/send.png') }}" alt="Envoyer" />
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <form class="newsletter-form">
-                    <div class="newsletter-input-group">
-                        <span class="newsletter-input-icon">
-                            <img src="{{ asset('assets/img/email.png') }}" alt="Email" />
-                        </span>
-                        <input class="newsletter-input" type="email" placeholder="Votre adresse email ..." />
-                        <button class="newsletter-btn" type="submit">
-                            <img src="{{ asset('assets/img/send.png') }}" alt="Envoyer" />
-                        </button>
-                    </div>
-                </form>
             </div>
         </div>
 

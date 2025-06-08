@@ -63,6 +63,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                        <img src="{{ asset('assets/img/hamburger.png') }}" alt="Menu" width="30" height="30">
+                    </div>
                 </div>
             </div>
         </header>

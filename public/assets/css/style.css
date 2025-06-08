@@ -274,6 +274,144 @@
     width: 100%;
 }
 
+/* Responsive design header et navbar */
+@media screen and (max-width: 1024px) {
+    .header-info {
+        gap: 20px;
+        width: 70%;
+    }
+
+    .header-lang {
+        width: 25%;
+    }
+
+    .navbar-container {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+
+    .header.header-info {
+        /* flex-direction: column; */
+        /* width: 100%;
+        gap: 10px; */
+        display: none;
+    }
+
+    .header .header-lang {
+        display: none;
+        /* width: 100%;
+        justify-content: flex-start; */
+    }
+
+    .header-logo {
+        /* width: 100%; */
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding-left: 10px;
+    }
+
+    .nav-login-btn {
+        width: 100%;
+        justify-content: flex-start;
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .info-label,
+    .info-value,
+    .lang-switcher-label,
+    .lang-label {
+        font-size: 10px;
+    }
+
+    .info-icon img,
+    .flag-icon,
+    .lang-switcher-flag {
+        width: 20px;
+        height: 20px;
+    }
+
+    .nav-link {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+
+    .login-text {
+        font-size: 14px;
+    }
+
+    .header-logo img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* menu mobile */
+.mobile-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 999;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.mobile-menu.open {
+    display: flex;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 992px) {
+    .header .header-info,
+    .header .header-lang,
+    .main-navbar {
+        display: none !important;
+    }
+    .header-info {
+        width: 100% !important;
+    }
+
+    .mobile-header-lang {
+        display: flex;
+        justify-content: end;
+    }
+
+    .infos {
+        display: flex;
+        padding-left: 10px;
+            flex-wrap: wrap;
+    justify-content: center;
+        /* justify-content: space-between; */
+        align-items: center;
+        gap: 30px;
+    }
+
+    .mobile-menu-toggle {
+        display: block;
+        margin-left: auto;
+    }
+}
+
 /* Section Hero */
 .hero-section {
     background: #fff;
@@ -370,6 +508,16 @@
     font-size: 18px;
     margin-bottom: 12px;
 }
+
+.chat-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 10px 15px 10px 40px;
+    border-radius: 50px;
+    font-family: "Inter", sans-serif;
+}
 .chat-icon img {
     width: 25px;
     height: 25px;
@@ -416,6 +564,117 @@
     bottom: 0;
     height: 500px;
     z-index: 2;
+}
+
+/* responsive hero */
+@media screen and (max-width: 1024px) {
+    .hero-title {
+        font-size: 40px;
+    }
+
+    .hero-description {
+        width: 100%;
+        font-size: 15px;
+    }
+
+    .hero-photo {
+        height: 400px;
+        right: 40px;
+    }
+
+    .chat {
+        right: 30px;
+        bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hero-section {
+        height: auto;
+        padding: 60px 20px 40px;
+    }
+
+    .hero-bg {
+        height: 100%;
+    }
+
+    .hero-content {
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-text-group {
+        max-width: 100%;
+        align-items: center;
+    }
+
+    .hero-title {
+        font-size: 32px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        width: 100%;
+    }
+
+    .hero-photo {
+        position: relative;
+        height: 300px;
+        right: 0;
+        bottom: 0;
+        margin-top: 40px;
+    }
+
+    .chat {
+        right: 20px;
+        bottom: 20px;
+    }
+
+    .cta-text {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-title {
+        font-size: 24px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .hero-photo {
+        height: 250px;
+    }
+
+    .chat-text {
+        font-size: 16px;
+    }
+
+    .chat-message {
+        font-size: 13px;
+    }
+
+    .cta-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .cta-text {
+        font-size: 14px;
+    }
+
+    .chat {
+        padding: 8px;
+    }
+
+    .chat-icon img {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 /* About Section */
@@ -505,6 +764,103 @@
     z-index: 0;
 }
 
+/* responsive about */
+@media screen and (max-width: 1024px) {
+    /* On passe à une disposition verticale */
+    .about-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Le texte prend toute la largeur */
+    .about-container {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* L’image prend toute la largeur également */
+    .about-image {
+        width: 100%;
+        height: 250px;
+    }
+
+    /* Décoration repositionnée si besoin */
+    .about-decoration {
+        width: 80px; /* On réduit un peu la déco */
+    }
+}
+
+/* -------- PETITS ÉCRANS : TÉLÉPHONES & TABLETTES VERTICALES -------- */
+@media screen and (max-width: 768px) {
+    /* Réduction de la taille des titres */
+    .about-title-en {
+        font-size: 16px;
+    }
+
+    .about-title-fr {
+        font-size: 26px;
+    }
+
+    /* Le texte devient un peu plus petit */
+    .about-description {
+        font-size: 15px;
+    }
+
+    /* Bouton plus petit */
+    .about-cta {
+        width: 180px;
+        height: 45px;
+    }
+
+    .about-cta-text {
+        font-size: 15px;
+    }
+
+    /* Image plus compacte */
+    .about-image {
+        height: 220px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Marges autour de la section pour souffler un peu */
+    .about-section {
+        padding: 40px 15px;
+    }
+
+    /* Titre principal plus petit pour tenir sur une ligne */
+    .about-title-fr {
+        font-size: 22px;
+    }
+
+    /* Texte encore plus lisible sur mobile */
+    .about-description {
+        font-size: 14px;
+    }
+
+    /* Bouton CTA encore réduit */
+    .about-cta {
+        width: 160px;
+        height: 42px;
+    }
+
+    .about-cta-text {
+        font-size: 14px;
+    }
+
+    /* Image adaptée aux écrans étroits */
+    .about-image {
+        height: 200px;
+        border-radius: 20px;
+    }
+
+    /* Décoration masquée pour alléger le visuel */
+    .about-decoration {
+        display: none;
+    }
+}
+
 /* Services Section */
 .services-section {
     width: 100%;
@@ -516,6 +872,16 @@
 .services-bg {
     background: #f8faff;
 }
+.services-button-top {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.services-button-bottom {
+    text-align: center;
+    margin-top: 30px;
+}
+
 .services-section .container {
     flex-direction: column;
     align-items: center;
@@ -624,6 +990,190 @@
     text-align: center;
 }
 
+/* responsive services */
+/* ======== SECTION SERVICES - STYLE DE BASE ======== */
+
+.services-section {
+    width: 100%;
+    padding: 60px 0 40px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.services-bg {
+    background: #f8faff;
+}
+
+.services-section .container {
+    flex-direction: column;
+    align-items: center;
+}
+
+.services-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 12px;
+    position: relative;
+}
+
+.services-title {
+    color: #1d77fe;
+    font-family: "ArchivoBlack-Regular", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.services-subtitle {
+    color: #757575;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.services-more-btn {
+    position: relative;
+    width: 140px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.services-more-bg {
+    background: #1d77fe;
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+}
+
+.services-more-text {
+    color: #fff;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+}
+
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.service-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    padding: 24px 20px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    transition: box-shadow 0.2s;
+}
+
+.service-card:hover {
+    box-shadow: 0 4px 16px rgba(29, 119, 254, 0.12);
+}
+
+.service-icon-bg {
+    background: #e6f0fa;
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.service-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.service-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.service-title {
+    color: #130a0a;
+    font-family: "ArchivoBlack-Regular", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.service-description {
+    color: #757575;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+}
+
+/* ======== MEDIA QUERIES POUR RESPONSIVE ======== */
+
+/* Pour tablettes et petits écrans : 2 colonnes */
+@media (max-width: 992px) {
+    .services-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Pour téléphones : 1 colonne */
+@media (max-width: 576px) {
+    .services-list {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        width: 100%;
+    }
+
+    .services-title {
+        font-size: 24px;
+    }
+
+    .services-subtitle {
+        font-size: 14px;
+    }
+
+    .services-more-btn {
+        width: 100%;
+    }
+
+    .services-more-text {
+        font-size: 15px;
+    }
+
+    .service-title {
+        font-size: 18px;
+    }
+
+    .service-description {
+        font-size: 13px;
+    }
+}
+
+/* count section */
 .count-section,
 .count-section * {
     box-sizing: border-box;
@@ -635,10 +1185,6 @@
 .count-bg {
     background: #ffffff;
     width: 100%;
-    min-height: 220px;
-    position: absolute;
-    left: 0;
-    top: 0;
     padding: 30px 0;
     z-index: 1;
     box-shadow: 0 -10px 30px -10px rgba(0, 0, 0, 0.1),
@@ -695,8 +1241,58 @@
     padding: 0 8px;
 }
 
-/* Testimonials Section */
+/* responnsive count section */
 
+/* Tablettes (moins de 992px) */
+@media (max-width: 992px) {
+    .count-number {
+        font-size: 48px;
+    }
+
+    .count-k,
+    .count-plus {
+        font-size: 36px;
+    }
+
+    .count-label {
+        font-size: 18px;
+    }
+
+    .count-item {
+        min-width: 45%;
+        margin-bottom: 24px;
+    }
+}
+
+/* Mobiles (moins de 576px) */
+@media (max-width: 576px) {
+    .count-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px 0;
+    }
+
+    .count-item {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .count-number {
+        font-size: 40px;
+    }
+
+    .count-k,
+    .count-plus {
+        font-size: 28px;
+    }
+
+    .count-label {
+        font-size: 16px;
+        min-width: auto;
+    }
+}
+
+/* Testimonials Section */
 .testimonials-section {
     width: 100%;
     background: #f9fcff;
@@ -741,9 +1337,6 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-}
-.testimonial-bg {
-    /* Si tu veux un fond décoratif supplémentaire, sinon retire cette div */
 }
 .testimonial-text {
     color: #fff;
@@ -790,13 +1383,67 @@
     height: 15px;
 }
 
+/* responsive temoignages */
+/* TABLETTES - Moins de 992px */
+@media (max-width: 992px) {
+    .testimonials-title {
+        font-size: 28px;
+    }
+
+    .testimonial-card {
+        width: 90%;
+    }
+
+    .testimonial-text {
+        font-size: 15px;
+    }
+}
+
+/* MOBILES - Moins de 576px */
+@media (max-width: 576px) {
+    .testimonials-section {
+        padding: 40px 0;
+    }
+
+    .testimonials-title {
+        font-size: 24px;
+    }
+
+    .testimonials-subtitle {
+        font-size: 14px;
+    }
+
+    .testimonial-card {
+        width: 100%;
+        padding: 24px 16px;
+    }
+
+    .testimonial-text {
+        font-size: 14px;
+        text-align: justify;
+    }
+
+    .testimonial-name {
+        font-size: 14px;
+    }
+
+    .cotes {
+        font-size: 36px;
+    }
+
+    .testimonial-icon {
+        width: 13px;
+        height: 13px;
+    }
+}
+
+/* cot services style */
 .cot-services,
 .cot-services * {
     box-sizing: border-box;
 }
 .cot-services {
     background: #1d77fe;
-    height: 176px;
     position: relative;
     overflow: hidden;
 }
@@ -1033,6 +1680,52 @@
     height: 60px;
 }
 
+/* responsive cot services */
+@media (max-width: 1030px) {
+    .cot-services-title {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .cot-services-content {
+        display: flex;
+        flex-direction: column;
+    }
+    .cot-services-subtitle {
+        font-size: 16px;
+        text-align: center;
+    }
+}
+@media (max-width: 768px) {
+    .cot-services-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cot-step {
+        min-width: 150px;
+    }
+
+    .cot-step-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .cot-step-text {
+        font-size: 14px;
+    }
+
+    .cot-services-steps {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cot-services {
+        padding: 40px 0 20px 0;
+    }
+}
+
+/*  newsletter style */
 .newsletter-section,
 .newsletter-section * {
     box-sizing: border-box;
@@ -1054,9 +1747,6 @@
     background: #a7deff;
     width: 100%;
     min-height: 300px;
-    position: absolute;
-    left: 0;
-    top: 0;
     box-shadow: 0px 7px 54px 0px rgba(0, 0, 0, 0.15);
     z-index: 1;
 }
@@ -1145,6 +1835,51 @@
     height: 22px;
 }
 
+/* responsive newsletter */
+@media (max-width: 768px) {
+    .news {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .news-info {
+        width: 100%;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .newsletter-title {
+        font-size: 22px;
+        margin-top: 35px;
+    }
+
+    .newsletter-description {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .newsletter-form {
+        width: 100%;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .newsletter-input {
+        padding: 12px 44px 12px 44px;
+        min-width: 100%;
+    }
+
+    .newsletter-btn {
+        position: static;
+        transform: none;
+        width: 100%;
+        padding: 11px 10px;
+        transform: translateX(-100%);
+    }
+}
+
+/* partenaires style */
 .partenaires-section {
     width: 100%;
     position: relative;
@@ -1178,6 +1913,19 @@
     background: transparent;
 }
 
+/* responsive partenaires */
+@media (max-width: 768px) {
+    .partenaires-list {
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+
+    .partenaire-logo {
+        height: 60px;
+    }
+}
+
+/* footer style */
 .footer {
     width: 100%;
     margin-top: 60px;
@@ -1188,13 +1936,9 @@
     overflow: hidden;
 }
 .footer-bg {
-    position: absolute;
-    left: 0;
-    top: 0;
     width: 100%;
     height: 100%;
     background: #a8dfff;
-    z-index: 1;
 }
 .footer .container {
     position: relative;
@@ -1202,7 +1946,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 0 0 0;
+    padding-top: 40px;
 }
 .footer-main {
     display: flex;
@@ -1347,6 +2091,21 @@
     font-family: "Inter-Regular", sans-serif;
 }
 
+/* responsive footer */
+@media (max-width: 768px) {
+    .footer-main {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+}
+
 /* page about */
 
 /* Section historique About */
@@ -1414,8 +2173,42 @@
     }
     .about-history-image {
         width: 100%;
-        max-width: 400px;
+        /* max-width: 400px; */
         margin: 0 auto;
+    }
+}
+
+/* responsive historique */
+@media (max-width: 900px) {
+    .about-history-section {
+        flex-direction: column;
+        align-items: center;
+        padding: 32px 12px;
+        gap: 24px;
+    }
+
+    .history-content {
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+
+    .about-history-text {
+        padding-right: 0;
+    }
+
+    .about-history-image {
+        width: 100%;
+        /* max-width: 400px; */
+        height: 400px;
+        margin: 0 auto;
+    }
+
+    .history-block {
+        width: 100%;
+    }
+
+    .about-history-title {
+        text-align: center;
     }
 }
 
@@ -1477,15 +2270,41 @@
     background: #fff;
 }
 
-/* Responsive */
+/* Responsive qualified doctors */
 @media (max-width: 900px) {
     .qualified-doctors-section {
+        flex-direction: column;
+        align-items: center;
         padding: 32px 12px;
-        gap: 24px;
+        gap: 70px;
     }
+
+    .qualified-doctors-header {
+        text-align: center;
+    }
+
+    .qualified-doctors-title {
+        font-size: 24px;
+    }
+
+    .qualified-doctors-description {
+        font-size: 16px;
+    }
+
+    .qualified-doctors-photos {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
     .doctor-photo {
         width: 120px;
         height: 120px;
+    }
+
+    .qualified-doctors-row {
+        align-items: center;
+        gap: 16px;
     }
 }
 
@@ -1541,18 +2360,27 @@
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 768px) {
     .director-message-section {
-        padding: 32px 12px;
+        padding: 40px 16px;
     }
+
     .director-message-title {
-        font-size: 20px;
+        font-size: 22px;
     }
+
     .director-message-text,
     .director-message-list {
         font-size: 16px;
+        text-align: left;
+    }
+
+    .director-message-content {
+        gap: 24px;
     }
 }
+
+/* faq section */
 
 .faq-section {
     margin: 0 auto;
@@ -1614,11 +2442,110 @@
     background-color: #a7deff;
 }
 
+/* responsive faq */
+.faq-section {
+    margin: 0 auto;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    padding: 60px 24px;
+}
+
+.faq-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.faq-title {
+    font-size: 28px;
+    font-family: "ArchivoBlack-Regular", sans-serif;
+    color: #1d77fe;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.faq-subtitle {
+    font-size: 18px;
+    font-family: "Inter-Regular", sans-serif;
+    color: #757575;
+    line-height: 1.5;
+}
+
+.faq-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.faq-item {
+    background: #1d77fe;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    font-family: "Inter-Regular", sans-serif;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+.faq-question {
+    cursor: pointer;
+    padding: 18px 24px;
+    font-size: 17px;
+    color: #fff;
+    font-family: "Inter-SemiBold", sans-serif;
+    outline: none;
+}
+
+.faq-answer {
+    padding: 0 24px 18px 24px;
+    color: #757575;
+    font-size: 16px;
+    line-height: 1.6;
+    background: #fff;
+}
+
+.faq-item[open] .faq-question {
+    color: #1d77fe;
+}
+
+.faq-item[open] {
+    background-color: #e5f5ff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .faq-section {
+        padding: 40px 16px;
+        gap: 24px;
+    }
+
+    .faq-title {
+        font-size: 22px;
+    }
+
+    .faq-subtitle {
+        font-size: 16px;
+    }
+
+    .faq-question {
+        font-size: 16px;
+        padding: 16px 20px;
+    }
+
+    .faq-answer {
+        font-size: 15px;
+        padding: 0 20px 16px 20px;
+    }
+}
+
+/* before consultation style */
 .before-consultation-section {
     background: #fff;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 60px;
 }
 .before-consultation-header {
     text-align: center;
@@ -1638,6 +2565,7 @@
 .before-consultation-list {
     display: flex;
     gap: 24px;
+    align-items: start;
 }
 .before-consultation-item {
     display: flex;
@@ -1690,6 +2618,53 @@
     margin: 0 auto;
 }
 
+/* Responsive before consultation*/
+@media (max-width: 900px) {
+    .before-consultation-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 85px;
+    }
+
+    .before-consultation-item {
+        width: 100%;
+        max-width: 360px;
+        gap: 24px;
+    }
+
+    .before-consultation-item-divider,
+    .before-consultation-item-divider-rdv {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .before-consultation-title {
+        font-size: 22px;
+    }
+
+    .before-consultation-subtitle {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .before-consultation-item-title {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .before-consultation-item-desc {
+        font-size: 15px;
+        padding: 0 12px;
+    }
+
+    .before-consultation-item-number {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+}
+
+/* at clinic style */
 .at-clinic-section {
     max-width: 900px;
     display: flex;
@@ -1752,6 +2727,52 @@
     color: #757575;
 }
 
+@media (max-width: 900px) {
+    .at-clinic-section {
+        padding: 32px 12px;
+        gap: 24px;
+    }
+
+    .at-clinic-title {
+        font-size: 22px;
+    }
+
+    .at-clinic-subtitle {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .at-clinic-steps {
+        gap: 24px;
+    }
+
+    .at-clinic-step {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        padding: 16px;
+    }
+
+    .at-clinic-step-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .at-clinic-step-icon img {
+        width: 24px;
+        height: 24px;
+    }
+
+    .at-clinic-step-title {
+        font-size: 16px;
+    }
+
+    .at-clinic-step-desc {
+        font-size: 15px;
+    }
+}
+
+/* prise rdv style */
 .blocks_rdv {
     display: flex;
     gap: 20px;
@@ -1817,6 +2838,7 @@
     font-weight: 600;
     letter-spacing: 1px;
     margin-right: 12px;
+    font-family: "Inter", sans-serif;
 }
 
 .appointment-form-image {
@@ -1932,6 +2954,46 @@ input:focus {
     opacity: 0.12;
     pointer-events: none;
     z-index: 0;
+}
+
+/* Responsive prise de rdv*/
+@media (max-width: 900px) {
+    .blocks_rdv {
+        flex-direction: column;
+        gap: 24px;
+    }
+    .block1,
+    .block2 {
+        width: 100%;
+    }
+    .appointment-form-container {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .appointment-form-title {
+        font-size: 22px;
+        padding: 0 10px;
+    }
+    .appointment-form-fields {
+        gap: 30px;
+        padding: 15px 12px;
+    }
+    .form-submit-btn {
+        font-size: 14px;
+        padding: 10px 0;
+    }
+    .appointment-form-image {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 6px;
+    }
+    .appointment-form-close {
+        width: 18px;
+        height: 18px;
+        margin: 12px 20px 0 0;
+    }
 }
 
 /* section pharmacie */
@@ -2093,7 +3155,7 @@ input:focus {
     margin-bottom: 6px;
 }
 
-/* Responsive */
+/* Responsive pharmacie*/
 @media (max-width: 900px) {
     .pharmacy-products-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -2113,7 +3175,7 @@ input:focus {
 
 .contact-header {
     text-align: center;
-    margin-bottom: 24px;
+    margin-bottom: 40px;
 }
 
 .contact-content {
@@ -2208,6 +3270,63 @@ input:focus {
 .contact-bg-img {
     width: 350px;
     pointer-events: none;
+}
+
+/* responsive contact */
+@media (max-width: 992px) {
+    .contact-content {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+    }
+    .contact-title {
+        font-size: 35px !important;
+    }
+
+    .image-contact,
+    .contact-form {
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .contact-title {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .contact-desc {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .contact-bg-img {
+        width: 100%;
+        height: 400px;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-title {
+        font-size: 20px;
+    }
+
+    .contact-desc {
+        font-size: 13px;
+    }
+
+    .contact-input {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .contact-submit-btn {
+        font-size: 15px;
+        padding: 12px 0;
+    }
+
+    .contact-bg-img {
+        height: 280px;
+    }
 }
 
 /* register css */
@@ -2528,6 +3647,101 @@ input:focus {
     width: 100%;
 }
 
+/* responsive register */
+@media screen and (max-width: 1024px) {
+    .background-rectangle {
+        width: 90%;
+        padding: 30px 40px;
+        margin: 30px auto;
+    }
+    .facebook-button,
+    .facebook-button-background {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header-section {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .logo-image {
+        width: 80px;
+        margin-top: 10px;
+    }
+
+    .divider-line-left,
+    .divider-line-right {
+        width: 100px;
+    }
+
+    .google-button,
+    .facebook-button,
+    .facebook-button-background {
+        width: 100%;
+    }
+
+    .facebook-button-text,
+    .facebook-icon {
+        position: static;
+        text-align: center;
+        width: auto;
+        margin: 10px auto;
+    }
+
+    .form-fields {
+        margin: 30px 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .background-rectangle {
+        padding: 20px;
+    }
+
+    .header-section {
+        padding: 15px;
+    }
+
+    .welcome-text,
+    .clinic-register-text,
+    .email-label,
+    .dob-label,
+    .gender-label,
+    .password-label {
+        font-size: 16px;
+    }
+
+    .input-field {
+        font-size: 14px;
+    }
+
+    .submit-button,
+    .google-button,
+    .facebook-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .divider-line-left,
+    .divider-line-right {
+        width: 60px;
+    }
+
+    .google-icon,
+    .facebook-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .facebook-button-text {
+        font-size: 14px;
+    }
+}
+
+
 /* .registration-form-container {
     max-width: 500px;
     margin: 0 auto;
@@ -2693,6 +3907,72 @@ input:focus {
     font-family: "Inter-Regular", sans-serif;
 }
 
+/* responsive emergency doctors */
+@media (max-width: 992px) {
+    .emergency-box {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .white-box,
+    .blue-box {
+        width: 100%;
+    }
+
+    .emergency-title {
+        font-size: 28px;
+    }
+
+    .priority-title {
+        font-size: 30px;
+        text-align: center;
+    }
+    .priority-text {
+        text-align: center;
+    }
+
+    .call-icon-group {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .emergency-title {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .priority-title {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .priority-text,
+    .emergency-description,
+    .emergency-phone {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .white-circle {
+        width: 60px;
+        height: 60px;
+    }
+
+    .call-icon {
+        width: 20px;
+        height: 20px;
+        bottom: calc(50% - 10px);
+        right: calc(50% - 10px);
+    }
+
+    .blue-box {
+        padding: 20px 15px;
+        align-items: center;
+        text-align: center;
+    }
+}
+
 /* contact doctors */
 .contact-section,
 .contact-section * {
@@ -2707,11 +3987,10 @@ input:focus {
 .contact-title {
     color: #1d77fe;
     text-align: center;
-    font-family: "PlusJakartaSans-Bold", sans-serif;
+    font-family: "inter-Bold", sans-serif;
     font-size: 50px;
     font-weight: 700;
     position: relative;
-    width: 807px;
 }
 
 .contact-cards {
@@ -2810,6 +4089,66 @@ input:focus {
     overflow: visible;
 }
 
+/* responsive contact doctors */
+@media (max-width: 992px) {
+    .contact-title {
+        font-size: 38px;
+    }
+
+    .contact-cards {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .card-bg-blue,
+    .card-bg-darkblue {
+        padding: 40px 20px;
+    }
+
+    .icon-phone,
+    .icon-location,
+    .icon-time {
+        position: static;
+        margin: 10px auto 0;
+        display: block;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-title {
+        font-size: 28px;
+        padding: 0 10px;
+    }
+
+    .contact-cards {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-label {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .contact-text {
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .contact-icon {
+        width: 30px;
+        height: 30px;
+        margin: 0 auto 10px;
+    }
+
+    .icon-phone,
+    .icon-location,
+    .icon-time {
+        display: none; /* Masquer les icônes positionnées absolument pour éviter les collisions sur mobile */
+    }
+}
+
 /* blog style */
 .card-article {
     width: 600px;
@@ -2833,8 +4172,7 @@ input:focus {
     object-fit: cover;
 }
 
-.content {
-}
+
 
 .meta {
     display: flex;
@@ -2912,6 +4250,11 @@ input:focus {
     display: flex;
     flex-direction: column;
     gap: 50px;
+    width: 60%;
+}
+
+.posts {
+    width: 30%;
 }
 
 .post-img {
@@ -3002,6 +4345,140 @@ input:focus {
     align-items: center;
 }
 
+/* responsive blog */
+@media (max-width: 992px) {
+    .blog-section {
+        /* flex-direction: column; */
+        align-items: start;
+        gap: 40px;
+    }
+
+    .card-article {
+        width: 100%;
+    }
+
+    .recent-posts-container,
+    .categories-container {
+        width: 100%;
+    }
+
+    .description {
+        margin: 10px 0 !important;
+    }
+
+    .author img {
+        width: 20px;
+    }
+
+    .post-text {
+        font-size: 14px;
+    }
+    .name {
+        font-size: 15px;
+    }
+
+    .badge {
+        width: 20px;
+        height: 20px;
+    }
+
+    .title {
+        font-size: 28px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-article {
+        padding: 15px;
+    }
+
+    .blog-section {
+        flex-direction: column;
+    }
+
+    .description {
+        margin: 20px !important;
+    }
+
+    .articles {
+        width: 100%;
+    }
+
+    .posts {
+        width: 100%;
+    }
+
+    .list_of_posts {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .recent-posts-container {
+        max-width: 100%;
+    }
+
+    .title {
+        font-size: 20px !important;
+        text-align: start !important;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+
+    .card-article .content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .meta {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .btn-read-more {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+
+    .recent-posts-container,
+    .categories-container {
+        padding: 15px;
+    }
+
+    .recent-posts-title {
+        font-size: 20px;
+        text-align: start;
+    }
+
+    .post {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .post-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .post-text {
+        font-size: 14px;
+    }
+
+    .name {
+        font-size: 18px;
+    }
+
+    .badge {
+        width: 26px;
+        height: 26px;
+        font-size: 13px;
+    }
+}
+
 /* events css */
 .evenements {
     display: flex;
@@ -3071,6 +4548,57 @@ input:focus {
     gap: 80px;
 }
 
+/* responsive events */
+@media (max-width: 768px) {
+    .evenement {
+        width: 100%;
+    }
+
+    .titre {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .details {
+        flex-direction: column;
+        gap: 10px;
+        text-align: left;
+    }
+
+    .lieu,
+    .horaire {
+        text-align: left;
+    }
+
+    .description,
+    .description-secondaire {
+        font-size: 14px;
+    }
+
+    .image-evenement {
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .titre {
+        font-size: 20px;
+    }
+
+    .details {
+        font-size: 14px;
+    }
+
+    .description,
+    .description-secondaire {
+        font-size: 13px;
+    }
+
+    .image-evenement {
+        height: 180px;
+    }
+}
+
 /* chat style */
 
 .chat-container {
@@ -3109,15 +4637,13 @@ input:focus {
     cursor: pointer;
 }
 
-.chat-menu {
-}
-
 .chat-main {
     flex: 1;
     padding: 30px 50px;
     display: flex;
     flex-direction: column;
     gap: 40px;
+    width: 100%;
 }
 
 .chat-bubble {
@@ -3134,18 +4660,12 @@ input:focus {
     gap: 10px;
 }
 
-.bot-avatar {
-}
-
 .bot-message {
     background: #fff;
     padding: 24px;
     border-radius: 30px;
     font-size: 16px;
     max-width: 800px;
-}
-
-.bot-pointer {
 }
 
 .user {
@@ -3174,12 +4694,16 @@ input:focus {
     background: white;
     border-radius: 50px;
     width: 100%;
-    padding: 20px 40px;
+    padding: 10px 40px;
     border: 1px solid #757575;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    width: 100%;
 }
+
+
 
 .chat-footer:focus {
     border: 1px solid #1d77fe;
@@ -3187,8 +4711,13 @@ input:focus {
 }
 
 .tap-question {
-    position: relative;
-    margin: 30px 50px;
+    /* position: relative; */
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 10px 20px;
+    background-color: #f1efef;
+    z-index: 10;
 }
 
 .add-icon {
@@ -3196,8 +4725,11 @@ input:focus {
     color: #1d77fe;
     position: absolute;
     top: 7px;
-    left: 12px;
+        left: 25px;
+        cursor: pointer;
+    /* left: 12px; */
 }
+
 
 .chat-footer::placeholder {
     color: #757575;
@@ -3214,14 +4746,17 @@ input:focus {
 }
 
 .send-button {
-    width: 56px;
-    height: 56px;
+    /* width: 56px;
+    height: 56px; */
+    padding: 30px;
     background-color: #1d77fe;
     position: absolute;
     top: 0;
     right: 0;
     border-radius: 0 50px 50px 0;
+    cursor: pointer;
 }
+
 
 .chat-actions-menu {
     background-color: #fff;
@@ -3282,112 +4817,213 @@ input:focus {
     color: #fc1919;
 }
 
+/* responsive chat */
+@media (max-width: 1024px) {
+    .chat-main {
+        padding: 20px 30px;
+        gap: 30px;
+    }
 
+    .chat-footer {
+        padding: 15px 30px;
+    }
+
+    .chat-header {
+        padding: 0 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chat-main {
+        padding: 15px 20px;
+        gap: 25px;
+    }
+
+
+    .chat-header {
+        height: auto;
+        padding: 10px;
+    }
+
+    .chat-logo {
+        width: 40px;
+    }
+
+    .chat-header .chat-direction {
+        width: 60px;
+    }
+
+    .chat-bubble {
+        gap: 15px;
+    }
+
+    .bot-message,
+    .user-message {
+        font-size: 14px;
+        padding: 16px;
+    }
+
+    .chat-footer input {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-main {
+        padding: 10px 15px;
+    }
+
+    .bot-message,
+    .user-message {
+        max-width: 100%;
+        font-size: 13px;
+    }
+
+    .send-button img {
+        width: 24px;
+        height: 24px;
+    }
+    .chat-actions-menu {
+        right: 5px;
+        width: 200px;
+    }
+
+    .chat-actions-menu .action-label {
+        font-size: 13px;
+    }
+}
 
 /* product_details style */
 .product-card,
 .product-card * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 .product-card {
-  position: relative;
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  max-width: 1400px;
+    position: relative;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    max-width: 1400px;
 }
 
 .product-info {
     width: 60%;
 }
 
-.img-product{
+.img-product {
     width: 30%;
 }
 
 .verified {
-  color: #1d77fe;
-  font-family: "Archivo-Bold", sans-serif;
+    color: #1d77fe;
+    font-family: "Archivo-Bold", sans-serif;
 }
 
 .description {
-  color: #1d77fe;
-  font-family: "Inter", sans-serif;
+    color: #1d77fe;
+    font-family: "Inter", sans-serif;
 }
 
 .title {
-  font-size: 38px;
-  font-weight: 700;
-  display: block;
-  margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 10px;
+    /* text-align: center; */
 }
 
 .subtitle {
-  color: #757575;
-  font-size: 20px;
-  font-weight: 400;
-  display: block;
+    color: #757575;
+    font-size: 20px;
+    font-weight: 400;
+    display: block;
 }
 
 .label {
-  color: #1d77fe;
-  text-decoration: underline;
-  margin-right: 5px;
+    color: #1d77fe;
+    text-decoration: underline;
+    margin-right: 5px;
 }
 
 .value {
-  color: #757575;
+    color: #757575;
 }
 
 .value.underline {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .details {
-  color: #757575;
-  display: block;
+    color: #757575;
+    display: block;
 }
 
 .stock {
-  color: #757575;
-  font-weight: 400;
+    color: #757575;
+    font-weight: 400;
 }
 
 .product-image {
     width: 500px;
 }
 
-
-
 .composition-section {
-  font-family: 'Inter', sans-serif;
-  margin: 50px auto;
-  padding: 20px;
-  color: #757575;
-      display: flex
-;
+    font-family: "Inter", sans-serif;
+    margin: 50px auto;
+    padding: 20px;
+    color: #757575;
+    display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
 .composition-section .title {
-  font-family: 'Inter-Bold', sans-serif;
-  font-size: 40px;
-  color: #1d77fe;
-  margin-bottom: 20px;
+    font-family: "Inter-Bold", sans-serif;
+    font-size: 40px;
+    color: #1d77fe;
+    margin-bottom: 20px;
 }
 
 .composition-section .content p {
-  margin-bottom: 15px;
-  color: #757575;
+    margin-bottom: 15px;
+    color: #757575;
 }
 
 .composition-section .content ul {
-  padding-left: 20px;
-  color: #757575;
+    padding-left: 20px;
+    color: #757575;
 }
 
 .composition-section .content ul li {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
+
+/* responsive product details */
+@media (max-width: 768px) {
+    .product-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img-product,
+    .product-info {
+        width: 100%;
+    }
+
+    .product-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .composition-section .title {
+        font-size: 28px;
+        text-align: center;
+    }
+
+    .composition-section {
+        padding: 10px;
+    }
+}
+

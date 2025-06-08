@@ -5,7 +5,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Chat Clinique Espoir sante</title>
-        <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
     </head>
 
@@ -59,13 +59,24 @@
                 </div>
             </main>
 
-            <div class="tap-question">
+            {{-- <div class="tap-question">
                 <input class="chat-footer" placeholder="Posez votre question ici ...">
                 <div class="add-icon" style="cursor: pointer;">+</div>
                 <div class="send-button">
                     <img src="{{ asset('assets/img/send.png') }}" />
                 </div>
+            </div> --}}
+
+            <div class="tap-question">
+                <div class="chat-footer">
+                    <div class="add-icon">+</div>
+                    <input type="text" class="chat-input" placeholder="Posez votre question ici ..." />
+                    <div class="send-button">
+                        <img src="{{ asset('assets/img/send.png') }}" />
+                    </div>
+                </div>
             </div>
+
         </div>
 
         <script>
