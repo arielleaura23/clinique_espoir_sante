@@ -1,4 +1,13 @@
-<div class="services-section section @if(!empty($background)) services-bg @endif">
+@props([
+    'title',
+    'subtitle',
+    'services' => [],
+    'button' => null,
+    'button_position' => 'center',
+    'background' => false,
+])
+
+<div class="services-section section @if (!empty($background)) services-bg @endif">
     <div class="container">
         <div class="services-header">
             @isset($title)
@@ -9,7 +18,7 @@
             @endisset
         </div>
         <div class="services-list">
-            @foreach($services ?? [] as $service)
+            @foreach ($services ?? [] as $service)
                 <div class="service-card">
                     <div class="service-icon-bg">
                         <img class="service-icon" src="{{ asset($service['icon']) }}" alt="{{ $service['title'] }}" />
@@ -21,8 +30,10 @@
                 </div>
             @endforeach
         </div>
-        @if(!empty($button))
-            {!! $button !!}
+        @if (!empty($button))
+            <div class="services-button ">
+                {!! $button !!}
+            </div>
         @endif
     </div>
 </div>

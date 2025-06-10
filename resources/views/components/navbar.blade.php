@@ -19,10 +19,11 @@
                         </div>
                     </div>
                     {{-- <div class="nav-dropdown"></div> --}}
-                    <a href="{{ route('show.login') }}" class="nav-login-btn">
+                    <x-bouton href="{{ route('show.login') }}" >Se connecter</x-bouton>
+                    {{-- <a href="{{ route('show.login') }}" class="nav-login-btn">
                         <div class="login-bg"></div>
                         <div class="login-text">Se connecter</div>
-                    </a>
+                    </a> --}}
                 </nav>
             </div>
         </div>

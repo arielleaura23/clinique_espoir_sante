@@ -3,7 +3,6 @@ function toggleMobileMenu() {
     document.getElementById("mobileMenu").classList.toggle("open");
 }
 
-
 $(function () {
     // Ouvre/ferme le dropdown au clic sur le sélecteur
     $(".lang-switcher-selected").on("click", function (e) {
@@ -27,5 +26,3 @@ $(function () {
         e.stopPropagation();
     });
 });
-
-

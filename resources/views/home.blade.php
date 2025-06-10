@@ -4,6 +4,15 @@
 
 @section('content')
 
+@props([
+    'title',
+    'subtitle',
+    'services' => [],
+    'button' => null,
+    'button_position' => 'center',
+    'background' => false,
+])
+
     <x-hero title='<span class="hero-title-main">Venez<span class="hero-title-highlight"> consulter chez nous!</span></span>'
         description="Réservez facilement vos rendez-vous médicaux en ligne, avec des médecins qualifiés et disponibles."
         :button="view('components.bouton', [
@@ -48,7 +57,7 @@
                 'title' => 'Kinésithérapie',
                 'description' => 'Soins pour soulager les douleurs ou récupérer après une intervention.',
             ],
-        ]" :button="view('components.bouton', ['slot' => 'Voir plus', 'href' => '/services'])->render()" button_position="top" background="1" {{-- retire cette ligne si tu ne veux pas de bg --}} />
+        ]"   background="1" {{-- retire cette ligne si tu ne veux pas de bg --}} />
 
 
 

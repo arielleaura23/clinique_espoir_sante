@@ -13,10 +13,10 @@
         ])->render()" mask="assets/img/exclude.png" photo="assets/img/medoc1.png" />
 
 
-    <x-about />
+    <x-about  />
 
 
-    <div class="container">
+    <div  class="container">
         <div class="about-history-section section">
 
             <div class="history-content">
@@ -82,7 +82,7 @@
     </div>
 
 
-    <div class="container section">
+    <div  class="container section">
         <div class="director-message-section">
             <div class="director-message-content">
                 <div class="director-message-title">Mot du directeur général</div>

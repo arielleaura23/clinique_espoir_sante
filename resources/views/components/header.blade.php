@@ -1,9 +1,9 @@
         <header class="header">
             <div class="container">
                 <div class="header-top">
-                    <div class="header-logo">
+                    <a href="{{route('home')}}" class="header-logo">
                         <img src="{{ asset('assets/img/logo cercle.png') }}" alt="Logo Clinique Espoir Santé">
-                    </div>
+                    </a>
                     <div class="header-info">
                         <div class="info-block">
                             <div class="icon-block">
