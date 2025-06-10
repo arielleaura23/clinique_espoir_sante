@@ -67,19 +67,19 @@
             <div class="container">
                 <div class="count-list">
                     <div class="count-item">
-                        <span class="count-number">10<span class="count-k">K</span><span class="count-plus">+</span></span>
+                        <span class="count-number" data-target="10000">10<span class="count-k">K</span><span class="count-plus">+</span></span>
                         <div class="count-label">Clients satisfaits</div>
                     </div>
                     <div class="count-item">
-                        <span class="count-number">100<span class="count-plus">+</span></span>
+                        <span class="count-number" data-target="100">100<span class="count-plus">+</span></span>
                         <div class="count-label">Membres de l’équipe</div>
                     </div>
                     <div class="count-item">
-                        <span class="count-number">500<span class="count-plus">+</span></span>
+                        <span class="count-number" data-target="500">500<span class="count-plus">+</span></span>
                         <div class="count-label">Témoignages</div>
                     </div>
                     <div class="count-item">
-                        <span class="count-number">3<span class="count-plus">+</span></span>
+                        <span class="count-number" data-target="3">3<span class="count-plus">+</span></span>
                         <div class="count-label">Années d’expérience</div>
                     </div>
                 </div>

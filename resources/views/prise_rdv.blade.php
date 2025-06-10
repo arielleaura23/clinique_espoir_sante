@@ -87,12 +87,78 @@
                         </div>
                     </div>
                 </div>
-
-
                 <button type="submit" class="form-submit-btn">Envoyer</button>
             </form>
             <img class="appointment-form-bg" src="unsplash-t-nj-uk-pnl-00-removebg-preview0.png" alt="Décor" />
         </div>
+
+
+
+
+        <div class="modal-overlay" id="successModal" style="display: none;">
+            <div class="modal-success">
+                <div class="modal-header">
+                    <div class="success-title">
+                        <img class="icon-check" src="{{ asset('assets/img/check-circle.png') }}" alt="Succès" />
+                        <h2 class="modal-title">Succès</h2>
+                    </div>
+                    <img class="icon-close" src="{{ asset('assets/img/fermer.png') }}" alt="Fermer"
+                        id="closeModal" />
+                </div>
+
+                <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;" />
+
+                <div class="modal-body">
+                    <p>
+                        Votre rendez-vous a été enregistré avec succès.
+                        <br />
+                        Merci de vous présenter à l’hôpital à la date et à l’heure prévues.
+                        <br />
+                        Nous vous prions de respecter les délais afin de garantir une bonne prise en charge.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn-primary" id="okButton">Okay</button>
+                </div>
+            </div>
+        </div>
+
+
+        {{-- modale error --}}
+        <div class="modal-overlay" style="display: none">
+            <div class="modal-success">
+                <div class="modal-header">
+                    <div class="success-title">
+                        <img class="icon-check" src="{{ asset('assets/img/error.png') }}" alt="Succès" />
+                        <h2 class="modal-title" style="color: red;">Erreur d’enregistrement</h2>
+                    </div>
+                    <img class="icon-close" src="{{ asset('assets/img/croix_rouge.png') }}" alt="Fermer"
+                        id="closeModal" />
+                </div>
+
+                <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;" />
+
+                <div class="modal-body">
+                    <p>
+                        Votre rendez-vous n’a pas pu être enregistré.
+                        <br />
+                        Veuillez vérifier les horaires disponibles ainsi que la disponibilité du médecin choisi.
+                        <br />
+                        Si le problème persiste, veuillez réessayer plus tard ou contacter l’accueil de l’hôpital.
+                    </p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn-danger" id="okButton">Okay</button>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="{{ asset('assets/js/script.js') }}"></script>
     </body>
