@@ -41,15 +41,14 @@
                     </div>
                     <div class="header-lang">
                         <div class="lang-switcher">
-                            <div class="lang-switcher-selected"
-                                onclick="document.querySelector('.lang-switcher-dropdown').classList.toggle('show')">
+                            <div class="lang-switcher-selected" id="lang-switcher-selected">
                                 <span><img src="{{ asset('assets/img/chevron_down.png') }}" width="20"
                                         height="20" alt="chevron_down"></span>
                                 <img class="flag-icon" src="{{ asset('assets/img/drapeau_france.png') }}"
                                     alt="FR">
                                 <span class="lang-label">FR</span>
                             </div>
-                            <div class="lang-switcher-dropdown">
+                            <div class="lang-switcher-dropdown" id="lang-switcher-dropdown">
                                 <div class="lang-switcher-option">
                                     <img class="flag-icon" src="{{ asset('assets/img/drapeau_anglais.png') }}"
                                         alt="FR">

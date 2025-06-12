@@ -4,14 +4,14 @@
 
 @section('content')
 
-@props([
-    'title',
-    'subtitle',
-    'services' => [],
-    'button' => null,
-    'button_position' => 'center',
-    'background' => false,
-])
+    @props([
+        'title',
+        'subtitle',
+        'services' => [],
+        'button' => null,
+        'button_position' => 'center',
+        'background' => false,
+    ])
 
     <x-hero title='<span class="hero-title-main">Venez<span class="hero-title-highlight"> consulter chez nous!</span></span>'
         description="Réservez facilement vos rendez-vous médicaux en ligne, avec des médecins qualifiés et disponibles."
@@ -22,9 +22,9 @@
         ])->render()" mask="assets/img/exclude.png" photo="assets/img/doctor1.png" />
 
 
-    <x-about />
+    <x-about  />
 
-    <x-services title="Nos services médicaux" subtitle="Nous vous offrons une gamme complète de soins adaptés à vos besoins."
+    <x-services   title="Nos services médicaux" subtitle="Nous vous offrons une gamme complète de soins adaptés à vos besoins."
         :services="[
             [
                 'icon' => 'assets/img/consultation.png',
@@ -57,17 +57,28 @@
                 'title' => 'Kinésithérapie',
                 'description' => 'Soins pour soulager les douleurs ou récupérer après une intervention.',
             ],
-        ]"   background="1" {{-- retire cette ligne si tu ne veux pas de bg --}} />
+            [
+                'icon' => 'assets/img/labo.png',
+                'title' => 'Analyses médicales',
+                'description' => 'Faites vos analyses sur place et recevez vos résultats rapidement.',
+            ],
+            [
+                'icon' => 'assets/img/vaccin.png',
+                'title' => 'Vaccination',
+                'description' => 'Mise à jour de vos vaccins dans un cadre sécurisé.',
+            ],
+        ]" background="1" {{-- retire cette ligne si tu ne veux pas de bg --}} />
 
 
 
 
-    <div class="count-section section">
+    <div class="count-section section autoblur" data-aos="fade-up">
         <div class="count-bg">
             <div class="container">
                 <div class="count-list">
                     <div class="count-item">
-                        <span class="count-number" data-target="10000">10<span class="count-k">K</span><span class="count-plus">+</span></span>
+                        <span class="count-number" data-target="10000">10<span class="count-k">K</span><span
+                                class="count-plus">+</span></span>
                         <div class="count-label">Clients satisfaits</div>
                     </div>
                     <div class="count-item">
@@ -89,7 +100,7 @@
 
 
 
-    <div class="testimonials-section section">
+    <div class="testimonials-section section autoblur" data-aos="zoom-in">
         <div class="container">
             <div class="testimonials-header">
                 <div class="testimonials-title">Ce que nos clients disent</div>
@@ -170,7 +181,7 @@
 
 
 
-    <div class="cot-services section">
+    <div class="cot-services section autoblur" data-aos="fade-down">
         <div class="container">
             <div class="cot-services-content">
                 <div class="cot-services-header">
@@ -215,7 +226,7 @@
 
 
 
-    <div class="newsletter-section section">
+    <div class="newsletter-section section autoblur" data-aos="fade-up">
 
         <div class="newsletter-bg">
             <div class="container">
@@ -248,7 +259,7 @@
 
 
 
-    <div class="partenaires-section section" style="    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+    <div class="partenaires-section section autoblur" data-aos="fade-up" style="    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
         <div class="partenaires-bg">
             <div class="container">

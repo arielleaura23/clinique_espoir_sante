@@ -9,10 +9,12 @@
             'icon' => 'assets/img/phone_white.png',
             'slot' => 'Appeler la clinique',
             'href' => '#',
+            'id' => 'openCallModal',
+            'class' => 'call-popup-btn',
         ])->render()"
-        mask="assets/img/exclude.png" />
+        mask="assets/img/exclude.png" photo="assets/img/telephone.png"/>
 
-    <div class="contact-section ">
+    <div class="contact-section autoblur">
         <div class="container section">
             <div class="contact-header">
                 <div class="contact-title">Formulaire de contact</div>
@@ -22,7 +24,7 @@
             </div>
             <div class="contact-content">
                 <div class="image-contact">
-                    <img class="contact-bg-img" src="{{ asset('assets/img/doc6.png') }}" alt="doctor" />
+                    <img class="contact-bg-img"  src="{{ asset('assets/img/doc6.png') }}" alt="doctor" />
                 </div>
                 <form class="contact-form">
                     <div class="contact-form-group">
@@ -42,5 +44,20 @@
             </div>
         </div>
     </div>
+
+    <x-popup id="callClinicModal" title="Contactez la Clinique" icon="assets/img/phone_blue.png"
+        buttonText="Appeler maintenant" buttonLink="tel:+2376XXXXXXXX">
+        <p>
+            Pour toute information ou assistance, veuillez appeler la clinique au :
+            <br />
+            <strong class="clinic-phone" style="color: #1d77fe">(+237) 6 XX XX XX XX</strong>
+            <br />
+            Nous sommes disponibles du lundi au dimanche, de 8h à 20h.
+        </p>
+    </x-popup>
+
+
+
+
 
 @endsection

@@ -1,9 +1,9 @@
-    <div class="container">
+    <div  class="container autoblur">
         <div class="about-section section">
 
             <div class="about-content">
-                <img class="about-image" src="{{ asset('assets/img/about_img.png') }}" alt="À propos" />
-                <div class="about-container">
+                <img class="about-image " data-aos="zoom-in" src="{{ asset('assets/img/about_img.png') }}" alt="À propos" />
+                <div class="about-container" data-aos="fade-left">
                     <div class="about-title-en">About Us</div>
                     <div class="about-title-fr">Qui sommes-nous ?</div>
                     <div class="about-description">

@@ -76,7 +76,7 @@
                     </div>
                 </section>
 
-                <button class="submit-button" type="submit">
+                <button style="cursor: pointer" id="success_register" class="submit-button" type="submit">
                     <div class="button-background"></div>
                     <span class="button-text">Enregistrer</span>
                 </button>
@@ -87,22 +87,64 @@
 
                 </div>
                 <div class="btn-connect-social">
-                    <button class="google-button" type="button">
+                    <a href="#" class="google-button">
                         <div class="google-button-background"></div>
                         <img class="google-icon" src="{{ asset('assets/img/google.png') }}" />
                         <span class="google-button-text">Inscrivez vous avec google</span>
-                    </button>
-                    <button class="google-button" type="button">
+                    </a>
+                    <a href="#" class="google-button" type="button">
                         <div class="google-button-background"></div>
                         <img class="google-icon" src="{{ asset('assets/img/facebook.png') }}" />
                         <span class="google-button-text">Inscrivez vous avec facebook</span>
 
-                    </button>
+                    </a>
                 </div>
 
             </div>
 
         </form>
+
+
+
+        <x-popup id="successModal" title="Succès " icon="assets/img/check-circle.png" buttonText="Okay"
+            >
+            <p>
+            <h2>Félicitations !</h2>
+            <br />
+            Vous avez bien été enregistré<br />
+            </p>
+        </x-popup>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const success_register = document.getElementById('success_register');
+                const successModal = document.getElementById('successModal');
+
+                if (success_register && successModal) {
+                    success_register.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        console.log('Enregistrement réussi');
+                        successModal.style.display = 'flex';
+                    });
+                } else {
+                    console.log('Bouton ou modal non trouvés');
+                }
+
+
+                // Fermer les modales avec les boutons "Fermer" ou la croix
+                const closeButtons = document.querySelectorAll('.close-button');
+                closeButtons.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        const modalId = btn.dataset.close;
+                        const modalToClose = document.getElementById(modalId);
+                        if (modalToClose) {
+                            modalToClose.style.display = 'none'; // Ferme la modale
+                        }
+                    });
+                });
+            });
+        </script>
+
 
     </body>
 

@@ -11,13 +11,13 @@
             'icon' => 'assets/img/rdv.png',
             'slot' => 'Prendre un rdv',
             'href' => '/prise_rdv',
-        ])->render()" mask="assets/img/exclude.png" />
+        ])->render()" mask="assets/img/exclude.png" photo="assets/img/medecin.png" />
 
 
 
 
-    <section class="nos-medecins">
-        <div class="container section">
+    <section class="nos-medecins section autoblur" data-aos="fade-down">
+        <div class="container">
             <div class="doctors-content">
                 <div class="before-consultation-header">
                     <div class="before-consultation-title">Un accompagnement médical personnalisé</div>
@@ -71,8 +71,8 @@
 
 
 
-    <section class="emergency-section">
-        <div class="container section">
+    <section class="emergency-section section">
+        <div class="container">
             <div class="emergency-box">
                 <div class="white-box">
                     <div class="priority-title">
@@ -115,24 +115,24 @@
     </section>
 
 
-    <section class="partners">
-            <div class="before-consultation-header">
-        <div class="before-consultation-title">Partenaires</div>
-    </div>
-    <div class="partenaires-section section" style="    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+    <section class="partners section">
+        <div class="before-consultation-header">
+            <div class="before-consultation-title">Partenaires</div>
+        </div>
+        <div class="partenaires-section" style="    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
-        <div class="partenaires-bg">
-            <div class="container">
-                <div class="partenaires-list">
-                    <img class="partenaire-logo" src="{{ asset('assets/img/logo_minesup.webp') }}" alt="Minesup" />
-                    <img class="partenaire-logo" src="{{ asset('assets/img/logo_minsante-2.webp') }}" alt="Minsanté" />
-                    <img class="partenaire-logo" src="{{ asset('assets/img/logo_minfi.webp') }}" alt="Minfi" />
+            <div class="partenaires-bg">
+                <div class="container">
+                    <div class="partenaires-list">
+                        <img class="partenaire-logo" src="{{ asset('assets/img/logo_minesup.webp') }}" alt="Minesup" />
+                        <img class="partenaire-logo" src="{{ asset('assets/img/logo_minsante-2.webp') }}" alt="Minsanté" />
+                        <img class="partenaire-logo" src="{{ asset('assets/img/logo_minfi.webp') }}" alt="Minfi" />
+                    </div>
                 </div>
             </div>
+
+
         </div>
-
-
-    </div>
     </section>
 
 

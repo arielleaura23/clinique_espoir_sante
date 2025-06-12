@@ -10,13 +10,13 @@
             'icon' => 'assets/img/rdv.png',
             'slot' => 'Prendre un rdv',
             'href' => '/prise_rdv',
-        ])->render()" mask="assets/img/exclude.png" />
+        ])->render()" mask="assets/img/exclude.png" photo="assets/img/guide.png" />
 
 
 
 
-    <div class="container section">
-        <div class="before-consultation-section">
+    <div class="container section autoblur">
+        <div class="before-consultation-section " data-aos="flip-up">
             <div class="before-consultation-header">
                 <div class="before-consultation-title">Avant votre consultation</div>
                 <div class="before-consultation-subtitle">
@@ -56,7 +56,7 @@
     </div>
 
 
-    <div class="container section">
+    <div class="container section autoblur">
         <div class="at-clinic-section">
             <div class="at-clinic-header">
                 <div class="at-clinic-title">À la clinique</div>
@@ -64,12 +64,12 @@
                     À votre arrivée dans notre établissement, voici ce que vous devez faire
                 </div>
             </div>
-            <div class="at-clinic-steps">
+            <div class="at-clinic-steps" data-aos="zoom-in">
                 <div class="at-clinic-step">
                     <div class="at-clinic-step-icon">
                         <img src="{{asset('assets/img/person.png')}}" alt="Arrivée et orientation" />
                     </div>
-                    <div class="at-clinic-step-content">
+                    <div class="at-clinic-step-content" >
                         <div class="at-clinic-step-title">Arrivée et orientation</div>
                         <div class="at-clinic-step-desc">
                             Dès votre arrivée à la clinique, notre équipe de sécurité vous accueille et vous oriente vers le
@@ -78,11 +78,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="at-clinic-step">
+                <div class="at-clinic-step" data-aos="zoom-in">
                     <div class="at-clinic-step-icon">
                         <img src="{{asset('assets/img/enregister.png')}}" alt="Enregistrement" />
                     </div>
-                    <div class="at-clinic-step-content">
+                    <div class="at-clinic-step-content" >
                         <div class="at-clinic-step-title">Enregistrement</div>
                         <div class="at-clinic-step-desc">
                             L’enregistrement peut se faire à l’avance en ligne ou directement à la clinique. Si vous vous
@@ -95,11 +95,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="at-clinic-step">
+                <div class="at-clinic-step" data-aos="zoom-in">
                     <div class="at-clinic-step-icon">
                         <img src="{{asset('assets/img/temperature.png')}}" alt="Prise des constantes médicales" />
                     </div>
-                    <div class="at-clinic-step-content">
+                    <div class="at-clinic-step-content" >
                         <div class="at-clinic-step-title">Prise des constantes médicales</div>
                         <div class="at-clinic-step-desc">
                             Une fois l’enregistrement complété, vous serez dirigé vers l’espace dédié à la prise des
@@ -109,11 +109,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="at-clinic-step">
+                <div class="at-clinic-step" data-aos="zoom-in">
                     <div class="at-clinic-step-icon">
                         <img src="{{asset('assets/img/prise_rdv.png')}}" alt="Consultation médicale" />
                     </div>
-                    <div class="at-clinic-step-content">
+                    <div class="at-clinic-step-content" >
                         <div class="at-clinic-step-title">Consultation médicale</div>
                         <div class="at-clinic-step-desc">
                             Dès que vos constantes vitales ont été enregistrées, vous serez invité à rejoindre le cabinet du
@@ -128,7 +128,7 @@
     </div>
 
 
-        <div class="cot-services section">
+        <div class="cot-services section autoblur" data-aos="fade-down-right">
         <div class="container">
             <div class="cot-services-content">
                 <div class="cot-services-header">

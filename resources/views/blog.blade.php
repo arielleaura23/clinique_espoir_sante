@@ -10,7 +10,7 @@
             'slot' => 'Prendre un rdv',
             'href' => '/prise_rdv',
         ])->render()"
-        mask="assets/img/exclude.png" />
+        mask="assets/img/exclude.png" photo="assets/img/blog.png" />
 
     <section class="container blog-section section">
 
@@ -24,12 +24,12 @@
                         <span class="date">Lundi, 02 nov 2024</span>
                         <span class="author"><img src="{{ asset('assets/img/people.png') }}" alt="" /> By
                             Arie</span>
-                        <span class="author"><img src="{{ asset('assets/img/eye.png') }}" alt="" /> 55</span>
-                        <span class="author"><img src="{{ asset('assets/img/heart.png') }}" alt="" /> 23</span>
+                        <span class="author reaction view"><img src="{{ asset('assets/img/eye.png') }}" alt="" /> 55</span>
+                        <span class="author reaction like"><img src="{{ asset('assets/img/heart.png') }}" alt="" /> 23</span>
                     </div>
 
-                    <h2 class="title">La passion de redonner la santé</h2>
-                    <p class="description">
+                    <h2 class="title_blog">La passion de redonner la santé</h2>
+                    <p class="description_blog">
                         Lorem ipsum dolor sit amet consectetur. Purus neque dapibus sit viverra et urna bibendum id tellus.
                         Molestie nibh nulla eu ut nec cum viverra. Dictum enim bibendum ultrices in risus turpis accumsan.
                         Felis nunc iaculis imperdiet id quis sem maecenas sodales.
@@ -48,12 +48,12 @@
                         <span class="date">Lundi, 02 nov 2024</span>
                         <span class="author"><img src="{{ asset('assets/img/people.png') }}" alt="" /> By
                             Arie</span>
-                        <span class="views"><img src="{{ asset('assets/img/eye.png') }}" alt="" /> 55</span>
-                        <span class="likes"><img src="{{ asset('assets/img/heart.png') }}" alt="" /> 23</span>
+                        <span class="author reaction view"><img src="{{ asset('assets/img/eye.png') }}" alt="" /> 55</span>
+                        <span class="author reaction like"><img src="{{ asset('assets/img/heart.png') }}" alt="" /> 23</span>
                     </div>
 
-                    <h2 class="title">La passion de redonner la santé</h2>
-                    <p class="description">
+                    <h2 class="title_blog">La passion de redonner la santé</h2>
+                    <p class="description_blog">
                         Lorem ipsum dolor sit amet consectetur. Purus neque dapibus sit viverra et urna bibendum id tellus.
                         Molestie nibh nulla eu ut nec cum viverra. Dictum enim bibendum ultrices in risus turpis accumsan.
                         Felis nunc iaculis imperdiet id quis sem maecenas sodales.
@@ -72,12 +72,12 @@
                         <span class="date">Lundi, 02 nov 2024</span>
                         <span class="author"><img src="{{ asset('assets/img/people.png') }}" alt="" /> By
                             Arie</span>
-                        <span class="views"><img src="{{ asset('assets/img/eye.png') }}" alt="" /> 55</span>
-                        <span class="likes"><img src="{{ asset('assets/img/heart.png') }}" alt="" /> 23</span>
+                        <span class="author reaction view"><img src="{{ asset('assets/img/eye.png') }}" alt="" /> 55</span>
+                        <span class="author reaction like"><img src="{{ asset('assets/img/heart.png') }}" alt="" /> 23</span>
                     </div>
 
-                    <h2 class="title">La passion de redonner la santé</h2>
-                    <p class="description">
+                    <h2 class="title_blog">La passion de redonner la santé</h2>
+                    <p class="description_blog">
                         Lorem ipsum dolor sit amet consectetur. Purus neque dapibus sit viverra et urna bibendum id tellus.
                         Molestie nibh nulla eu ut nec cum viverra. Dictum enim bibendum ultrices in risus turpis accumsan.
                         Felis nunc iaculis imperdiet id quis sem maecenas sodales.

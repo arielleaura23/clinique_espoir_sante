@@ -7,10 +7,10 @@
     <x-hero
         title='<span class="hero-title-main">Vivez avec <span class="hero-title-highlight"> nous nos evenements!</span></span>'
         description="Réservez facilement vos rendez-vous médicaux en ligne, avec des médecins qualifiés et disponibles."
-        mask="assets/img/exclude.png" />
+        mask="assets/img/exclude.png" photo="assets/img/events.png"/>
 
 
-    <div class="events container section">
+    <div class="events container section ">
         <div class="futur-events  ">
             <div class="pharmacy-search-bar">
                 <input type="text" class="pharmacy-search-input"

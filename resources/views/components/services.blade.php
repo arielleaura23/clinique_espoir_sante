@@ -7,9 +7,9 @@
     'background' => false,
 ])
 
-<div class="services-section section @if (!empty($background)) services-bg @endif">
+<div data-aos="fade-down" class="services-section autoblur section @if (!empty($background)) services-bg @endif">
     <div class="container">
-        <div class="services-header">
+        <div class="services-header autoDisplay">
             @isset($title)
                 <div class="services-title">{{ $title }}</div>
             @endisset

@@ -12,7 +12,7 @@
         ])->render()"
         mask="assets/img/exclude.png" />
 
-    <section class="container blog-section section">
+    <section class="container blog-section section autoblur">
 
         <div class="card-article">
             <div class="image-container">

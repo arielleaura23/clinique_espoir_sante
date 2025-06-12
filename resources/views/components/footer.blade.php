@@ -1,6 +1,6 @@
-        <div class="footer">
-            <div class="footer-bg"></div>
-            <div class="container">
+        <div class="footer section">
+            <div class="footer-bg">
+                            <div class="container">
                 <div class="footer-main">
                     <div class="footer-brand">
                         <img class="footer-logo" src="{{ asset('assets/img/logo cercle.png') }}" alt="Logo" />
@@ -55,5 +55,6 @@
                                 alt="Whatsapp" /></a>
                     </div>
                 </div>
+            </div>
             </div>
         </div>

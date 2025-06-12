@@ -11,7 +11,7 @@ $(function () {
         if ($dropdown.hasClass("show")) {
             $dropdown.removeClass("show");
         } else {
-            $(".lang-switcher-dropdown").removeClass("show");
+            $("#lang-switcher-dropdown").removeClass("show");
             $dropdown.addClass("show");
         }
     });
@@ -39,9 +39,13 @@ document.getElementById('closeModal').addEventListener('click', function () {
   document.getElementById('successModal').style.display = 'none';
 });
 
-document.getElementById('okButton').addEventListener('click', function () {
-  document.getElementById('successModal').style.display = 'none';
-});
+
+
+// modale
+
+
+
+
 
 
 

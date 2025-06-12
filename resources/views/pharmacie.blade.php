@@ -10,7 +10,7 @@
         mask="assets/img/exclude.png" photo="assets/img/medoc2.png" />
 
 
-    <div class="pharmacy-section">
+    <div class="pharmacy-section section autoblur" data-aos="fade-up">
         <div class="container">
             <div class="pharmacy-header">
                 <div class="pharmacy-header-title">Tous nos médicaments</div>
