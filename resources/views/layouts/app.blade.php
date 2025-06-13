@@ -124,22 +124,79 @@
         {{-- script pour afficher le panier --}}
 
         <script>
-                document.addEventListener("DOMContentLoaded", function () {
-        const toggle = document.getElementById("panierToggle");
-        const dropdown = document.getElementById("panierDropdown");
+            document.addEventListener("DOMContentLoaded", function() {
+                const toggle = document.getElementById("panierToggle");
+                const dropdown = document.getElementById("panierDropdown");
 
-        toggle.addEventListener("click", function (e) {
-            e.preventDefault();
-            dropdown.classList.toggle("active");
-        });
+                toggle.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    dropdown.classList.toggle("active");
+                });
 
-        // Fermer si on clique ailleurs
-        document.addEventListener("click", function (e) {
-            if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
-                dropdown.classList.remove("active");
-            }
-        });
-    });
+                // Fermer si on clique ailleurs
+                document.addEventListener("click", function(e) {
+                    if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                        dropdown.classList.remove("active");
+                    }
+                });
+            });
+        </script>
+
+
+        {{-- Script pour la recherche de médicaments --}}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchInput = document.getElementById('pharmacy-search-input');
+                const cards = document.querySelectorAll('.pharmacy-product-card');
+
+                searchInput.addEventListener('input', function() {
+                    const value = this.value.trim().toLowerCase();
+                    cards.forEach(card => {
+                        const title = card.querySelector('.pharmacy-product-title').textContent
+                            .toLowerCase();
+                        if (title.includes(value)) {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+        {{-- Script pour la recherche d'événements --}}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const searchInput = document.getElementById('event-search-input');
+                // Récupère tous les événements des deux sections
+                const eventCards = document.querySelectorAll('.evenements .evenement');
+
+                searchInput.addEventListener('input', function() {
+                    const value = this.value.trim().toLowerCase();
+                    eventCards.forEach(card => {
+                        // Recherche dans le titre, la date, le lieu, l’horaire et la description
+                        const titre = card.querySelector('.titre')?.textContent.toLowerCase() || '';
+                        const date = card.querySelector('.date')?.textContent.toLowerCase() || '';
+                        const lieu = card.querySelector('.lieu')?.textContent.toLowerCase() || '';
+                        const horaire = card.querySelector('.horaire')?.textContent.toLowerCase() || '';
+                        const desc = card.querySelector('.description')?.textContent.toLowerCase() ||
+                        '';
+                        // Affiche si au moins un champ contient la valeur recherchée
+                        if (
+                            titre.includes(value) ||
+                            date.includes(value) ||
+                            lieu.includes(value) ||
+                            horaire.includes(value) ||
+                            desc.includes(value)
+                        ) {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
         </script>
 
 

@@ -190,12 +190,12 @@
                 </div>
                 <div class="cot-services-steps">
                     <div class="cot-step">
-                        <div class="cot-step-bg">
+                        <a href="{{route('prise_rdv')}}" class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/prise_rdv.png') }}" alt="" />
                             <div class="cot-step-text">Demander un <br> rendez-vous</div>
-                        </div>
+                        </a>
                     </div>
-                    <div class="cot-step">
+                    <a href="{{route('prise_rdv')}}" class="cot-step">
                         <div class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/consultation.png') }}"
                                 alt="Caler le rendez-vous" />
@@ -203,8 +203,8 @@
                                 Caler le<br />rendez-vous
                             </div>
                         </div>
-                    </div>
-                    <div class="cot-step">
+                    </a>
+                    <a href="{{route('visio_consulting')}}" class="cot-step">
                         <div class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/consult.png') }}" alt="" />
                             <div class="cot-step-text">
@@ -212,7 +212,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </a>
                 </div>
                 {{-- <div class="cot-services-icons">
                         <img class="cot-services-calendar" src="group0.svg" alt="Calendrier" />

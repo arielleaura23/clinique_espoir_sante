@@ -18,13 +18,13 @@
                     Nous vous offrons une large gamme de médicaments
                 </div>
                 <div class="pharmacy-search-bar">
-                    <input type="text" class="pharmacy-search-input" placeholder="Rechercher un médicament">
+                    <input type="text" id="pharmacy-search-input" class="pharmacy-search-input" placeholder="Rechercher un médicament">
                     <button class="pharmacy-search-btn">
                         <img src="{{ asset('assets/img/search.png') }}" alt="Rechercher" />
                     </button>
                 </div>
             </div>
-            <div class="pharmacy-products-grid">
+            <div class="pharmacy-products-grid" id="pharmacy-products-grid">
                 <div class="pharmacy-product-card">
                     <div class="pharmacy-product-img-wrapper">
                         <a href="{{ route('product_details') }}" class="pharmacy-img-link">
@@ -36,7 +36,7 @@
                         </a>
                     </div>
                     <div class="pharmacy-product-info">
-                        <div class="pharmacy-product-title">Amoxicilin 500 mg</div>
+                        <div class="pharmacy-product-title">dexa 500 mg</div>
                         <div class="pharmacy-product-status in-stock">En stock</div>
                         <div class="pharmacy-product-price">2000 FCFA</div>
                         <x-bouton icon="{{asset('assets/img/cart-add.png')}}">Ajouter</x-bouton>

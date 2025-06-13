@@ -37,6 +37,7 @@ Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
 Route::get('/product_details', [HomeController::class, 'product_details'])->name('product_details');
 Route::get('/checkout_page', [HomeController::class, 'checkout_page'])->name('checkout_page');
 Route::get('/recents_posts', [HomeController::class, 'recents_posts'])->name('recents_posts');
+Route::get('/visio_consulting', [HomeController::class, 'visio_consulting'])->name('visio_consulting');
 
 
 Route::get('/register', [AuthController::class, 'register'])->name('show.register');

@@ -13,7 +13,7 @@
     <div class="events container section ">
         <div class="futur-events  ">
             <div class="pharmacy-search-bar">
-                <input type="text" class="pharmacy-search-input"
+                <input type="text" class="pharmacy-search-input" id="event-search-input"
                     placeholder="Rechercher des evenements par nom, mois, lieu ou jour ....">
                 <button class="pharmacy-search-btn">
                     <img src="{{ asset('assets/img/search.png') }}" alt="Rechercher" />
@@ -29,13 +29,13 @@
             </div>
 
 
-            <div class="evenements">
+            <div class="evenements" id="evenements-a-venir">
                 <!-- Événement 1 -->
                 <div class="evenement">
                     <img src="{{ asset('assets/img/doc8.png') }}" alt="Journée mondiale du SIDA" class="image-evenement" />
                     <h2 class="titre">Journée mondiale du SIDA</h2>
                     <div class="details">
-                        <p class="date">Mardi, 04 septembre 2025</p>
+                        <p class="date">Jeudi, 04 Octobre 2025</p>
                         <p class="lieu">CHU</p>
                         <p class="horaire">08:00 - 15:00</p>
                     </div>
@@ -82,7 +82,7 @@
             </div>
 
 
-            <div class="evenements">
+            <div class="evenements" id="evenements-passes">
                 <!-- Événement 1 -->
                 <div class="evenement">
                     <img src="{{ asset('assets/img/doc8.png') }}" alt="Journée mondiale du SIDA" class="image-evenement" />

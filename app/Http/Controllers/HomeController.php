@@ -66,6 +66,10 @@ class HomeController extends Controller
     {
         return view('recents_posts');
     }
+    public function visio_consulting()
+    {
+        return view('visio_consulting');
+    }
 
 
 }

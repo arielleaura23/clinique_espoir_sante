@@ -5,6 +5,54 @@
 @section('content')
 
     <main class="checkout-container">
+
+        <div class="left-section">
+                    <!-- Section Méthodes de paiement -->
+        <section class="payment-methods">
+            <h2 class="section-title">Informations du client</h2>
+
+            <div class="user-group">
+                <label for="nom">
+                    {{-- <img src="icons/google-pay-icon.svg" alt="Google Pay"> --}}
+                    <span class="label_nom">Nom <span style="color: red;">*</span></span>
+                </label>
+                <input class="payment-option user_info"  placeholder="Entrez votre nom" type="text" id="nom" name="nom">
+            </div>
+
+            <div class="user-group">
+                <label for="adresse">
+                    {{-- <img src="icons/google-pay-icon.svg" alt="Google Pay"> --}}
+                    <span class="label_nom">Adresse <span style="color: red;">*</span></span>
+                </label>
+                <input class="payment-option user_info" type="text" placeholder="Entrez votre adresse" id="adresse" name="adresse">
+            </div>
+
+            <div class="user-group">
+                <label for="phone">
+                    {{-- <img src="icons/google-pay-icon.svg" alt="Google Pay"> --}}
+                    <span class="label_nom">Telephone <span style="color: red;">*</span></span>
+                </label>
+                <input class="payment-option user_info" type="text" id="phone" placeholder="Entrez votre telephone" name="phone">
+            </div>
+            <div class="user-group">
+                <label for="ville">
+                    {{-- <img src="icons/google-pay-icon.svg" alt="Google Pay"> --}}
+                    <span class="label_nom">Ville <span style="color: red;">*</span></span>
+                </label>
+                <input class="payment-option user_info" type="text" id="ville" placeholder="Entrez votre ville" name="ville">
+            </div>
+            <div class="user-group">
+                <label for="quartier">
+                    {{-- <img src="icons/google-pay-icon.svg" alt="Google Pay"> --}}
+                    <span class="label_nom">Quartier <span style="color: red;">*</span></span>
+                </label>
+                <input class="payment-option user_info" type="text" placeholder="Entrez votre quartier" id="quartier" name="quartier">
+            </div>
+
+
+        </section>
+
+
         <!-- Section Méthodes de paiement -->
         <section class="payment-methods">
             <h2 class="section-title">Méthode de paiement</h2>
@@ -44,7 +92,7 @@
                             <img src="{{ asset('assets/img/visa.png') }}" alt="Visa">
                             <p class="bank-name">HDFC Bank</p>
                         </div>
-                            <p class="card-number">**** 4521</p>
+                        <p class="card-number">**** 4521</p>
                     </div>
                 </div>
                 <button class="add-card-btn">
@@ -57,10 +105,32 @@
             </button> --}}
         </section>
 
+        <section class="payment-methods">
+            <h2 class="section-title">Méthode de livraison</h2>
+
+            <div class="payment-option">
+                <input type="radio" id="google-pay" name="payment" checked>
+                <label for="google-pay">
+                    {{-- <img src="icons/google-pay-icon.svg" alt="Google Pay"> --}}
+                    <span>A la clinique</span>
+                </label>
+            </div>
+
+            <div class="payment-option">
+                <input type="radio" id="debit-card" name="payment">
+                <label for="debit-card">
+                    {{-- <img src="icons/debit-icon.svg" alt="Carte de débit"> --}}
+                    <span>livraison</span>
+                </label>
+            </div>
+
+        </section>
+        </div>
+
         <!-- Section Résumé de commande -->
         <section class="order-summary">
             <div class="product-preview">
-                <img src="{{asset('assets/img/medoc4.png')}}" alt="Produit" class="product-img">
+                <img src="{{ asset('assets/img/medoc4.png') }}" alt="Produit" class="product-img">
                 <div class="product-details">
                     <p class="product-name">Amoxicilin 500mg</p>
                     <p class="product-price">2000 FCFA</p>
