@@ -16,7 +16,7 @@
 
 
     <div class="container section autoblur">
-        <div class="before-consultation-section " data-aos="flip-up">
+        <div class="before-consultation-section " data-aos="flip-up" data-aos-easing="linear" data-aos-duration="800">
             <div class="before-consultation-header">
                 <div class="before-consultation-title">Avant votre consultation</div>
                 <div class="before-consultation-subtitle">
@@ -64,8 +64,8 @@
                     À votre arrivée dans notre établissement, voici ce que vous devez faire
                 </div>
             </div>
-            <div class="at-clinic-steps" data-aos="zoom-in">
-                <div class="at-clinic-step">
+            <div class="at-clinic-steps">
+                <div class="at-clinic-step" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="at-clinic-step-icon">
                         <img src="{{asset('assets/img/person.png')}}" alt="Arrivée et orientation" />
                     </div>
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="at-clinic-step" data-aos="zoom-in">
+                <div class="at-clinic-step" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="at-clinic-step-icon">
                         <img src="{{asset('assets/img/enregister.png')}}" alt="Enregistrement" />
                     </div>
@@ -95,7 +95,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="at-clinic-step" data-aos="zoom-in">
+                <div class="at-clinic-step" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="at-clinic-step-icon">
                         <img src="{{asset('assets/img/temperature.png')}}" alt="Prise des constantes médicales" />
                     </div>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="at-clinic-step" data-aos="zoom-in">
+                <div class="at-clinic-step" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="at-clinic-step-icon">
                         <img src="{{asset('assets/img/prise_rdv.png')}}" alt="Consultation médicale" />
                     </div>
@@ -128,7 +128,7 @@
     </div>
 
 
-        <div class="cot-services section autoblur" data-aos="fade-down-right">
+        <div class="cot-services section autoblur" data-aos="fade-down-right" data-aos-easing="linear" data-aos-duration="1000">
         <div class="container">
             <div class="cot-services-content">
                 <div class="cot-services-header">

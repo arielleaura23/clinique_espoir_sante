@@ -198,6 +198,166 @@ a {
     font-weight: 700;
 }
 
+.right-icons {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 20px;
+}
+
+/* panier */
+.panier {
+    position: relative;
+    display: inline-block;
+}
+
+.panier-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 7px;
+    border-radius: 50%;
+    background-color: #f0f4ff;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 255, 0.1);
+}
+
+.panier-link:hover {
+    background-color: #dbe8ff;
+    transform: scale(1.05);
+}
+
+.panier-link img {
+    width: 25px;
+}
+
+.panier-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 2px;
+    border-radius: 12px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    min-width: 20px;
+    text-align: center;
+}
+
+.panier-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 10px;
+    width: 300px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    padding: 15px 0;
+    z-index: 100;
+}
+
+.panier-title {
+    font-weight: bold;
+    text-align: center;
+    color: #1d77fe;
+    margin-bottom: 30px;
+    font-family: "inter-bold", sans-serif;
+    font-size: 20px;
+}
+
+.panier-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.panier-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.panier-item:hover {
+    background-color: #f5f9ff;
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.1);
+    cursor: pointer;
+}
+
+.panier .img-medoc {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.panier .img-medoc img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    display: block;
+    font-size: 14px;
+    font-family: "inter-bold", sans-serif;
+    color: #1d77fe;
+}
+
+.item-price {
+    font-size: 13px;
+    color: #737373;
+    font-family: "inter", sans-serif;
+}
+
+.panier-total {
+    text-align: right;
+    margin: 15px;
+    color: #1d77fe;
+    font-family: "inter", sans-serif;
+}
+
+.btn-panier {
+    display: block;
+    text-align: center;
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    margin: 15px 15px 0 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.btn-panier:hover {
+    background-color: #0056b3;
+}
+
+.panier-dropdown.active {
+    display: block;
+}
+
 /* Logo */
 .header-logo {
     display: flex;
@@ -306,7 +466,7 @@ a {
     }
 
     .header .header-lang {
-        display: none;
+        /* display: none; */
         /* width: 100%;
         justify-content: flex-start; */
     }
@@ -387,7 +547,6 @@ a {
 
 @media screen and (max-width: 992px) {
     .header .header-info,
-    .header .header-lang,
     .main-navbar {
         display: none !important;
     }
@@ -558,8 +717,8 @@ a {
     white-space: nowrap;
 }
 .cta-icon {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     z-index: 3;
 }
 .hero-mask {
@@ -3000,6 +3159,14 @@ input:focus {
     background: #a8dfff;
 }
 
+.pharmacy-product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.pharmacy-product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
 .pharmacy-products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -3094,6 +3261,50 @@ input:focus {
     margin-bottom: 6px;
 }
 
+.pharmacy-product-img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.pharmacy-img-link {
+    display: block;
+    position: relative;
+}
+
+.pharmacy-product-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.pharmacy-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* voile noir */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-weight: bold;
+    font-size: 1.2em;
+    pointer-events: none;
+}
+
+.pharmacy-img-link:hover .pharmacy-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.pharmacy-img-link:hover .pharmacy-product-img {
+    transform: scale(1.05);
+}
+
 /* Responsive pharmacie*/
 @media (max-width: 1150px) {
     .pharmacy-products-grid {
@@ -3109,6 +3320,11 @@ input:focus {
     }
     .pharmacy-product-card {
         width: 250px;
+    }
+}
+@media (max-width: 576px) {
+    .pharmacy-products-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -3723,6 +3939,7 @@ input:focus {
     grid-template-columns: repeat(4, 1fr);
     justify-content: space-between;
     gap: 30px;
+    margin: 0 auto;
 }
 
 .doctor-card {
@@ -3762,6 +3979,23 @@ input:focus {
     display: flex;
     flex-direction: column;
     gap: 50px;
+}
+
+/* responsive doctors section */
+@media (max-width: 1150px) {
+    .doctors {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 768px) {
+    .doctors {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 576px) {
+    .doctors {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* emergency doctors */
@@ -4971,6 +5205,189 @@ input:focus {
     }
 }
 
+/* checkout-page */
+.checkout-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 40px;
+    gap: 60px;
+}
+.section-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1d77fe;
+    font-family: "inter", sans-serif;
+}
+
+.image-bank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.order-summary {
+    border-radius: 20px;
+    padding: 30px;
+    width: 45%;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(64, 139, 252, 0.05);
+}
+.payment-methods {
+    padding: 30px;
+    width: 45%;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Méthodes de paiement */
+.payment-option {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e7e9eb;
+    border-radius: 10px;
+    padding: 10px 15px;
+    margin-bottom: 16px;
+    gap: 10px;
+}
+
+.payment-option input {
+    accent-color: #408bfc;
+}
+
+.payment-option label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.saved-cards {
+    margin-top: 20px;
+}
+
+.card-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e7e9eb;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.card-details {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.bank-name {
+    font-size: 14px;
+    color: #696969;
+}
+
+.card-number {
+    font-size: 14px;
+    color: #696969;
+}
+
+.add-card-btn,
+.add-method-btn {
+    background: none;
+    border: none;
+    color: #408bfc;
+    font-weight: 500;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+/* Résumé de commande */
+.order-summary .product-preview {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.product-img {
+    width: 78px;
+    height: 78px;
+    object-fit: cover;
+    border-radius: 6px;
+    background: #f5f7f9;
+}
+
+.product-name {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.product-price {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.promo-code {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.add-code-btn {
+    background: none;
+    border: none;
+    color: #408bfc;
+    font-size: 12px;
+    cursor: pointer;
+    border-bottom: 1px dashed #408bfc;
+}
+
+.payment-breakdown {
+    font-size: 16px;
+    color: #696969;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.payment-breakdown p {
+    display: flex;
+    justify-content: space-between;
+}
+
+.payment-breakdown .total {
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.delivery-address {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #757575;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pay-now-btn {
+    background: #408bfc;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 20px;
+    width: 100%;
+    cursor: pointer;
+}
+
 /* animations */
 
 /* blur effect animation */
@@ -4979,34 +5396,34 @@ input:focus {
     animation-timeline: view();
 }
 
-@keyframes autoBlurAnimation{
-    0%{
-        filter: blur(10px);
+@keyframes autoBlurAnimation {
+    0% {
+        filter: blur(5px);
         opacity: 0;
     }
-    35%,65%{
+    35%,
+    65% {
         filter: blur(0);
         opacity: 1;
     }
-    100%{
+    100% {
         filter: blur(5px);
         opacity: 0;
     }
 }
 
-
 /* AUTO DISPLAY ANIMAION */
-.autoDisplay{
+.autoDisplay {
     animation: autoDisplayAnimation both;
     animation-timeline: view();
-
 }
 
-@keyframes autoDisplayAnimation{
-    from{
+@keyframes autoDisplayAnimation {
+    from {
         filter: blur(10px);
         transform: translateY(-200px) scale(0);
-    } 50%{
+    }
+    50% {
         opacity: 1;
         filter: blur(0px);
         transform: translateX(0) scale(1);
@@ -5015,21 +5432,24 @@ input:focus {
 
 /* FADEIN_LEFT */
 
-.fadein-left{
+.fadein-left {
     animation: fadeInLeftAnimation both;
     animation-timeline: view();
 }
 
-@keyframes fadeInLeftAnimation{
-    0%{
+@keyframes fadeInLeftAnimation {
+    0% {
         opacity: 0;
         transform: translateX(-500px) scale(0.2);
         filter: blur(10px);
-    } 35%,65%{
+    }
+    35%,
+    65% {
         opacity: 1;
         transform: translateX(0) scale(1);
         filter: blur(0px);
-    }100%{
+    }
+    100% {
         filter: blur(10px);
     }
 }
@@ -5041,6 +5461,5 @@ input:focus {
 }
 
 .page.fade-out {
-    opacity: .8;
+    opacity: 0.8;
 }
-

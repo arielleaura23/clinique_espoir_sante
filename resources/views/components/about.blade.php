@@ -1,9 +1,9 @@
-    <div  class="container autoblur">
+    <div class="container autoblur">
         <div class="about-section section">
 
             <div class="about-content">
-                <img class="about-image " data-aos="zoom-in" src="{{ asset('assets/img/about_img.png') }}" alt="À propos" />
-                <div class="about-container" data-aos="fade-left">
+                <img class="about-image " data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1000" src="{{ asset('assets/img/about_img.png') }}" alt="À propos" />
+                <div class="about-container" data-aos="fade-left" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="about-title-en">About Us</div>
                     <div class="about-title-fr">Qui sommes-nous ?</div>
                     <div class="about-description">
@@ -14,7 +14,7 @@
                         et approche humaine pour garantir votre bien-être au quotidien.
                     </div>
 
-                    <x-bouton href="{{route('contact')}}">Contactez nous</x-bouton>
+                    <x-bouton href="{{ route('contact') }}">Contactez nous</x-bouton>
                 </div>
             </div>
 
@@ -26,7 +26,7 @@
                     </div>
                     <div class="chat-message">Envoyez-nous un message</div>
                 </div> --}}
-            <a href="{{route('chat')}}" class="chat">
+            <a href="{{ route('chat') }}" class="chat">
                 <div class="chat-bg"></div>
                 <div class="chat-icon">
                     <img src="{{ asset('assets/img/chat.png') }}" alt="Chat" />

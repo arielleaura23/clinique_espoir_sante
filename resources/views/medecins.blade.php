@@ -71,10 +71,10 @@
 
 
 
-    <section class="emergency-section section">
+    <section class="emergency-section section autoblur">
         <div class="container">
             <div class="emergency-box">
-                <div class="white-box">
+                <div class="white-box" data-aos="fade-right" data-aos-easing="linear" data-aos-duration="1200">
                     <div class="priority-title">
                         Votre santé est notre priorité
                     </div>
@@ -85,7 +85,7 @@
                         efficace et humaine, dans les moments où vous en avez le plus besoin.
                     </div>
                 </div>
-                <div class="blue-box">
+                <div class="blue-box" data-aos="fade-left" data-aos-easing="linear" data-aos-duration="1200">
                     <div class="emergency-title">
                         Interventions d’urgence médicales
                     </div>
@@ -115,7 +115,7 @@
     </section>
 
 
-    <section class="partners section">
+    <section class="partners section autoblur" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1200">
         <div class="before-consultation-header">
             <div class="before-consultation-title">Partenaires</div>
         </div>
@@ -136,7 +136,7 @@
     </section>
 
 
-    <div class="container section">
+    <div class="container section autoblur">
         <div class="contact-section">
             <div class="before-consultation-header">
                 <div class="before-consultation-title">Contact</div>
@@ -144,7 +144,7 @@
 
             <div class="contact-cards">
                 <!-- Carte Emergency -->
-                <div class="contact-card">
+                <div class="contact-card" data-aos="zoom-in-up" data-aos-easing="linear" data-aos-duration="700">
                     <div class="card-bg-blue">
                         <div class="contact-info">
                             <img class="contact-icon" src="{{ asset('assets/img/phone_sky_blue.png') }}" />
@@ -157,7 +157,7 @@
 
                 <!-- Carte Adresse -->
                 <div class="contact-card">
-                    <div class="card-bg-blue card-bg-darkblue">
+                    <div class="card-bg-blue card-bg-darkblue" data-aos="zoom-in-up" data-aos-easing="linear" data-aos-duration="700">
                         <div class="contact-info">
                             <img class="contact-icon" src="{{ asset('assets/img/location_blue.png') }}" />
                             <div class="contact-label">Address</div>
@@ -170,7 +170,7 @@
 
                 <!-- Carte Email -->
                 <div class="contact-card">
-                    <div class="card-bg-blue">
+                    <div class="card-bg-blue" data-aos="zoom-in-up" data-aos-easing="linear" data-aos-duration="700">
                         <div class="contact-info">
                             <img class="contact-icon" src="{{ asset('assets/img/email_sky_blue.png') }}" />
                             <div class="contact-label">Email</div>
@@ -183,7 +183,7 @@
 
                 <!-- Carte Emploi du temps -->
                 <div class="contact-card">
-                    <div class="card-bg-blue">
+                    <div class="card-bg-blue" data-aos="zoom-in-up" data-aos-easing="linear" data-aos-duration="700">
                         <div class="contact-info">
                             <img class="contact-icon" src="{{ asset('assets/img/time_sky_blue.png') }}" />
                             <div class="contact-label">Emploi de temps</div>

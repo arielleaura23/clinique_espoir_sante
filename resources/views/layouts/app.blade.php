@@ -121,6 +121,27 @@
 
 
 
+        {{-- script pour afficher le panier --}}
+
+        <script>
+                document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.getElementById("panierToggle");
+        const dropdown = document.getElementById("panierDropdown");
+
+        toggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            dropdown.classList.toggle("active");
+        });
+
+        // Fermer si on clique ailleurs
+        document.addEventListener("click", function (e) {
+            if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.remove("active");
+            }
+        });
+    });
+        </script>
+
 
 
 
@@ -129,7 +150,7 @@
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             AOS.init({
-                duration: 800,
+                // duration: 800,
                 once: false,
             });
         </script>

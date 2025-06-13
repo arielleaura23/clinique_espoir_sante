@@ -58,6 +58,14 @@ class HomeController extends Controller
     {
         return view('product_details');
     }
+    public function checkout_page()
+    {
+        return view('checkout_page');
+    }
+    public function recents_posts()
+    {
+        return view('recents_posts');
+    }
 
 
 }

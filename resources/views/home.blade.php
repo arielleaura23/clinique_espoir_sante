@@ -100,7 +100,7 @@
 
 
 
-    <div class="testimonials-section section autoblur" data-aos="zoom-in">
+    <div class="testimonials-section section autoblur" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1000">
         <div class="container">
             <div class="testimonials-header">
                 <div class="testimonials-title">Ce que nos clients disent</div>
@@ -181,7 +181,7 @@
 
 
 
-    <div class="cot-services section autoblur" data-aos="fade-down">
+    <div class="cot-services section autoblur" data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
         <div class="container">
             <div class="cot-services-content">
                 <div class="cot-services-header">
@@ -226,7 +226,7 @@
 
 
 
-    <div class="newsletter-section section autoblur" data-aos="fade-up">
+    <div class="newsletter-section section autoblur" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
 
         <div class="newsletter-bg">
             <div class="container">
@@ -259,7 +259,7 @@
 
 
 
-    <div class="partenaires-section section autoblur" data-aos="fade-up" style="    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+    <div class="partenaires-section section autoblur" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000" style="    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
         <div class="partenaires-bg">
             <div class="container">

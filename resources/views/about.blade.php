@@ -16,7 +16,7 @@
     <x-about  />
 
 
-    <div  class="container autoblur" data-aos="zoom-out-left">
+    <div  class="container autoblur" data-aos="zoom-out-left" data-aos-easing="linear" data-aos-duration="1000">
         <div class="about-history-section section">
 
             <div class="history-content">
@@ -68,7 +68,7 @@
                     personnalisé et efficace.
                 </div>
             </div>
-            <div class="qualified-doctors-photos"  data-aos="zoom-in">
+            <div class="qualified-doctors-photos"  data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1500">
                 <div class="qualified-doctors-row" style="margin-top: -100px;">
                     <img class="doctor-photo" src="{{ asset('assets/img/doctor2.png') }}" alt="Médecin 1" />
                     <img class="doctor-photo" src="{{ asset('assets/img/doctor3.png') }}" alt="Médecin 2" />
@@ -86,8 +86,8 @@
         <div class="director-message-section">
             <div class="director-message-content">
                 <div class="director-message-title">Mot du directeur général</div>
-                <div class="director-message-text">
-                    <span  >
+                <div class="director-message-text" data-aos="fade-up-right"  data-aos-easing="linear" data-aos-duration="1000">
+                    <span>
                         Chers collaborateurs, chers partenaires,
                         <br />
                         C’est avec un engagement renouvelé que nous entamons une nouvelle ère pour la Clinique Espoir santé.

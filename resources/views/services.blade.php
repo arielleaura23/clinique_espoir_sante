@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="faq-list">
-                <details class="faq-item" data-aos="fade-down-right">
+                <details class="faq-item" data-aos="fade-down-right"  data-aos-duration="1000">
                     <summary class="faq-question">
                         Est-ce que je peux choisir mon médecin ?
                     </summary>
@@ -86,7 +86,7 @@
                         disponibilités.
                     </div>
                 </details>
-                <details class="faq-item" data-aos="fade-down-right">
+                <details class="faq-item" data-aos="fade-down-right"  data-aos-duration="1000">
                     <summary class="faq-question">
                         Quels sont les moyens de paiement acceptés ?
                     </summary>
@@ -94,7 +94,7 @@
                         Nous acceptons les paiements en espèces, par carte bancaire, mobile money et virement bancaire.
                     </div>
                 </details>
-                <details class="faq-item" data-aos="fade-down-right">
+                <details class="faq-item" data-aos="fade-down-right"  data-aos-duration="1000">
                     <summary class="faq-question">
                         Puis-je annuler ou déplacer un rendez-vous ?
                     </summary>
