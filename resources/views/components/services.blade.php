@@ -7,7 +7,7 @@
     'background' => false,
 ])
 
-<div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1500" class="services-section autoblur section @if (!empty($background)) services-bg @endif">
+<div data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000" class="services-section  section @if (!empty($background)) services-bg @endif">
     <div class="container">
         <div class="services-header autoDisplay">
             @isset($title)

@@ -1,4 +1,4 @@
-    <div class="container autoblur">
+    <div class="container ">
         <div class="about-section section">
 
             <div class="about-content">

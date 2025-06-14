@@ -1,4 +1,4 @@
-<div class="hero-section autoblur">
+<div class="hero-section ">
     @if (!empty($bg))
         <div class="hero-bg" style="background-image: url('{{ asset($bg) }}')">
             <div class="container">
