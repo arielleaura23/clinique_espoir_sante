@@ -136,7 +136,7 @@
     </section>
 
 
-    <div class="container section autoblur">
+    <div class="container section ">
         <div class="contact-section">
             <div class="before-consultation-header">
                 <div class="before-consultation-title">Contact</div>

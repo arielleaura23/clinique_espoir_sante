@@ -67,9 +67,9 @@
             <div class="at-clinic-steps">
                 <div class="at-clinic-step" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="at-clinic-step-icon">
-                        <img src="{{asset('assets/img/person.png')}}" alt="Arrivée et orientation" />
+                        <img src="{{ asset('assets/img/person.png') }}" alt="Arrivée et orientation" />
                     </div>
-                    <div class="at-clinic-step-content" >
+                    <div class="at-clinic-step-content">
                         <div class="at-clinic-step-title">Arrivée et orientation</div>
                         <div class="at-clinic-step-desc">
                             Dès votre arrivée à la clinique, notre équipe de sécurité vous accueille et vous oriente vers le
@@ -80,9 +80,9 @@
                 </div>
                 <div class="at-clinic-step" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="at-clinic-step-icon">
-                        <img src="{{asset('assets/img/enregister.png')}}" alt="Enregistrement" />
+                        <img src="{{ asset('assets/img/enregister.png') }}" alt="Enregistrement" />
                     </div>
-                    <div class="at-clinic-step-content" >
+                    <div class="at-clinic-step-content">
                         <div class="at-clinic-step-title">Enregistrement</div>
                         <div class="at-clinic-step-desc">
                             L’enregistrement peut se faire à l’avance en ligne ou directement à la clinique. Si vous vous
@@ -97,9 +97,9 @@
                 </div>
                 <div class="at-clinic-step" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="at-clinic-step-icon">
-                        <img src="{{asset('assets/img/temperature.png')}}" alt="Prise des constantes médicales" />
+                        <img src="{{ asset('assets/img/temperature.png') }}" alt="Prise des constantes médicales" />
                     </div>
-                    <div class="at-clinic-step-content" >
+                    <div class="at-clinic-step-content">
                         <div class="at-clinic-step-title">Prise des constantes médicales</div>
                         <div class="at-clinic-step-desc">
                             Une fois l’enregistrement complété, vous serez dirigé vers l’espace dédié à la prise des
@@ -111,9 +111,9 @@
                 </div>
                 <div class="at-clinic-step" data-aos="zoom-in" data-aos-easing="linear" data-aos-duration="1000">
                     <div class="at-clinic-step-icon">
-                        <img src="{{asset('assets/img/prise_rdv.png')}}" alt="Consultation médicale" />
+                        <img src="{{ asset('assets/img/prise_rdv.png') }}" alt="Consultation médicale" />
                     </div>
-                    <div class="at-clinic-step-content" >
+                    <div class="at-clinic-step-content">
                         <div class="at-clinic-step-title">Consultation médicale</div>
                         <div class="at-clinic-step-desc">
                             Dès que vos constantes vitales ont été enregistrées, vous serez invité à rejoindre le cabinet du
@@ -128,7 +128,7 @@
     </div>
 
 
-        <div class="cot-services section autoblur" data-aos="fade-down-right" data-aos-easing="linear" data-aos-duration="1000">
+    <div class="cot-services section " data-aos="fade-down" data-aos-easing="linear" data-aos-duration="1000">
         <div class="container">
             <div class="cot-services-content">
                 <div class="cot-services-header">
@@ -137,12 +137,12 @@
                 </div>
                 <div class="cot-services-steps">
                     <div class="cot-step">
-                        <div class="cot-step-bg">
+                        <a href="{{route('prise_rdv')}}" class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/prise_rdv.png') }}" alt="" />
                             <div class="cot-step-text">Demander un <br> rendez-vous</div>
-                        </div>
+                        </a>
                     </div>
-                    <div class="cot-step">
+                    <a href="{{route('prise_rdv')}}" class="cot-step">
                         <div class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/consultation.png') }}"
                                 alt="Caler le rendez-vous" />
@@ -150,8 +150,8 @@
                                 Caler le<br />rendez-vous
                             </div>
                         </div>
-                    </div>
-                    <div class="cot-step">
+                    </a>
+                    <a href="{{route('visio_consulting')}}" class="cot-step">
                         <div class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/consult.png') }}" alt="" />
                             <div class="cot-step-text">
@@ -159,7 +159,7 @@
                             </div>
                         </div>
 
-                    </div>
+                    </a>
                 </div>
                 {{-- <div class="cot-services-icons">
                         <img class="cot-services-calendar" src="group0.svg" alt="Calendrier" />

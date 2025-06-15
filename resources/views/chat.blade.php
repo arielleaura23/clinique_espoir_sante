@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
         <style>
-
             .chat-panel {
                 width: 100% !important;
                 max-width: 100% !important;
@@ -24,19 +23,64 @@
                 flex-shrink: 0;
             }
 
+            .chat-panel .chat-btn-menu {
+                position: relative
+            }
+
             .chat-panel .chat-panel-bg .chat-header {
                 background-color: #1d7eff !important;
                 border-bottom: 1px solid #eaeaea !important;
                 display: flex !important;
                 align-items: center;
-                justify-content: space-between;
+                justify-content: space-between !important;
                 padding: 0 24px !important;
                 height: 68px !important;
                 position: relative;
                 z-index: 10;
             }
-            .chat-panel .chat-panel-bg .chat-header img{
+
+            .chat-panel .chat-panel-bg .chat-header img {
                 width: 50px;
+            }
+
+            .chat-panel .chat-panel-bg .chat-header .menu-btn {
+                width: 30px !important;
+                cursor: pointer;
+            }
+
+            .chat-panel .chat-panel-bg .options-menu {
+                display: none;
+                background-color: #fff;
+                width: 200px;
+                border-radius: 8px;
+                padding: 0;
+                cursor: pointer;
+                position: absolute;
+                right: 0;
+            }
+
+            .options-menu button {
+                background: none !important;
+                border: none !important;
+                width: 100%;
+                text-align: left;
+                padding: 10px 16px;
+                font-size: 12px;
+                color: #757575;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+            .options-menu.show {
+                display: block!important;
+            }
+
+            .options-button {
+                background: none !important;
+                border: none !important;
+            }
+
+            .options-menu button:hover {
+                background: #f0f8ff;
             }
         </style>
 
@@ -56,15 +100,17 @@
                             <img src="{{ asset('assets/img/logo cercle bleu.png') }}" alt="back" />
                         </a>
 
-                        <button class="more-options-button" id="chatOptionsBtn" title="Options">
-                            <img src="{{ asset('assets/img/more.png') }}" alt="More options" />
-                        </button>
-                        <!-- Menu options -->
-                        <div class="chat-options-menu" id="chatOptionsMenu">
-                            <button type="button">Supprimer la
-                                conversation</button>
-                            <button type="button">Signaler un
-                                abus</button>
+                        <div class="chat-btn-menu">
+                            <button class="options-button" id="chatOptionsBtn" title="Options">
+                                <img class="menu-btn" src="{{ asset('assets/img/menu.png') }}" alt="More options" />
+                            </button>
+                            <!-- Menu options -->
+                            <div class="options-menu" id="chatOptionsMenu">
+                                <button type="button">Supprimer la
+                                    conversation</button>
+                                <button type="button">Signaler un
+                                    abus</button>
+                            </div>
                         </div>
                 </div>
                 <!-- Chat input area -->
@@ -137,40 +183,8 @@
 
         <!-- JS pour interactions -->
         <script>
-            // Redimensionnement du chat-panel
-            (function() {
-                const chatPanel = document.getElementById('chatPanel');
-                const handle = document.getElementById('chatResizeHandle');
-                let isResizing = false;
-                let startX = 0;
-                let startWidth = 0;
-
-                handle.addEventListener('mousedown', function(e) {
-                    isResizing = true;
-                    startX = e.clientX;
-                    startWidth = chatPanel.offsetWidth;
-                    document.body.style.userSelect = 'none';
-                });
-
-                document.addEventListener('mousemove', function(e) {
-                    if (!isResizing) return;
-                    let newWidth = startWidth - (e.clientX - startX);
-                    newWidth = Math.max(180, Math.min(480, newWidth));
-                    chatPanel.style.width = newWidth + 'px';
-                });
-
-                document.addEventListener('mouseup', function() {
-                    if (isResizing) {
-                        isResizing = false;
-                        document.body.style.userSelect = '';
-                    }
-                });
-            })();
-
-
-
             // Toggle chat options menu
-            document.getElementById('chatOptionsBtn').onclick = function(e) {
+            document.querySelector('.options-button').onclick = function(e) {
                 e.stopPropagation();
                 document.getElementById('chatOptionsMenu').classList.toggle('show');
             };
@@ -217,15 +231,15 @@
                 const msg = document.createElement('div');
                 msg.className = 'message-container sent-message';
                 msg.innerHTML = `
-                <div class="message-content">
-                    <div class="sender-name">Vous</div>
-                    <div class="message-bubble sent-bubble">
-                        <div class="message-text sent-text">${escapeHtml(text)}</div>
-                    </div>
-                    <div class="message-time sent-time">${time}</div>
+            <div class="message-content">
+                <div class="sender-name">Vous</div>
+                <div class="message-bubble sent-bubble">
+                    <div class="message-text sent-text">${escapeHtml(text)}</div>
                 </div>
-                <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
-            `;
+                <div class="message-time sent-time">${time}</div>
+            </div>
+            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
+        `;
                 chat.appendChild(msg);
                 input.value = '';
                 chat.scrollTop = chat.scrollHeight;
@@ -237,137 +251,24 @@
                 return div.innerHTML;
             }
 
-
-            // Chat panel toggle (simulate)
-            document.querySelector('.chat-button').onclick = function() {
-                const panel = document.getElementById('chatPanel');
-                panel.style.display = (panel.style.display === 'none' ? '' : 'none');
-            };
-
-            // Audio/Video/End
-            document.querySelector('.audio-button').onclick = function() {
-                this.classList.toggle('active');
-                const icon = this.querySelector('.button-icon');
-                if (this.classList.contains('active')) {
-                    icon.src = "{{ asset('assets/img/AudioOn.png') }}";
-                } else {
-                    icon.src = "{{ asset('assets/img/AudioOff.png') }}";
-                }
-            };
-            document.querySelector('.video-button').onclick = function() {
-                this.classList.toggle('active');
-                const icon = this.querySelector('.button-icon');
-                if (this.classList.contains('active')) {
-                    icon.src = "{{ asset('assets/img/CameraOn.png') }}";
-                } else {
-                    icon.src = "{{ asset('assets/img/CameraOff.png') }}";
-                }
-            };
-            document.querySelector('.end-call-button').onclick = function(e) {
-                e.preventDefault();
-                showInfoModal(
-                    'Quitter la réunion',
-                    'Voulez-vous vraiment quitter la réunion ?',
-                    [{
-                            text: 'Annuler',
-                            action: closeInfoModal,
-                            class: 'btn-secondary'
-                        },
-                        {
-                            text: 'Quitter',
-                            action: function() {
-                                // Ici, on quitte la réunion (redirection ou fermeture)
-                                window.location.href = '/'; // Mets ici la page de destination après la réunion
-                            },
-                            class: 'btn-danger'
-                        }
-                    ]
-                );
-            };
-
-            // Participants chevron (affiche/masque les avatars)
-            document.querySelector('.participants-counter .chevron-icon').onclick = function() {
-                const counter = document.getElementById('participantsCounter');
-                counter.classList.toggle('collapsed');
-            };
-
-
-            // Fonction générique pour ouvrir le modal avec actions personnalisées
-            function showInfoModal(title, message, buttons = [{
-                text: 'Fermer',
-                action: closeInfoModal,
-                class: 'btn-primary'
-            }]) {
-                document.getElementById('modalTitle').textContent = title;
-                document.getElementById('modalBody').innerHTML = message;
-                const footer = document.getElementById('modalFooter');
-                footer.innerHTML = '';
-                buttons.forEach(btn => {
-                    const button = document.createElement('button');
-                    button.textContent = btn.text;
-                    button.className = btn.class || 'btn-primary';
-                    button.onclick = function(e) {
-                        e.preventDefault();
-                        btn.action();
-                    };
-                    footer.appendChild(button);
-                });
-                document.getElementById('infoModal').style.display = 'flex';
-            }
-
-            function closeInfoModal() {
-                document.getElementById('infoModal').style.display = 'none';
-            }
-
-            // Boutons de fermeture du modal
-            document.getElementById('closeModalBtn').onclick = closeInfoModal;
-
             // Supprimer la conversation
             document.querySelectorAll('#chatOptionsMenu button')[0].onclick = function(e) {
                 e.stopPropagation();
-                showInfoModal(
-                    'Suppression',
-                    'Voulez-vous vraiment supprimer la conversation ?',
-                    [{
-                            text: 'Annuler',
-                            action: closeInfoModal,
-                            class: 'btn-secondary'
-                        },
-                        {
-                            text: 'Supprimer',
-                            action: function() {
-                                document.getElementById('chatMessages').innerHTML = '';
-                                closeInfoModal();
-                                showInfoModal('Suppression', 'La conversation a été supprimée.');
-                            },
-                            class: 'btn-danger'
-                        }
-                    ]
-                );
+                if (confirm('Voulez-vous vraiment supprimer la conversation ?')) {
+                    document.getElementById('chatMessages').innerHTML = '';
+                    alert('La conversation a été supprimée.');
+                }
             };
 
             // Signaler un abus
             document.querySelectorAll('#chatOptionsMenu button')[1].onclick = function(e) {
                 e.stopPropagation();
-                showInfoModal('Signalement', 'Votre signalement a bien été pris en compte. Merci.');
-            };
-
-            // Bouton "out" (partager le lien)
-            document.querySelector('.exit-button').onclick = function(e) {
-                e.preventDefault();
-                const link = window.location.href;
-                showInfoModal(
-                    'Partager la consultation',
-                    `<div>Voici le lien à partager pour rejoindre la consultation :</div>
- <div style="margin:10px 0;word-break:break-all;"><strong>${link}</strong></div>
- <button onclick="navigator.clipboard.writeText('${link}');this.textContent='Lien copié !';return false;" class="btn-primary" style="margin-top:8px;">Copier le lien</button>`
-                );
+                alert('Votre signalement a bien été pris en compte. Merci.');
             };
 
             // Ajout de pièce jointe
             document.getElementById('attachBtn').onclick = function(e) {
                 e.preventDefault();
-                // Crée un input file invisible
                 let fileInput = document.getElementById('hiddenFileInput');
                 if (!fileInput) {
                     fileInput = document.createElement('input');
@@ -384,17 +285,17 @@
                             const msg = document.createElement('div');
                             msg.className = 'message-container sent-message';
                             msg.innerHTML = `
-                    <div class="message-content">
-                        <div class="sender-name">Vous</div>
-                        <div class="message-bubble sent-bubble">
-                            <div class="message-text sent-text">
-                                <span class="file-attachment">📎 ${escapeHtml(file.name)}</span>
+                        <div class="message-content">
+                            <div class="sender-name">Vous</div>
+                            <div class="message-bubble sent-bubble">
+                                <div class="message-text sent-text">
+                                    <span class="file-attachment">📎 ${escapeHtml(file.name)}</span>
+                                </div>
                             </div>
+                            <div class="message-time sent-time">${time}</div>
                         </div>
-                        <div class="message-time sent-time">${time}</div>
-                    </div>
-                    <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
-                `;
+                        <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
+                    `;
                             chat.appendChild(msg);
                             chat.scrollTop = chat.scrollHeight;
                         }
@@ -403,9 +304,10 @@
                 fileInput.click();
             };
 
-            // Boutons de fermeture du modal
-            document.getElementById('closeModalBtn').onclick = closeInfoModal;
-            document.getElementById('closeModalBtn2').onclick = closeInfoModal;
+            // Retour arrière
+            document.querySelector('.chat-direction').onclick = function() {
+                window.history.back();
+            };
         </script>
 
 
