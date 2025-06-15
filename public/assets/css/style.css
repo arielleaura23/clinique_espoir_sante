@@ -6,6 +6,7 @@
 
 a {
     outline: none;
+    cursor: pointer;
 }
 
 /* Layout principal */
@@ -41,7 +42,7 @@ a {
     max-width: 400px;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
     padding: 28px 24px;
     display: flex;
     flex-direction: column;
@@ -126,7 +127,7 @@ a {
     border-color: #415be7;
 }
 .payment-methods .payment-option input[type="radio"]:checked::after {
-    content: '';
+    content: "";
     display: block;
     width: 8px;
     height: 8px;
@@ -160,10 +161,12 @@ a {
 }
 
 /* Champs carte et mobile money */
-.card-fields, .mobile-money-fields {
+.card-fields,
+.mobile-money-fields {
     margin-bottom: 16px;
 }
-.card-type-fields, .card-details-fields {
+.card-type-fields,
+.card-details-fields {
     margin-bottom: 10px;
 }
 .user-group {
@@ -288,7 +291,8 @@ a {
         flex-direction: column;
         gap: 24px;
     }
-    .left-section, .order-summary {
+    .left-section,
+    .order-summary {
         max-width: 100%;
         min-width: 0;
     }
@@ -309,13 +313,17 @@ a {
     .order-summary {
         padding: 18px 8px;
         border-radius: 8px;
-        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06);
     }
     .section-title {
         font-size: 1.05rem;
         margin-bottom: 10px;
     }
-    .form-label, .product-name, .product-price, .delivery-address, .payment-breakdown {
+    .form-label,
+    .product-name,
+    .product-price,
+    .delivery-address,
+    .payment-breakdown {
         font-size: 14px;
     }
     .pay-now-btn {
@@ -334,7 +342,8 @@ a {
 }
 
 /* Pour éviter le débordement horizontal */
-html, body {
+html,
+body {
     max-width: 100vw;
     overflow-x: hidden;
 }
@@ -420,9 +429,6 @@ html, body {
     line-height: 36px;
     font-weight: 400;
 }
-
-
-
 
 .host-badge {
     background: #0f79da;
@@ -901,7 +907,6 @@ html, body {
     margin: 0;
     pointer-events: none;
 }
-
 
 /* animation all pages when redirect */
 .page {
@@ -3228,6 +3233,330 @@ html, body {
     background: #fff;
 }
 
+/* emergency doctors */
+.emergency-section,
+.emergency-section * {
+    box-sizing: border-box;
+}
+
+.white-box {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.emergency-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blue-box {
+    background: #1d77fe;
+    width: 50%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.emergency-title {
+    color: #ffffff;
+    text-align: center;
+    font-family: "Inter-Medium", sans-serif;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.emergency-description {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+}
+
+.emergency-phone {
+    color: #ffffff;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+    font-size: 20px;
+}
+
+.call-icon-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.white-circle {
+    background: #ffffff;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    position: relative;
+}
+
+.call-icon {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    bottom: calc(50% - 15px);
+    right: calc(50% - 15px);
+}
+
+.priority-title {
+    color: #1d77fe;
+    text-align: left;
+    font-family: "ArchivoBlack-Regular", sans-serif;
+    font-size: 36px;
+}
+
+.priority-text {
+    color: #757575;
+    text-align: left;
+    font-family: "Inter-Regular", sans-serif;
+}
+
+/* responsive emergency doctors */
+@media (max-width: 992px) {
+    .emergency-box {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .white-box,
+    .blue-box {
+        width: 100%;
+    }
+
+    .emergency-title {
+        font-size: 28px;
+    }
+
+    .priority-title {
+        font-size: 30px;
+        text-align: center;
+    }
+    .priority-text {
+        text-align: center;
+    }
+
+    .call-icon-group {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .emergency-title {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .priority-title {
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .priority-text,
+    .emergency-description,
+    .emergency-phone {
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .white-circle {
+        width: 60px;
+        height: 60px;
+    }
+
+    .call-icon {
+        width: 20px;
+        height: 20px;
+        bottom: calc(50% - 10px);
+        right: calc(50% - 10px);
+    }
+
+    .blue-box {
+        padding: 20px 15px;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+/* contact doctors */
+.contact-section,
+.contact-section * {
+    box-sizing: border-box;
+}
+.contact-section {
+    display: flex;
+    flex-direction: column;
+    /* gap: 50px; */
+}
+
+.contact-title {
+    color: #1d77fe;
+    text-align: center;
+    font-family: "inter-Bold", sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+    position: relative;
+}
+
+.contact-cards {
+    display: flex;
+    max-width: 900px;
+    margin: 0 auto;
+    gap: 20px;
+    align-items: center;
+}
+
+.card-bg-blue {
+    background: #a8dfff;
+    width: 200px;
+    padding: 60px 30px;
+    height: 225px;
+}
+
+.card-bg-darkblue {
+    background: #1d77fe;
+    height: 225px;
+}
+.card-bg-darkblue .contact-text,
+.card-bg-darkblue .contact-label {
+    color: #a8dfff;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.contact-label {
+    color: #757575;
+    text-align: left;
+    font-family: "ArchivoBlack-Regular", sans-serif;
+}
+
+.contact-text {
+    color: #1d77fe;
+    text-align: left;
+    font-family: "inter-Regular", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.contact-icon {
+    width: 40px;
+    height: 40px;
+}
+
+/* Icônes */
+.icon-phone {
+    width: 4.03%;
+    height: 40px;
+    position: absolute;
+    right: 92.44%;
+    left: 3.53%;
+    top: 225px;
+    overflow: visible;
+    aspect-ratio: 1;
+}
+
+.icon-time {
+    background: #a8dfff;
+    width: 4.03%;
+    height: 40px;
+    position: absolute;
+    right: 16.43%;
+    left: 79.54%;
+    top: 221px;
+    aspect-ratio: 1;
+}
+
+.icon-location {
+    background: #1d77fe;
+    width: 4.54%;
+    height: 45px;
+    position: absolute;
+    right: 66.94%;
+    left: 28.53%;
+    top: 220px;
+    aspect-ratio: 1;
+}
+
+.icon-inner {
+    width: 66.67%;
+    height: 83.33%;
+    position: absolute;
+    right: 16.67%;
+    left: 16.67%;
+    bottom: 8.33%;
+    top: 8.33%;
+    overflow: visible;
+}
+
+/* responsive contact doctors */
+@media (max-width: 992px) {
+    .contact-title {
+        font-size: 38px;
+    }
+
+    .contact-cards {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .card-bg-blue,
+    .card-bg-darkblue {
+        padding: 40px 20px;
+    }
+
+    .icon-phone,
+    .icon-location,
+    .icon-time {
+        position: static;
+        margin: 10px auto 0;
+        display: block;
+    }
+}
+
+@media (max-width: 576px) {
+    .contact-title {
+        font-size: 28px;
+        padding: 0 10px;
+    }
+
+    .contact-cards {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .contact-label {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .contact-text {
+        font-size: 13px;
+        text-align: center;
+    }
+
+    .contact-icon {
+        width: 30px;
+        height: 30px;
+        margin: 0 auto 10px;
+    }
+
+    .icon-phone,
+    .icon-location,
+    .icon-time {
+        display: none; /* Masquer les icônes positionnées absolument pour éviter les collisions sur mobile */
+    }
+}
+
 /* Responsive qualified doctors */
 @media (max-width: 900px) {
     .qualified-doctors-section {
@@ -3336,6 +3665,421 @@ html, body {
     .director-message-content {
         gap: 24px;
     }
+}
+
+/* blog style */
+.card-article {
+    width: 600px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    font-family: "Inter", sans-serif;
+    padding: 20px;
+}
+
+.image-container {
+    width: 100%;
+    height: 360px;
+    background: #fff;
+    position: relative;
+}
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: #757575;
+    font-size: 16px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+.meta img {
+    width: 20px;
+}
+
+.meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.meta .reaction {
+    cursor: pointer;
+}
+.meta .like:hover {
+    color: red;
+}
+.meta .view:hover {
+    color: #1d77fe;
+}
+
+.title_blog {
+    color: #1d77fe;
+    font-family: "Archivo Black", sans-serif;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.description_blog {
+    font-size: 18px;
+    color: #757575;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    font-family: "Inter", sans-serif;
+}
+
+.btn-read-more {
+    display: inline-block;
+    background: #1d77fe;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 16px;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.btn-read-more:hover {
+    background: #155fd4;
+}
+
+.recent-posts-container {
+    max-width: 325px;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #757575;
+    border-radius: 5px;
+    font-family: "Inter", sans-serif;
+}
+
+.recent-posts-title {
+    color: #1d77fe;
+    font-family: "Archivo Black", sans-serif;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.post {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.articles {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 60%;
+}
+
+.posts {
+    width: 30%;
+}
+
+.post-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 5px;
+    background: #d9d9d9;
+}
+
+.post-content {
+    flex: 1;
+}
+
+.post-date {
+    font-size: 14px;
+    color: #1d77fe;
+    margin-bottom: 5px;
+}
+
+.post-text {
+    font-size: 16px;
+    color: #000;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+.categories-container {
+    width: 325px;
+    background: #fff;
+    border: 1px solid #757575;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.title {
+    font-size: 34px;
+    color: #1d77fe;
+    margin-bottom: 40px;
+    font-family: "ArchivoBlack-Regular", sans-serif;
+}
+
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name {
+    font-size: 20px;
+    color: #757575;
+    font-family: "ArchivoBlack-Regular", sans-serif;
+}
+
+.badge {
+    background-color: #1d77fe;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "ArchivoBlack-Regular", sans-serif;
+    font-size: 15px;
+}
+
+.posts {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.blog-section {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.navigation-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* responsive blog */
+@media (max-width: 992px) {
+    .blog-section {
+        /* flex-direction: column; */
+        align-items: start;
+        gap: 40px;
+    }
+
+    .card-article {
+        width: 100%;
+    }
+
+    .recent-posts-container,
+    .categories-container {
+        width: 100%;
+    }
+
+    .description {
+        margin: 10px 0 !important;
+    }
+
+    .author img {
+        width: 20px;
+    }
+
+    .post-text {
+        font-size: 14px;
+    }
+    .name {
+        font-size: 15px;
+    }
+
+    .badge {
+        width: 20px;
+        height: 20px;
+    }
+
+    .title {
+        font-size: 28px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .card-article {
+        padding: 15px;
+    }
+
+    .blog-section {
+        flex-direction: column;
+    }
+
+    .description {
+        margin: 20px !important;
+    }
+
+    .articles {
+        width: 100%;
+    }
+
+    .posts {
+        width: 100%;
+    }
+
+    .list_of_posts {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .recent-posts-container {
+        max-width: 100%;
+    }
+
+    .title {
+        font-size: 20px !important;
+        text-align: start !important;
+    }
+
+    .description {
+        font-size: 16px;
+    }
+
+    .card-article .content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .meta {
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .btn-read-more {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 15px;
+    }
+
+    .recent-posts-container,
+    .categories-container {
+        padding: 15px;
+    }
+
+    .recent-posts-title {
+        font-size: 20px;
+        text-align: start;
+    }
+
+    .post {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .post-img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .post-text {
+        font-size: 14px;
+    }
+
+    .name {
+        font-size: 18px;
+    }
+
+    .badge {
+        width: 26px;
+        height: 26px;
+        font-size: 13px;
+    }
+}
+
+/* events css */
+.events {
+    margin-right: auto;
+    margin-left: auto;
+}
+.evenements {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-family: "WorkSans", sans-serif;
+}
+
+.evenement {
+    width: 480px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.image-evenement {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.titre {
+    font-size: 32px;
+    color: #1d77fe;
+    font-family: "PlusJakartaSans-Bold", sans-serif;
+    font-weight: bold;
+    margin: 20px;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+    font-size: 16px;
+    color: #1d77fe;
+    font-family: "Inter", sans-serif;
+}
+
+.date {
+    color: #757575;
+    flex: 1;
+}
+
+.lieu,
+.horaire {
+    flex: 1;
+    text-align: right;
+}
+
+.description,
+.description-secondaire {
+    margin: 10px 20px;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.futur-events {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
 }
 
 /* faq section */
@@ -4846,10 +5590,6 @@ input:focus {
     gap: 50px;
 }
 
-
-
-
-
 @keyframes slideInFromLeft {
     from {
         transform: translateX(100%);
@@ -5134,8 +5874,8 @@ input:focus {
 .payment-methods .section-title {
     margin-bottom: 18px;
     font-size: 18px;
-        color: #1d7eff;
-        font-family: 'inter', sans-serif;
+    color: #1d7eff;
+    font-family: "inter", sans-serif;
 }
 
 .checkout-form-grid {
@@ -5150,7 +5890,6 @@ input:focus {
     flex-direction: column;
     gap: 6px;
 }
-
 
 .required {
     color: #e23710;
@@ -5179,11 +5918,13 @@ input:focus {
     }
 }
 
-
 .modal-card {
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.25);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5195,7 +5936,7 @@ input:focus {
     padding: 32px 28px 22px 28px;
     min-width: 320px;
     max-width: 95vw;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.13);
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.13);
     position: relative;
 }
 .modal-card-content h3 {
@@ -5205,7 +5946,8 @@ input:focus {
     font-weight: 600;
     color: #1d7eff;
 }
-.modal-card-cancel, .modal-card-save {
+.modal-card-cancel,
+.modal-card-save {
     padding: 8px 20px;
     border-radius: 6px;
     border: none;
@@ -5659,7 +6401,6 @@ input:focus {
     height: 48px;
 }
 
-
 .video-bg {
     background: #1d77fe;
 }
@@ -5729,7 +6470,6 @@ input:focus {
     flex-shrink: 0;
 }
 
-
 .chat-resize-handle {
     position: absolute;
     left: 0;
@@ -5794,16 +6534,6 @@ input:focus {
     margin-left: auto;
     width: 16px;
     height: 16px;
-}
-
-.more-options-button {
-    position: absolute;
-    right: 16px;
-    top: 16px;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
 }
 
 /* Chat messages */

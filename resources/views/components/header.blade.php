@@ -40,7 +40,7 @@
                         </div>
                     </div>
 
-                    <div class="right-icons" style="    width: 40px;">
+                    <div class="right-icons" >
                         <div class="header-lang">
                             <div class="lang-switcher">
                                 <div class="lang-switcher-selected" id="lang-switcher-selected">

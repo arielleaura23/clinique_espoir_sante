@@ -157,6 +157,18 @@
 
 
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const closeBtn = document.querySelector('.appointment-form-close');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function() {
+                        window.history.back();
+                    });
+                }
+            });
+        </script>
+
+
 
 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
