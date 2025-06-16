@@ -102,11 +102,14 @@
                                     </a>
                                 </div>
 
+                                <div class="panier-footer">
+
                                 <div class="panier-total">
                                     Total : <strong>17 500 FCFA</strong>
                                 </div>
 
                                 <a href="{{route('checkout_page')}}" class="btn-panier">Passer à la caisse</a>
+                                </div>
                             </div>
                         </div>
 
