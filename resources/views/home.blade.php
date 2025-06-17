@@ -204,7 +204,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="{{route('visio_consulting')}}" class="cot-step">
+                    <a href="{{route('discussions')}}" class="cot-step">
                         <div class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/consult.png') }}" alt="" />
                             <div class="cot-step-text">

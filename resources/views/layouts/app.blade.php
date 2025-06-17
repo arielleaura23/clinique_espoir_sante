@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         {{-- <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"> --}}
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
     </head>
 
     <body>
@@ -313,49 +315,52 @@
 
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-    const creditRadio = document.getElementById('credit-card');
-    const mobileRadio = document.getElementById('mobile-money');
-    const cardFields = document.querySelector('.card-fields');
-    const cardTypeFields = document.querySelector('.card-type-fields');
-    const mobileFields = document.querySelector('.mobile-money-fields');
-    const cardType = document.getElementById('card-type');
-    const cardDetailsFields = document.querySelector('.card-details-fields');
+                const creditRadio = document.getElementById('credit-card');
+                const mobileRadio = document.getElementById('mobile-money');
+                const cardFields = document.querySelector('.card-fields');
+                const cardTypeFields = document.querySelector('.card-type-fields');
+                const mobileFields = document.querySelector('.mobile-money-fields');
+                const cardType = document.getElementById('card-type');
+                const cardDetailsFields = document.querySelector('.card-details-fields');
 
-    function togglePaymentFields() {
-        if (creditRadio.checked) {
-            cardFields.style.display = 'block';
-            cardTypeFields.style.display = 'block';
-            mobileFields.style.display = 'none';
-            // Affiche ou non les détails selon le type déjà choisi
-            if (cardType.value) {
-                cardDetailsFields.style.display = 'block';
-            } else {
-                cardDetailsFields.style.display = 'none';
-            }
-        } else if (mobileRadio.checked) {
-            cardFields.style.display = 'none';
-            cardTypeFields.style.display = 'none';
-            cardDetailsFields.style.display = 'none';
-            mobileFields.style.display = 'block';
-        }
-    }
+                function togglePaymentFields() {
+                    if (creditRadio.checked) {
+                        cardFields.style.display = 'block';
+                        cardTypeFields.style.display = 'block';
+                        mobileFields.style.display = 'none';
+                        // Affiche ou non les détails selon le type déjà choisi
+                        if (cardType.value) {
+                            cardDetailsFields.style.display = 'block';
+                        } else {
+                            cardDetailsFields.style.display = 'none';
+                        }
+                    } else if (mobileRadio.checked) {
+                        cardFields.style.display = 'none';
+                        cardTypeFields.style.display = 'none';
+                        cardDetailsFields.style.display = 'none';
+                        mobileFields.style.display = 'block';
+                    }
+                }
 
-    creditRadio.addEventListener('change', togglePaymentFields);
-    mobileRadio.addEventListener('change', togglePaymentFields);
+                creditRadio.addEventListener('change', togglePaymentFields);
+                mobileRadio.addEventListener('change', togglePaymentFields);
 
-    // Affiche les champs détails carte seulement si un type est choisi
-    cardType.addEventListener('change', function() {
-        if (this.value) {
-            cardDetailsFields.style.display = 'block';
-        } else {
-            cardDetailsFields.style.display = 'none';
-        }
-    });
+                // Affiche les champs détails carte seulement si un type est choisi
+                cardType.addEventListener('change', function() {
+                    if (this.value) {
+                        cardDetailsFields.style.display = 'block';
+                    } else {
+                        cardDetailsFields.style.display = 'none';
+                    }
+                });
 
-    // Initial state
-    togglePaymentFields();
-});
+                // Initial state
+                togglePaymentFields();
+            });
         </script>
+
+
+
 
 
 

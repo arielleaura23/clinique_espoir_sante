@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('chat.{chatId}', function ($user, $chatId) {
+    // Ici tu peux vérifier si l'utilisateur a accès au chat
+    return true; // Pour tester, on autorise tout le monde
+});
+

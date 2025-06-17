@@ -7,11 +7,25 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Visio conference</title>
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+        <style>
+            @media (max-width: 900px) {
+
+                .chat-panel {
+                    display: none !important;
+                }
+
+                .control-button.chat-button{
+                    display: none !important;
+                }
+
+            }
+        </style>
     </head>
 
     <body>
         <div class="video-conference">
-            
+
             <!-- Participants sidebar -->
             <div class="participants-sidebar">
                 <div class="participants-bg"></div>
@@ -166,7 +180,7 @@
             <div class="control-toolbar">
                 <button class="control-button audio-button" title="Activer/Désactiver le micro">
                     <div class="button-bg"></div>
-                    <img class="button-icon" src="{{ asset('assets/img/AudioOff.png') }}" alt="Toggle audio" />
+                    <img class="button-icon audioOff" src="{{ asset('assets/img/AudioOff.png') }}" alt="Toggle audio" />
                 </button>
                 <button class="control-button video-button" title="Activer/Désactiver la caméra">
                     <div class="button-bg video-bg"></div>
@@ -178,7 +192,7 @@
                 </button>
                 <button class="control-button chat-button" title="Afficher/Masquer le chat">
                     <div class="button-bg"></div>
-                    <img class="button-icon" src="{{ asset('assets/img/Chat.png') }}" alt="Open chat" />
+                    <img class="button-icon " src="{{ asset('assets/img/Chat.png') }}" alt="Open chat" />
                     <div class="notification-indicator"></div>
                 </button>
                 <button class="control-button exit-button" title="Partager le lien de la consultation">

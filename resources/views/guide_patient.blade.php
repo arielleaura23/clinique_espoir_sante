@@ -15,7 +15,7 @@
 
 
 
-    <div class="container section autoblur">
+    <div class="container section ">
         <div class="before-consultation-section " data-aos="flip-up" data-aos-easing="linear" data-aos-duration="800">
             <div class="before-consultation-header">
                 <div class="before-consultation-title">Avant votre consultation</div>
@@ -56,7 +56,7 @@
     </div>
 
 
-    <div class="container section autoblur">
+    <div class="container section ">
         <div class="at-clinic-section">
             <div class="at-clinic-header">
                 <div class="at-clinic-title">À la clinique</div>

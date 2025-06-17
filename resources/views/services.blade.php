@@ -49,12 +49,12 @@
                 'title' => 'Kinésithérapie',
                 'description' => 'Soins pour soulager les douleurs ou récupérer après une intervention.',
             ],
-                                    [
+            [
                 'icon' => 'assets/img/labo.png',
                 'title' => 'Analyses médicales',
                 'description' => 'Faites vos analyses sur place et recevez vos résultats rapidement.',
             ],
-                        [
+            [
                 'icon' => 'assets/img/vaccin.png',
                 'title' => 'Vaccination',
                 'description' => 'Mise à jour de vos vaccins dans un cadre sécurisé.',
@@ -68,7 +68,7 @@
 
 
 
-    <div class="container section autoblur">
+    <div class="container section">
         <div class="faq-section">
             <div class="faq-header">
                 <div class="faq-title">FAQ</div>
@@ -77,7 +77,7 @@
                 </div>
             </div>
             <div class="faq-list">
-                <details class="faq-item" data-aos="fade-down-right"  data-aos-duration="1000">
+                <details class="faq-item" data-aos="fade-down-right" data-aos-duration="1000">
                     <summary class="faq-question">
                         Est-ce que je peux choisir mon médecin ?
                     </summary>
@@ -86,7 +86,7 @@
                         disponibilités.
                     </div>
                 </details>
-                <details class="faq-item" data-aos="fade-down-right"  data-aos-duration="1000">
+                <details class="faq-item" data-aos="fade-down-right" data-aos-duration="1000">
                     <summary class="faq-question">
                         Quels sont les moyens de paiement acceptés ?
                     </summary>
@@ -94,7 +94,7 @@
                         Nous acceptons les paiements en espèces, par carte bancaire, mobile money et virement bancaire.
                     </div>
                 </details>
-                <details class="faq-item" data-aos="fade-down-right"  data-aos-duration="1000">
+                <details class="faq-item" data-aos="fade-down-right" data-aos-duration="1000">
                     <summary class="faq-question">
                         Puis-je annuler ou déplacer un rendez-vous ?
                     </summary>

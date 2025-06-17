@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,8 +39,15 @@ Route::get('/product_details', [HomeController::class, 'product_details'])->name
 Route::get('/checkout_page', [HomeController::class, 'checkout_page'])->name('checkout_page');
 Route::get('/recents_posts', [HomeController::class, 'recents_posts'])->name('recents_posts');
 Route::get('/visio_consulting', [HomeController::class, 'visio_consulting'])->name('visio_consulting');
+Route::get('/discussions', [HomeController::class, 'discussions'])->name('discussions');
 
 
 Route::get('/register', [AuthController::class, 'register'])->name('show.register');
 Route::get('/login', [AuthController::class, 'login'])->name('show.login');
+
+
+
+
+Route::post('/send-message', [MessageController::class, 'sendMessage']);
+
 

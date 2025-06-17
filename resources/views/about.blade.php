@@ -16,7 +16,7 @@
     <x-about  />
 
 
-    <div  class="container autoblur" data-aos="zoom-out-left" data-aos-easing="linear" data-aos-duration="1000">
+    <div  class="container " data-aos="zoom-out-left" data-aos-easing="linear" data-aos-duration="1000">
         <div class="about-history-section section">
 
             <div class="history-content">
@@ -55,7 +55,7 @@
 
 
 
-    <div class="container section autoblur">
+    <div class="container section ">
         <div class="qualified-doctors-section">
             <div class="qualified-doctors-header">
                 <div class="qualified-doctors-title">Nos médecins qualifiés</div>
@@ -82,7 +82,7 @@
     </div>
 
 
-    <div  class="container section autoblur">
+    <div  class="container section ">
         <div class="director-message-section">
             <div class="director-message-content">
                 <div class="director-message-title">Mot du directeur général</div>

@@ -70,6 +70,10 @@ class HomeController extends Controller
     {
         return view('visio_consulting');
     }
+    public function discussions()
+    {
+        return view('discussions');
+    }
 
 
 }

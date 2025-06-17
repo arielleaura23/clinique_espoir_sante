@@ -70,8 +70,9 @@
                 cursor: pointer;
                 transition: background 0.2s;
             }
+
             .options-menu.show {
-                display: block!important;
+                display: block !important;
             }
 
             .options-button {
@@ -82,6 +83,8 @@
             .options-menu button:hover {
                 background: #f0f8ff;
             }
+
+            
         </style>
 
     </head>
