@@ -19,7 +19,37 @@
                         </div>
                     </div>
                     {{-- <div class="nav-dropdown"></div> --}}
-                    <x-bouton href="{{ route('show.login') }}" >Se connecter</x-bouton>
+
+                    @guest
+                        <x-bouton href="{{ route('login') }}">Se connecter</x-bouton>
+                    @else
+                        <div class="nav-user-dropdown">
+                            <input type="checkbox" id="userDropdownToggle" class="nav-user-toggle" hidden>
+                            <label for="userDropdownToggle" class="nav-user-btn">
+                                {{-- <span class="nav-user-avatar">
+                                    <img src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar" width="32"
+                                        height="32" style="border-radius:50%;">
+                                </span> --}}
+                                <span class="nav-user-name">{{ Auth::user()->name }}</span>
+                                <img src="{{ asset('assets/img/chevron_down.png') }}" width="18" height="18"
+                                    alt="chevron_down">
+                            </label>
+                            <div class="nav-user-menu">
+                                <a href="{{ route('profile.edit') }}" class="nav-user-menu-item">Profil</a>
+                                <a href="{{ route('discussions') }}" class="nav-user-menu-item">Messages</a>
+                                <a href="#" class="nav-user-menu-item" style="color: red"
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    Déconnexion
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    style="display: none;">
+                                    @csrf
+                                </form>
+
+                            </div>
+                        </div>
+                    @endguest
                     {{-- <a href="{{ route('show.login') }}" class="nav-login-btn">
                         <div class="login-bg"></div>
                         <div class="login-text">Se connecter</div>
@@ -51,52 +81,75 @@
                         </div>
                     </div>
                     {{-- <div class="nav-dropdown"></div> --}}
-                    <a href="{{ route('show.login') }}" class="nav-login-btn">
+                    @guest
+                        <x-bouton href="{{ route('login') }}">Se connecter</x-bouton>
+                    @else
+                        <div class="nav-user-dropdown">
+                            <button class="nav-user-btn" id="userDropdownBtn">
+                                <span class="nav-user-avatar">
+                                    <img src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar" width="32"
+                                        height="32" style="border-radius:50%;">
+                                </span>
+                                <span class="nav-user-name">{{ Auth::user()->name }}</span>
+                                <img src="{{ asset('assets/img/chevron_down.png') }}" width="18" height="18"
+                                    alt="chevron_down">
+                            </button>
+                            <div class="nav-user-menu" id="userDropdownMenu">
+                                <a href="{{ route('profile.edit') }}" class="nav-user-menu-item">Profil</a>
+                                <a href="{{ route('discussions') }}" class="nav-user-menu-item">Messages</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="nav-user-menu-item logout-btn">Déconnexion</button>
+                                </form>
+                            </div>
+                        </div>
+                    @endguest
+                    {{-- <a href="{{ route('login') }}" class="nav-login-btn">
                         <div class="login-bg"></div>
                         <div class="login-text">Se connecter</div>
-                    </a>
+                    </a> --}}
                 </nav>
             </div>
 
             <div class="infos">
-                            <div class="mobile-header-info">
-                <div class="header-info">
-                    <div class="info-block">
-                        <div class="icon-block">
-                            <span class="info-icon">
-                                <img src="{{ asset('assets/img/phone.png') }}" alt="Téléphone">
-                            </span>
+                <div class="mobile-header-info">
+                    <div class="header-info">
+                        <div class="info-block">
+                            <div class="icon-block">
+                                <span class="info-icon">
+                                    <img src="{{ asset('assets/img/phone.png') }}" alt="Téléphone">
+                                </span>
+                            </div>
+                            <div class="block-content">
+                                <span class="info-label">Urgences :</span>
+                                <span class="info-value">(+237) 690-11-80-10</span>
+                            </div>
                         </div>
-                        <div class="block-content">
-                            <span class="info-label">Urgences :</span>
-                            <span class="info-value">(+237) 690-11-80-10</span>
+                        <div class="info-block">
+                            <div class="icon-block">
+                                <span class="info-icon">
+                                    <img src="{{ asset('assets/img/montre.png') }}" alt="Horaires">
+                                </span>
+                            </div>
+                            <div class="block-content">
+                                <span class="info-label">Période de travail :</span>
+                                <span class="info-value">8h00-20h00 chaque jour</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="info-block">
-                        <div class="icon-block">
-                            <span class="info-icon">
-                                <img src="{{ asset('assets/img/montre.png') }}" alt="Horaires">
-                            </span>
-                        </div>
-                        <div class="block-content">
-                            <span class="info-label">Période de travail :</span>
-                            <span class="info-value">8h00-20h00 chaque jour</span>
-                        </div>
-                    </div>
-                    <div class="info-block">
-                        <div class="icon-block">
-                            <span class="info-icon">
-                                <img src="{{ asset('assets/img/localisation.png') }}" alt="Localisation">
-                            </span>
-                        </div>
-                        <div class="block-content">
-                            <span class="info-label">Localisation :</span>
-                            <span class="info-value">Mendong</span>
+                        <div class="info-block">
+                            <div class="icon-block">
+                                <span class="info-icon">
+                                    <img src="{{ asset('assets/img/localisation.png') }}" alt="Localisation">
+                                </span>
+                            </div>
+                            <div class="block-content">
+                                <span class="info-label">Localisation :</span>
+                                <span class="info-value">Mendong</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            {{-- <div class="mobile-header-lang">
+                {{-- <div class="mobile-header-lang">
                     <div class="right-icons">
                         <div class="header-lang">
                             <div class="lang-switcher">

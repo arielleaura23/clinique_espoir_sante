@@ -10,7 +10,8 @@
     </head>
 
     <body>
-        <form class="registration-form">
+        <form class="registration-form" action="{{ route('register') }}" method="POST">
+            @csrf
             <div class="background-rectangle">
                 <header class="header-section">
                     <h1 class="welcome-title">
@@ -23,34 +24,46 @@
                     </h1>
                     <img class="logo-image" src="{{ asset('assets/img/connect-img.png') }}" />
                 </header>
+
+                {{-- errors --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <section class="form-fields">
                     <div class="name-field">
                         <label class="name-label">
                             <span class="label-text">Nom</span>
                             <span class="required-asterisk">*</span>
                         </label>
-                        <input class="input-field" type="text" />
+                        <input class="input-field" type="text" name="name" required autofocus />
                     </div>
                     <div class="name-field">
                         <label class="email-label">
                             <span class="label-text">Email</span>
                             <span class="required-asterisk">*</span>
                         </label>
-                        <input class="input-field" type="email" />
+                        <input class="input-field" type="email" name="email" required />
                     </div>
                     <div class="name-field">
                         <label class="dob-label">
                             <span class="label-text">Date de naissance</span>
                             <span class="required-asterisk">*</span>
                         </label>
-                        <input class="input-field" type="date" />
+                        <input class="input-field" type="date" name="dob" required />
                     </div>
                     <div class="name-field">
                         <label class="gender-label">
                             <span class="label-text">Sexe</span>
                             <span class="required-asterisk">*</span>
                         </label>
-                        <select class="input-field">
+                        <select class="input-field" name="sexe" required>
                             <option value="">Sélectionner</option>
                             <option value="homme">Homme</option>
                             <option value="femme">Femme</option>
@@ -61,22 +74,32 @@
                             <span class="label-text">Mot de passe</span>
                             <span class="required-asterisk">*</span>
                         </label>
-                        <input class="input-field" type="password" />
+                        <input class="input-field" type="password" name="password" required
+                            autocomplete="new-password" />
+                    </div>
+
+                    <div class="name-field">
+                        <label class="password-label">
+                            <span class="label-text">Confirmez votre mot de passe</span>
+                            <span class="required-asterisk">*</span>
+                        </label>
+                        <input class="input-field" type="password" name="password_confirmation" required />
                     </div>
 
                     <div class="questions">
                         <div class="remember-section">
-                            <input class="remember-checkbox" type="checkbox" />
-                            <label class="remember-label">remenber me</label>
+                            <input class="remember-checkbox" type="checkbox" name="remember" />
+                            <label class="remember-label">Se souvenir de moi</label>
 
                         </div>
-                        <p class="login-link"><a href="{{ route('show.login') }}"
-                                style="color: blue;font-size:14px;">Avez vous deja un compte?</a> </p>
+                        <p class="login-link"><a href="{{ route('login') }}" style="color: blue;font-size:14px;">Avez
+                                vous deja un compte?</a> </p>
 
                     </div>
                 </section>
 
-                <button style="cursor: pointer" id="success_register" class="submit-button" type="submit">
+                {{-- id="success_register" --}}
+                <button style="cursor: pointer" class="submit-button" type="submit">
                     <div class="button-background"></div>
                     <span class="button-text">Enregistrer</span>
                 </button>
@@ -87,12 +110,12 @@
 
                 </div>
                 <div class="btn-connect-social">
-                    <a href="#" class="google-button">
+                    <a href="{{ route('google.login') }}" class="google-button">
                         <div class="google-button-background"></div>
                         <img class="google-icon" src="{{ asset('assets/img/google.png') }}" />
                         <span class="google-button-text">Inscrivez vous avec google</span>
                     </a>
-                    <a href="#" class="google-button" type="button">
+                    <a href="{{route('facebook.login')}}" class="google-button" type="button">
                         <div class="google-button-background"></div>
                         <img class="google-icon" src="{{ asset('assets/img/facebook.png') }}" />
                         <span class="google-button-text">Inscrivez vous avec facebook</span>
@@ -106,8 +129,7 @@
 
 
 
-        <x-popup id="successModal" title="Succès " icon="assets/img/check-circle.png" buttonText="Okay"
-            >
+        <x-popup id="successModal" title="Succès " icon="assets/img/check-circle.png" buttonText="Okay">
             <p>
             <h2>Félicitations !</h2>
             <br />

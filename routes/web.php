@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\GoogleController;
+use App\Http\Controllers\Auth\FacebookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +18,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -42,12 +40,24 @@ Route::get('/visio_consulting', [HomeController::class, 'visio_consulting'])->na
 Route::get('/discussions', [HomeController::class, 'discussions'])->name('discussions');
 
 
-Route::get('/register', [AuthController::class, 'register'])->name('show.register');
-Route::get('/login', [AuthController::class, 'login'])->name('show.login');
+// Route::get('/register', [AuthController::class, 'register'])->name('show.register');
+// Route::get('/login', [AuthController::class, 'login'])->name('show.login');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
 
+require __DIR__.'/auth.php';
 
-Route::post('/send-message', [MessageController::class, 'sendMessage']);
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-
+Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook'])->name('facebook.login');
+Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);

@@ -1037,6 +1037,86 @@ body {
     z-index: 10;
 }
 
+/* dropdown user */
+.nav-user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.nav-user-btn {
+    display: flex;
+    align-items: center;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #1d77fe;
+    gap: 8px;
+    transition: background 0.2s;
+    user-select: none;
+}
+
+
+.nav-user-avatar img {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+    margin-right: 8px;
+}
+
+.nav-user-name {
+    font-size: 18px;
+    font-weight: 500;
+    font-family: "Inter-Bold", sans-serif;
+}
+
+.nav-user-toggle:checked ~ .nav-user-menu {
+    display: block;
+}
+
+.nav-user-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    min-width: 170px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    padding: 8px 0;
+    z-index: 9999;
+}
+
+.nav-user-menu-item {
+    display: block;
+    padding: 10px 22px;
+    color: #757575;
+    text-decoration: none;
+    font-size: 15px;
+    transition: background 0.2s, color 0.2s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.nav-user-menu-item:hover,
+.nav-user-menu-item.logout-btn:hover {
+    background-color: #f5f9ff;
+}
+
+.logout-btn {
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    color: red;
+    font-size: 15px;
+    padding: 10px 22px;
+}
+
 .lang-switcher {
     width: 71px;
     height: 40px;
@@ -1651,7 +1731,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
     width: fit-content;
 }
 .cta-text {
@@ -5345,7 +5424,7 @@ input:focus {
     border-radius: 30px;
     width: 100%;
     padding: 10px;
-    border: 1px solid #757575;
+    border: none;
 }
 
 .button-text {

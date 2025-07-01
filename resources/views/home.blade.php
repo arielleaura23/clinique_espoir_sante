@@ -22,9 +22,11 @@
         ])->render()" mask="assets/img/exclude.png" photo="assets/img/doctor1.png" />
 
 
-    <x-about  />
 
-    <x-services   title="Nos services médicaux" subtitle="Nous vous offrons une gamme complète de soins adaptés à vos besoins."
+
+    <x-about />
+
+    <x-services title="Nos services médicaux" subtitle="Nous vous offrons une gamme complète de soins adaptés à vos besoins."
         :services="[
             [
                 'icon' => 'assets/img/consultation.png',
@@ -190,12 +192,12 @@
                 </div>
                 <div class="cot-services-steps">
                     <div class="cot-step">
-                        <a href="{{route('prise_rdv')}}" class="cot-step-bg">
+                        <a href="{{ route('prise_rdv') }}" class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/prise_rdv.png') }}" alt="" />
                             <div class="cot-step-text">Demander un <br> rendez-vous</div>
                         </a>
                     </div>
-                    <a href="{{route('prise_rdv')}}" class="cot-step">
+                    <a href="{{ route('prise_rdv') }}" class="cot-step">
                         <div class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/consultation.png') }}"
                                 alt="Caler le rendez-vous" />
@@ -204,7 +206,7 @@
                             </div>
                         </div>
                     </a>
-                    <a href="{{route('discussions')}}" class="cot-step">
+                    <a href="{{ route('discussions') }}" class="cot-step">
                         <div class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/consult.png') }}" alt="" />
                             <div class="cot-step-text">
@@ -259,7 +261,8 @@
 
 
 
-    <div class="partenaires-section section " data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000" style="    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
+    <div class="partenaires-section section " data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000"
+        style="    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);">
 
         <div class="partenaires-bg">
             <div class="container">
@@ -273,5 +276,66 @@
 
 
     </div>
+
+    <x-popup id="successModal" title="Succès " icon="assets/img/check-circle.png" buttonText="Okay">
+        <p>
+        <h2>Félicitations !</h2>
+        <br />
+        Vous avez bien été enregistré<br />
+        </p>
+    </x-popup>
+
+    <x-popup id="success_deconnexion_Modal" title="Deconnexion " icon="assets/img/check-circle.png" buttonText="Okay">
+        <p>
+        <br />
+        A très bientot !<br />
+        </p>
+    </x-popup>
+
+
+    <x-popup id="success_connexion_Modal" title="Succès" icon="assets/img/check-circle.png" buttonText="Okay">
+        <p>
+        <h2>Félicitations !</h2>
+        <br />
+        Vous venez de vous connecter<br />
+        </p>
+    </x-popup>
+
+
+    @if (session('registration_success'))
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                const modal = document.getElementById('successModal');
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+            });
+        </script>
+    @endif
+
+    {{-- Affichage du modal de succès de déconnexion --}}
+    @if (session('deconnexion_success'))
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                const modal = document.getElementById('success_deconnexion_Modal');
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+            });
+        </script>
+    @endif
+
+    {{-- Affichage du modal de succès de connexion --}}
+
+    @if (session('connexion_success'))
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                const modal = document.getElementById('success_connexion_Modal');
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+            });
+        </script>
+    @endif
 
 @endsection

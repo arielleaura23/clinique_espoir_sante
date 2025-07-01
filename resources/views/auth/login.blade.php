@@ -5,12 +5,13 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Registration</title>
+        <title>login</title>
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     </head>
 
     <body>
-        <form class="registration-form">
+        <form method="POST" action="{{ route('login') }}" class="registration-form">
+            @csrf
             <div class="background-rectangle">
                 <header class="header-section">
                     <h1 class="welcome-title">
@@ -23,34 +24,45 @@
                     </h1>
                     <img class="logo-image" src="{{ asset('assets/img/connect-img.png') }}" />
                 </header>
+
+                {{-- errors --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger" style="color:red;">
+                        @foreach ($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
+
                 <section class="form-fields">
                     <div class="name-field">
                         <label class="name-label">
-                            <span class="label-text">Nom</span>
+                            <span class="label-text">Email</span>
                             <span class="required-asterisk">*</span>
                         </label>
-                        <input class="input-field" type="text" />
+                        <input class="input-field" type="email" name="email" required autofocus />
                     </div>
                     <div class="name-field">
                         <label class="password-label">
                             <span class="label-text">Mot de passe</span>
                             <span class="required-asterisk">*</span>
                         </label>
-                        <input class="input-field" type="password" />
+                        <input class="input-field" type="password" name="password" required />
                     </div>
 
                     <div class="questions">
                         <div class="remember-section">
-                            <input class="remember-checkbox" type="checkbox" />
-                            <label class="remember-label">remenber me</label>
+                            <input class="remember-checkbox" name="remember" type="checkbox" />
+                            <label class="remember-label">Se souvenir de moi</label>
 
                         </div>
-                        <a href="#" class="login-link">Mot de passe oublié?</a>
+                        <a href="{{ route('password.request') }}" class="login-link">Mot de passe oublié?</a>
 
                     </div>
                 </section>
 
-                <button class="submit-button" id="success_register" type="submit">
+                {{-- id="success_register" --}}
+                <button class="submit-button" type="submit">
                     <div class="button-background"></div>
                     <span class="button-text">Connecter</span>
                 </button>
@@ -61,7 +73,7 @@
 
                 </div>
                 <div class="btn-connect-social">
-                    <a class="google-button" href="#">
+                    <a class="google-button" href="{{ route('google.login')}}">
                         <div class="google-button-background"></div>
                         <img class="google-icon" src="{{ asset('assets/img/google.png') }}" />
                         <span class="google-button-text">Connectez vous avec google</span>
@@ -76,8 +88,9 @@
 
                 <div class="questions" style="    justify-content: center;
     margin-top: 20px;">
-                    <p style="color: #757575;font-size:14px;" class="login-link">Vous n'avez pas de compte ? <a style="color: blue" href="{{ route('show.register') }}">Inscrivez vous</a>
-                        </p>
+                    <p style="color: #757575;font-size:14px;" class="login-link">Vous n'avez pas de compte ? <a
+                            style="color: blue" href="{{ route('register') }}">Inscrivez vous</a>
+                    </p>
                 </div>
 
             </div>
@@ -85,8 +98,7 @@
         </form>
 
 
-                <x-popup id="successModal" title="Succès" icon="assets/img/check-circle.png" buttonText="Okay"
-            >
+        <x-popup id="successModal" title="Succès" icon="assets/img/check-circle.png" buttonText="Okay">
             <p>
             <h2>Félicitations !</h2>
             <br />
