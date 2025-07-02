@@ -17,6 +17,7 @@ html {
 a {
     outline: none;
     cursor: pointer;
+    text-decoration: none !important;
 }
 
 /* Layout principal */
@@ -909,9 +910,6 @@ body {
     background: #f0f8ff;
 }
 
-
-
-
 /* Chevron participants */
 .participants-counter .chevron-icon {
     cursor: pointer;
@@ -1055,7 +1053,6 @@ body {
     user-select: none;
 }
 
-
 .nav-user-avatar img {
     border-radius: 50%;
     width: 32px;
@@ -1082,7 +1079,7 @@ body {
     min-width: 170px;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
     padding: 8px 0;
     z-index: 9999;
 }
@@ -1641,7 +1638,9 @@ body {
     font-family: "ArchivoBlack-Regular", sans-serif;
     font-size: 48px;
     font-weight: bold;
-    display: flex;
+    display: inline-block;
+    white-space: normal;
+    word-break: break-word;
     gap: 8px;
 }
 .hero-title-main {
@@ -1649,6 +1648,7 @@ body {
 }
 .hero-title-highlight {
     color: #1d77fe;
+    display: inline;
 }
 .hero-description {
     color: #757575;
@@ -2842,13 +2842,14 @@ body {
 .newsletter-bg {
     background: #a7deff;
     width: 100%;
-    min-height: 300px;
+    padding: 50px 0;
     box-shadow: 0px 7px 54px 0px rgba(0, 0, 0, 0.15);
     z-index: 1;
 }
 .news {
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 .news-info {
     display: flex;

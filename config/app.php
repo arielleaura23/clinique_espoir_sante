@@ -83,7 +83,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'fr',
+    'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -142,6 +143,7 @@ return [
     'maintenance' => [
         'driver' => 'file',
         // 'store' => 'redis',
+
     ],
 
     /*

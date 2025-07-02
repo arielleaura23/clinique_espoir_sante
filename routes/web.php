@@ -61,3 +61,16 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 
 Route::get('auth/facebook', [FacebookController::class, 'redirectToFacebook'])->name('facebook.login');
 Route::get('auth/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+
+
+// change language
+
+Route::get('lang/{locale}', function ($locale) {
+    if (!in_array($locale, ['en', 'fr'])) {
+        abort(400);
+    }
+    session(['locale' => $locale]);
+    app()->setLocale($locale);
+    return back();
+});
+
