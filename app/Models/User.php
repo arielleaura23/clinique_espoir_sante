@@ -27,15 +27,26 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function user()
+    // public function user()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
+
+    public function isMedecin()
     {
-        return $this->belongsTo(User::class);
+        return $this->role === 'medecin';
     }
 
-    public function chat()
+    public function isPatient()
     {
-        return $this->belongsTo(Chat::class);
+        return $this->role === 'patient';
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
 
 
 

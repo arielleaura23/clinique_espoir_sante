@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>login</title>
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css">
     </head>
 
     <body>
@@ -27,7 +28,7 @@
 
                 {{-- errors --}}
                 @if ($errors->any())
-                    <div class="alert alert-danger" style="color:red;">
+                    <div class="alert alert-danger" role="alert" style="margin-top: 20px;">
                         @foreach ($errors->all() as $error)
                             <div>{{ $error }}</div>
                         @endforeach
@@ -95,6 +96,8 @@
                 });
             });
         </script>
+
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 
 

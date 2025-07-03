@@ -7,6 +7,8 @@ use App\Http\Controllers\MessageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\FacebookController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DoctorAppointmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +45,9 @@ Route::get('/discussions', [HomeController::class, 'discussions'])->name('discus
 // Route::get('/register', [AuthController::class, 'register'])->name('show.register');
 // Route::get('/login', [AuthController::class, 'login'])->name('show.login');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
@@ -73,4 +75,27 @@ Route::get('lang/{locale}', function ($locale) {
     app()->setLocale($locale);
     return back();
 });
+
+// routes for dashboard
+
+Route::get('/dashboard/medecin', [DashboardController::class, 'dashboard_medecin'])->name('dashboard_medecin');
+Route::get('/dashboard/new_appointment', [DashboardController::class, 'new_appointment'])->name('new_appointment');
+Route::get('/dashboard/approved_appointment', [DashboardController::class, 'approved_appointment'])->name('approved_appointment');
+Route::get('/dashboard/cancelled_appointment', [DashboardController::class, 'cancelled_appointment'])->name('cancelled_appointment');
+Route::get('/dashboard/cancelled_appointment', [DashboardController::class, 'cancelled_appointment'])->name('cancelled_appointment');
+
+
+
+// Protéger les routes des médecins avec le middleware 'auth'
+// Route::middleware(['auth'])->group(function () {
+//     // Route pour la liste des rendez-vous approuvés
+//     Route::get('/dashboard/doctor/approved-appointments', [DoctorAppointmentController::class, 'approvedAppointments'])
+//         ->name('doctor.approved_appointments');
+
+//     // Route pour le détail d'un rendez-vous
+//     Route::get('/dashboard/doctor/view-appointment-detail/{id}/{aptid}', [DoctorAppointmentController::class, 'viewAppointmentDetail'])
+//         ->name('doctor.view_appointment_detail');
+// });
+
+
 

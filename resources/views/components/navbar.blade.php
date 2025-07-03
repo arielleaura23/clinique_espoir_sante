@@ -26,14 +26,15 @@
             @guest
                 <x-bouton href="{{ route('login') }}">{{ __('Log in') }}</x-bouton>
             @else
-                <div class="nav-user-dropdown">
+                <div class="dropdown-container">
                     <input type="checkbox" id="userDropdownToggle" class="nav-user-toggle" hidden>
                     <label for="userDropdownToggle" class="nav-user-btn">
                         <span class="nav-user-name">{{ Auth::user()->name }}</span>
                         <img src="{{ asset('assets/img/chevron_down.png') }}" width="18" height="18"
                             alt="chevron_down">
                     </label>
-                    <div class="nav-user-menu">
+
+                    {{-- <div class="nav-user-menu">
                         <a href="{{ route('profile.edit') }}" class="nav-user-menu-item">{{ __('Profile') }}</a>
                         <a href="{{ route('discussions') }}" class="nav-user-menu-item">{{ __('Messages') }}</a>
                         <a href="#" class="nav-user-menu-item" style="color: red"
@@ -44,8 +45,20 @@
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
+                    </div> --}}
+
+                    <div class="dropdown ">
+                        <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('Profile') }}</a>
+                        <a href="{{ route('discussions') }}" class="dropdown-item">{{ __('Messages') }}</a>
+                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="dropdown-item">{{ __('Logout') }}</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </div>
+
+
             @endguest
         </nav>
     </div>
@@ -67,7 +80,8 @@
                 <a href="#" class="nav-link">
                     {{ __('News') }}
                     <span>
-                        <img src="{{ asset('assets/img/chevron_down.png') }}" width="20" height="20" alt="chevron_down">
+                        <img src="{{ asset('assets/img/chevron_down.png') }}" width="20" height="20"
+                            alt="chevron_down">
                     </span>
                 </a>
                 <div class="dropdown">
@@ -143,4 +157,3 @@
         </div>
     </div>
 </div>
-

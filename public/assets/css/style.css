@@ -1027,7 +1027,8 @@ body {
 }
 
 .dropdown-item:hover {
-    background-color: #757575;
+    background-color: #f5f9ff;
+    color: #1d77fe;
 }
 
 .dropdown-container:hover .dropdown {
@@ -1180,7 +1181,7 @@ body {
     gap: 5px;
 }
 .lang-switcher-option:hover {
-    background: #a8dfff;
+    background-color: #f5f9ff;
 }
 .flag-icon {
     width: 30px;
