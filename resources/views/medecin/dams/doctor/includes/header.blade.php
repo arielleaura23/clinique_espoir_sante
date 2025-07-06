@@ -15,9 +15,8 @@
             <span class="zmdi zmdi-hc-lg zmdi-search"></span>
         </button>
 
-        <a href="{{ url('dashboard') }}" class="navbar-brand">
-            <span class="brand-icon"><i class="fa fa-gg"></i></span>
-            <span class="brand-name">YDHP</span>
+        <a href="{{ route('dashboard_medecin') }}" class="navbar-brand">
+            <img src="{{asset('assets/img/logo ligne fond bleu.png')}}" alt="">
         </a>
     </div><div class="navbar-container container-fluid">
         <div class="collapse navbar-collapse" id="app-navbar-collapse">

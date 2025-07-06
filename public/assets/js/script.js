@@ -29,10 +29,10 @@ $(function () {
 
 
 // Simulation : à appeler après soumission réussie du formulaire
-document.querySelector('form').addEventListener('submit', function (e) {
-  e.preventDefault(); // Empêche l'envoi réel pour test
-  document.getElementById('successModal').style.display = 'flex';
-});
+// document.querySelector('form').addEventListener('submit', function (e) {
+//   e.preventDefault(); // Empêche l'envoi réel pour test
+//   document.getElementById('successModal').style.display = 'flex';
+// });
 
 // Fermer la modale
 document.getElementById('closeModal').addEventListener('click', function () {

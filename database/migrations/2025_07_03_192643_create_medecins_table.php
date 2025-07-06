@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('MobileNumber')->unique();
             $table->string('Email')->unique();
             $table->string('Specialization');
+            $table->float('consultancy_fees')->default(0);
             $table->string('Password');
             $table->timestamp('CreationDate')->useCurrent();
             $table->timestamps();

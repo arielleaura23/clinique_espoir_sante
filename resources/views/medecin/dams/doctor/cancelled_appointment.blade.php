@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="widget">
                     <header class="widget-header">
-                        <h4 class="widget-title">Approved Appointment</h4>
+                        <h4 class="widget-title">Cancelled Appointment</h4>
                     </header><!-- .widget-header -->
                     <hr class="widget-separator">
                     <div class="widget-body">

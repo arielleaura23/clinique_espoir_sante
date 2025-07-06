@@ -25,9 +25,13 @@ class Appointment extends Model
         'Status',
     ];
 
+public function doctor()
+{
+    return $this->belongsTo(Medecin::class, 'doctor_id');
+}
 
-    public function doctor()
-    {
-        return $this->belongsTo(Medecin::class, 'doctor_id');
-    }
+public function patient()
+{
+    return $this->belongsTo(Patient::class, 'user_id');
+}
 }

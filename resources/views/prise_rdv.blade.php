@@ -17,7 +17,8 @@
                     <div class="appointment-form-clinic">CLINIQUE ESPOIR<br>SANTE</div>
                 </div>
             </div>
-            <form class="appointment-form-fields">
+            <form class="appointment-form-fields" method="POST" action="{{ route('appointment.store') }}">
+                @csrf
                 <div class="appointment-form-title">Formulaire de prise de rendez-vous</div>
                 <hr class="before-consultation-item-divider-rdv">
                 <div class="blocks_rdv">
@@ -61,13 +62,17 @@
                             <input type="tel" id="telephone" name="telephone" class="form-input" required>
                         </div>
                         <div class="form-group">
+                            <label class="form-label" for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        <div class="form-group">
                             <label class="form-label" for="specialite">Spécialité médicale <span
                                     class="required">*</span></label>
                             <select id="specialite" name="specialite" class="form-input" required>
                                 <option value="">Sélectionner</option>
-                                <option value="Cardiologie">Cardiologie</option>
-                                <option value="Pédiatrie">Pédiatrie</option>
-                                <!-- Ajoute d'autres spécialités ici -->
+                                @foreach ($specialites as $spec)
+                                    <option value="{{ $spec->specilization }}">{{ $spec->specilization }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -75,9 +80,11 @@
                                     class="required">*</span></label>
                             <select id="medecin" name="medecin" class="form-input" required>
                                 <option value="">Sélectionner</option>
-                                <option value="Dr. X">Dr. X</option>
-                                <option value="Dr. Y">Dr. Y</option>
-                                <!-- Ajoute d'autres médecins ici -->
+                                @foreach ($medecins as $medecin)
+                                    <option value="{{ $medecin->FullName }}">{{ $medecin->FullName }}
+                                        ({{ $medecin->Specialization }})
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
@@ -91,9 +98,6 @@
             </form>
             <img class="appointment-form-bg" src="unsplash-t-nj-uk-pnl-00-removebg-preview0.png" alt="Décor" />
         </div>
-
-
-
 
         <div class="modal-overlay" id="successModal" style="display: none;">
             <div class="modal-success">
@@ -112,21 +116,24 @@
                     <p>
                         Votre rendez-vous a été enregistré avec succès.
                         <br />
-                        Merci de vous présenter à l’hôpital à la date et à l’heure prévues.
-                        <br />
-                        Nous vous prions de respecter les délais afin de garantir une bonne prise en charge.
+                        Nous analysons votre demande et vous contacterons bientôt pour confirmer votre rendez-vous.
                     </p>
                 </div>
+                <br />
+                </p>
 
                 <div class="modal-footer">
                     <button class="btn-primary" id="okButton">Okay</button>
                 </div>
             </div>
+
+
+        </div>
         </div>
 
 
         {{-- modale error --}}
-        <div class="modal-overlay" style="display: none">
+        <div class="modal-overlay" id="errorModal" style="display: none">
             <div class="modal-success">
                 <div class="modal-header">
                     <div class="success-title">
@@ -143,9 +150,8 @@
                     <p>
                         Votre rendez-vous n’a pas pu être enregistré.
                         <br />
-                        Veuillez vérifier les horaires disponibles ainsi que la disponibilité du médecin choisi.
+                        Veuillez vérifier les informations saisies.
                         <br />
-                        Si le problème persiste, veuillez réessayer plus tard ou contacter l’accueil de l’hôpital.
                     </p>
                 </div>
 
@@ -154,6 +160,30 @@
                 </div>
             </div>
         </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+        {{-- ouvrir la modale en fonction du résultat de la requête --}}
+        <script>
+            $(document).ready(function() {
+                @if (session('success'))
+                    $('#successModal').show();
+                @endif
+
+                @if (session('error'))
+                    $('#errorModal').show();
+                @endif
+
+                // Fermer la modale au clic sur le bouton ou la croix
+                $('#successModal #okButton, #successModal #closeModal').on('click', function() {
+                    $('#successModal').hide();
+                });
+                $('#errorModal #okButton, #errorModal #closeModal').on('click', function() {
+                    $('#errorModal').hide();
+                });
+            });
+        </script>
 
 
 
@@ -169,9 +199,6 @@
         </script>
 
 
-
-
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="{{ asset('assets/js/script.js') }}"></script>
     </body>
 

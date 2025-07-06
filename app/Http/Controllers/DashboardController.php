@@ -15,6 +15,8 @@ class DashboardController extends Controller
     //     $this->middleware('auth:medecin');
     // }
 
+
+
     public function dashboard_medecin()
     {
         return view('medecin.dams.doctor.dashboard');
@@ -27,27 +29,67 @@ class DashboardController extends Controller
 
     public function approved_appointment()
     {
-        // Pour le développement/test, nous gérons sans vérifier l'authentification pour le moment.
-        // En production, cette fonction devrait être protégée par un middleware d'authentification.
+        // // Vérifier si l'utilisateur est authentifié
+        // if (!Auth::check()) {
+        //     // Rediriger vers la page de connexion si non authentifié
+        //     return redirect()->route('login'); // Assurez-vous que votre route de connexion est nommée 'login'
+        // }
 
-        // Récupérer l'utilisateur authentifié. Si aucun, $medecin sera null.
         $medecin = Auth::user();
+        // $docid = $medecin->id;
 
-        // Définir l'ID du médecin.
-        // Pour le test sans authentification, nous allons temporairement utiliser un ID fixe (par exemple, 1).
-        // Assurez-vous que cet ID existe dans votre table 'medecins' et est associé à des rendez-vous.
-        // En production, $docid devrait toujours venir de l'utilisateur authentifié.
-        $docid = $medecin ? $medecin->id : 1; // Remplacez '1' par un ID de médecin valide pour vos tests.
+
+        // $appointments = Appointment::where('Status', 'Approved')
+        //     ->where('doctor_id', $docid)
+        //     ->get();
+
+        $docid = $medecin ? $medecin->id : 1;
 
 
         $appointments = Appointment::where('Status', 'Approved')
             ->where('doctor_id', $docid)
             ->get();
 
-        // Passer les données à la vue
         return view('medecin.dams.doctor.approved_appointment', compact('appointments'));
     }
 
 
+    public function cancelled_appointment()
+    {
 
+        $medecin = Auth::user();
+
+        $docid = $medecin ? $medecin->id : 1;
+
+        $appointments = Appointment::where('Status', 'Cancelled')
+            ->where('doctor_id', $docid)
+            ->get();
+
+        return view('medecin.dams.doctor.cancelled_appointment', compact('appointments'));
+    }
+
+    public function showSearchForm()
+    {
+        return view('medecin.dams.doctor.search');
+    }
+
+    public function searchAppointments(Request $request)
+    {
+        $request->validate([
+            'searchdata' => 'required|string|max:255',
+        ]);
+
+        $search = $request->input('searchdata');
+        $doctorId = 1;
+
+        $appointments = Appointment::where(function ($query) use ($search) {
+            $query->where('AppointmentNumber', 'like', "$search%")
+                ->orWhere('Name', 'like', "$search%")
+                ->orWhere('MobileNumber', 'like', "$search%");
+        })
+            ->where('doctor_id', $doctorId)
+            ->get();
+
+        return view('medecin.dams.doctor.search', compact('appointments', 'search'));
+    }
 }

@@ -13,23 +13,39 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('appointments', function (Blueprint $table) {
-            $table->id();
-            $table->string('AppointmentNumber')->unique();
-            $table->string('Name');
-            $table->string('MobileNumber');
-            $table->string('Email');
-            $table->date('AppointmentDate');
-            $table->time('AppointmentTime');
-            $table->string('Specialization');
-            $table->unsignedBigInteger('doctor_id')->nullable();
-            $table->text('Message')->nullable();
-            $table->date('ApplyDate');
-            $table->text('Remark')->nullable();
-            $table->string('Status')->default('');
-            $table->timestamps();
-            $table->foreign('doctor_id')->references('id')->on('medecins')->onDelete('set null');
-        });
+Schema::create('appointments', function (Blueprint $table) {
+    $table->id();
+    $table->string('AppointmentNumber')->unique();
+    $table->string('Name');
+    $table->string('MobileNumber');
+    $table->string('Email');
+    $table->date('AppointmentDate');
+    $table->time('AppointmentTime');
+    $table->string('Specialization');
+
+    $table->unsignedBigInteger('doctorId')->nullable();
+    $table->unsignedBigInteger('userId')->nullable();
+
+    $table->string('doctorSpecialization')->nullable();
+    $table->float('consultancyFees')->nullable();
+
+    $table->text('Message')->nullable();
+    $table->date('ApplyDate');
+
+    $table->text('Remark')->nullable();
+    $table->string('Status')->default('');
+
+    $table->tinyInteger('userStatus')->default(1);
+    $table->tinyInteger('doctorStatus')->default(1);
+    $table->timestamp('postingDate')->nullable();
+    $table->timestamp('updationDate')->nullable(); 
+
+    $table->timestamps();
+
+    $table->foreign('doctorId')->references('id')->on('medecins')->onDelete('set null');
+    $table->foreign('userId')->references('id')->on('users')->onDelete('set null');
+});
+
     }
 
     /**

@@ -27,7 +27,7 @@
                             </a>
                             <ul class="dropdown-menu animated flipInY">
                                 <li>
-                                    <a class="text-color" href="{{ url('dashboard') }}">
+                                    <a class="text-color" href="{{ route('dashboard_medecin') }}">
                                         <span class="m-r-xs"><i class="fa fa-home"></i></span>
                                         <span>Home</span>
                                     </a>
@@ -115,17 +115,17 @@
                 </li> --}}
 
                 <li @if (Request::is('search')) class="active" @endif>
-                    <a href="{{ url('search') }}">
+                    <a href="{{ route('appointments.search.form') }}">
                         <i class="menu-icon zmdi zmdi-search zmdi-hc-lg"></i>
                         <span class="menu-text">Search</span>
                     </a>
                 </li>
-                <li @if (Request::is('appointment-bwdates')) class="active" @endif>
+                {{-- <li @if (Request::is('appointment-bwdates')) class="active" @endif>
                     <a href="{{ url('appointment-bwdates') }}">
                         <i class="menu-icon zmdi zmdi-layers zmdi-hc-lg"></i>
                         <span class="menu-text">Report</span>
                     </a>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>
