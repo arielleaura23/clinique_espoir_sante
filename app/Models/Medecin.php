@@ -16,6 +16,7 @@ class Medecin extends Model
         'FullName',
         'MobileNumber',
         'Email',
+        'consultancy_fees',
         'Specialization',
         'Password',
         'CreationDate',

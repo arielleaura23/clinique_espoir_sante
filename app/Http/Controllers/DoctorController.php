@@ -12,6 +12,10 @@ use App\Models\DoctorSpecilization;
 use Illuminate\Support\Facades\Hash;
 use App\Models\MedicalHistory;
 use App\Models\ContactQuery;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use App\Models\Schedule;
+use Carbon\Carbon;
 
 class DoctorController extends Controller
 {
@@ -127,6 +131,7 @@ class DoctorController extends Controller
             'FullName' => $request->docname,
             'MobileNumber' => $request->doccontact,
             'Email' => $request->docemail,
+            'consultancy_fees' => $request->docfees,
             'Specialization' => $request->Doctorspecialization,
             'Password' => Hash::make($request->npass),
             'CreationDate' => now(),
@@ -177,7 +182,7 @@ class DoctorController extends Controller
     }
 
 
-    // appointment history
+    // appointments
     public function appointmentHistory()
     {
         $appointments = Appointment::with(['doctor', 'patient'])
@@ -185,6 +190,155 @@ class DoctorController extends Controller
             ->get();
         return view('doctor.doctor.appointment-history', compact('appointments'));
     }
+
+    public function newAppointment()
+    {
+        $appointments = Appointment::with(['doctor', 'patient'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('doctor.doctor.new_appointment', compact('appointments'));
+    }
+    public function approvedAppointment()
+    {
+        $appointments = Appointment::with(['doctor', 'patient'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('doctor.doctor.approved_appointment', compact('appointments'));
+    }
+    public function cancelledAppointment()
+    {
+        $appointments = Appointment::with(['doctor', 'patient'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('doctor.doctor.cancelled_appointment', compact('appointments'));
+    }
+
+
+
+
+
+    public function approve(Request $request, $id)
+    {
+        $request->validate([
+            'remark' => 'required|string',
+        ]);
+
+        $appointment = Appointment::findOrFail($id);
+        $appointment->doctor_status = 2;
+        $appointment->status = 'Approuvé';
+        $appointment->remark = $request->remark;
+        $appointment->save();
+
+        // Mail de confirmation au patient
+        if ($appointment->email) {
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = env('MAIL_HOST');
+                $mail->SMTPAuth = true;
+                $mail->Username = env('MAIL_USERNAME');
+                $mail->Password = env('MAIL_PASSWORD');
+                $mail->SMTPSecure = env('MAIL_ENCRYPTION');
+                $mail->Port = env('MAIL_PORT');
+
+                $mail->setFrom(env('MAIL_FROM_ADDRESS'), 'Clinique Espoir Santé');
+                $mail->addAddress($appointment->email, $appointment->name);
+                $mail->isHTML(true);
+                $mail->Subject = 'Votre rendez-vous est approuvé';
+                $mail->Body = '
+                <h2 style="color: green;">Rendez-vous confirmé</h2>
+                <p>Bonjour ' . htmlspecialchars($appointment->name) . ',</p>
+                <p>Votre rendez-vous du <strong>' . $appointment->appointment_date . '</strong> à <strong>' . $appointment->appointment_time . '</strong> avec le Dr <strong>' . ($appointment->doctor->FullName ?? '-') . '</strong> a été <strong>approuvé</strong>.</p>
+                <p><strong>Remarque du médecin :</strong> ' . nl2br(htmlspecialchars($appointment->remark)) . '</p>
+                <p>Merci de vous présenter à l’heure.</p>
+                <br><p>— Clinique Espoir Santé</p>
+            ';
+                $mail->send();
+            } catch (Exception $e) {
+                // log error si tu veux
+            }
+        }
+
+        Schedule::create([
+            'doctor_id'    => $appointment->doctor_id,
+            'date'         => $appointment->appointment_date,
+            'start_time'   => $appointment->appointment_time,
+            'patient_name' => $appointment->name,
+            'motif'        => $appointment->message,
+        ]);
+
+        return back()->with('success', 'Rendez-vous approuvé et e-mail envoyé.');
+    }
+
+
+    public function reject(Request $request, $id)
+    {
+        $request->validate([
+            'remark' => 'required|string',
+        ]);
+
+        $appointment = Appointment::findOrFail($id);
+        $appointment->doctor_status = 0;
+        $appointment->status = 'Rejeté';
+        $appointment->remark = $request->remark;
+        $appointment->save();
+
+        // Mail au patient
+        if ($appointment->email) {
+            try {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = env('MAIL_HOST');
+                $mail->SMTPAuth = true;
+                $mail->Username = env('MAIL_USERNAME');
+                $mail->Password = env('MAIL_PASSWORD');
+                $mail->SMTPSecure = env('MAIL_ENCRYPTION');
+                $mail->Port = env('MAIL_PORT');
+
+                $mail->setFrom(env('MAIL_FROM_ADDRESS'), 'Clinique Espoir Santé');
+                $mail->addAddress($appointment->email, $appointment->name);
+                $mail->isHTML(true);
+                $mail->Subject = 'Votre rendez-vous a été rejeté';
+                $mail->Body = '
+                <h2 style="color: red;">Rendez-vous rejeté</h2>
+                <p>Bonjour ' . htmlspecialchars($appointment->name) . ',</p>
+                <p>Malheureusement, votre rendez-vous du <strong>' . $appointment->appointment_date . '</strong> à <strong>' . $appointment->appointment_time . '</strong> a été <strong>rejeté</strong>.</p>
+                <p><strong>Raison :</strong> ' . nl2br(htmlspecialchars($appointment->remark)) . '</p>
+                <p>Merci de reprendre un rendez-vous ou de contacter la clinique.</p>
+                <br><p>— Clinique Espoir Santé</p>
+            ';
+                $mail->send();
+            } catch (Exception $e) {
+                // log error
+            }
+        }
+
+        return back()->with('success', 'Rendez-vous rejeté et e-mail envoyé.');
+    }
+
+
+
+
+public function schedule()
+{
+
+    $doctorId =1;
+
+    $appointments = Appointment::where('doctor_id', $doctorId)
+        ->where('doctor_status', 1) 
+        ->orderBy('appointment_date')
+        ->orderBy('appointment_time')
+        ->get();
+
+    return view('doctor.doctor.schedule', compact('appointments'));
+}
+
+
+
+
+
+
+
 
 
     // contact us

@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -18,5 +21,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Admin::create([
+            'fullname' => 'admin',
+            'address' => 'Yaoundé',
+            'city' => 'Yaoundé',
+            'gender' => 'female',
+            'email' => 'admin@espoir.com',
+            'password' => Hash::make('admin2025'),
+        ]);
     }
 }

@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ContactQuery extends Model
 {
-    public $timestamps = false; // On utilise PostingDate et LastupdationDate
+    public $timestamps = false; 
 
     protected $fillable = [
         'fullname',

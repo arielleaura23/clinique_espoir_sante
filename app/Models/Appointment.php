@@ -9,20 +9,26 @@ class Appointment extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
-        'AppointmentNumber',
-        'Name',
-        'MobileNumber',
-        'Email',
-        'AppointmentDate',
-        'AppointmentTime',
-        'Specialization',
+        'appointment_number',
+        'name',
+        'mobile_number',
+        'email',
+        'appointment_date',
+        'appointment_time',
+        'specialization',
         'doctor_id',
-        'Message',
-        'ApplyDate',
-        'Remark',
-        'Status',
+        'user_id',
+        'doctor_specialization',
+        'consultancy_fees',
+        'message',
+        'apply_date',
+        'remark',
+        'status',
+        'user_status',
+        'doctor_status',
+        'posting_date',
+        'updation_date',
     ];
 
 public function doctor()
@@ -32,6 +38,7 @@ public function doctor()
 
 public function patient()
 {
-    return $this->belongsTo(Patient::class, 'user_id');
+    return $this->belongsTo(User::class, 'user_id');
 }
+
 }

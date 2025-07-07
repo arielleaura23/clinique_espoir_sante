@@ -11,8 +11,8 @@
             'href' => '#',
             'id' => 'openCallModal',
             'class' => 'call-popup-btn',
-        ])->render()"
-        mask="assets/img/exclude.png" photo="assets/img/telephone.png"/>
+        ])->render()" mask="assets/img/exclude.png"
+        photo="assets/img/telephone.png" />
 
     <div class="contact-section autoblur">
         <div class="container section">
@@ -24,16 +24,21 @@
             </div>
             <div class="contact-content">
                 <div class="image-contact">
-                    <img class="contact-bg-img"  src="{{ asset('assets/img/doc6.png') }}" alt="doctor" />
+                    <img class="contact-bg-img" src="{{ asset('assets/img/doc6.png') }}" alt="doctor" />
                 </div>
-                <form class="contact-form">
+                <form class="contact-form" method="POST" action="{{ route('contact.store') }}">
+                    @csrf
                     <div class="contact-form-group">
                         <label class="contact-label" for="contact-nom">Nom <span class="required">*</span></label>
-                        <input type="text" id="contact-nom" name="nom" class="contact-input" required>
+                        <input type="text" id="contact-nom" name="fullname" class="contact-input" required>
                     </div>
                     <div class="contact-form-group">
                         <label class="contact-label" for="contact-email">Email <span class="required">*</span></label>
                         <input type="email" id="contact-email" name="email" class="contact-input" required>
+                    </div>
+                    <div class="contact-form-group">
+                        <label class="contact-label" for="contact-contactno">Téléphone (facultatif)</label>
+                        <input type="text" id="contact-contactno" name="contactno" class="contact-input">
                     </div>
                     <div class="contact-form-group">
                         <label class="contact-label" for="contact-message">Message <span class="required">*</span></label>
@@ -41,6 +46,9 @@
                     </div>
                     <button type="submit" class="contact-submit-btn">Envoyer</button>
                 </form>
+
+
+
             </div>
         </div>
     </div>

@@ -127,6 +127,7 @@ class AdminController extends Controller
             'FullName' => $request->docname,
             'MobileNumber' => $request->doccontact,
             'Email' => $request->docemail,
+            'consultancy_fees' => $request->docfees,
             'Specialization' => $request->Doctorspecialization,
             'Password' => Hash::make($request->npass),
             'CreationDate' => now(),
@@ -191,39 +192,54 @@ class AdminController extends Controller
 
     public function unreadQueries()
     {
-        $queries = ContactQuery::whereNull('IsRead')->orderBy('PostingDate', 'desc')->get();
+        $queries = ContactQuery::where('IsRead', 0)->orderByDesc('PostingDate')->get();
         return view('admin.admin.unread-queries', compact('queries'));
     }
 
     public function queryDetails($id)
     {
         $query = ContactQuery::findOrFail($id);
-        // mark as read
-        $query->IsRead = 1;
-        $query->save();
         return view('admin.admin.query-details', compact('query'));
     }
-
 
     public function updateQuery(Request $request, $id)
     {
         $request->validate([
-            'adminremark' => 'required|string',
+            'AdminRemark' => 'required|string|max:1000',
         ]);
 
         $query = ContactQuery::findOrFail($id);
-        $query->AdminRemark = $request->adminremark;
-        $query->IsRead = true;
-        $query->LastupdationDate = now();
-        $query->save();
 
-        return redirect()->route('admin.queries.details', $id)->with('success', 'Admin Remark updated successfully.');
+        $query->update([
+            'AdminRemark' => $request->AdminRemark,
+            'IsRead' => 1,
+            'LastupdationDate' => now(),
+        ]);
+
+
+        return redirect()->route('admin.queries.read')->with('success', 'Remarque enregistrée. Message déplacé dans Read Queries.');
     }
 
 
     public function readQueries()
     {
-        $queries = ContactQuery::where('IsRead', true)->orderBy('PostingDate', 'desc')->get();
+        $queries = ContactQuery::where('IsRead', 1)->orderByDesc('LastupdationDate')->get();
         return view('admin.admin.read-query', compact('queries'));
+    }
+
+    public function editRemark(Request $request, $id)
+    {
+        $request->validate([
+            'AdminRemark' => 'required|string|max:1000',
+        ]);
+
+        $query = ContactQuery::findOrFail($id);
+
+        $query->update([
+            'AdminRemark' => $request->AdminRemark,
+            'LastupdationDate' => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Remarque mise à jour avec succès.');
     }
 }

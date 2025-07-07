@@ -1,4 +1,3 @@
-{{-- filepath: resources/views/admin/admin/add-doctor.blade.php --}}
 @extends('admin.layouts.app')
 
 @section('title', 'Admin | Add Doctor')

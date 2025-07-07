@@ -71,32 +71,32 @@ class HomeController extends Controller
             'motif' => 'required|string',
         ]);
 
-        // Trouver l'id du médecin
         $medecin = Medecin::where('FullName', $request->medecin)->first();
+        // $patient = auth('patient')->user(); // Connexion via  guard patient
+
+        $user = auth()->user(); // L'utilisateur connecté
 
         $appointment = Appointment::create([
-            'AppointmentNumber' => uniqid('RDV-'),
-            'Name' => $request->nom . ' ' . $request->prenom,
-            'MobileNumber' => $request->telephone,
-            'Email' => $request->email,
-            'AppointmentDate' => $request->date,
-            'AppointmentTime' => $request->heure,
-            'Specialization' => $request->specialite,
+            'appointment_number' => uniqid('RDV-'),
+            'name' => $request->nom . ' ' . $request->prenom,
+            'mobile_number' => $request->telephone,
+            'email' => $request->email,
+            'appointment_date' => $request->date,
+            'appointment_time' => $request->heure,
+            'specialization' => $request->specialite,
             'doctor_id' => $medecin ? $medecin->id : null,
-            'user_id' => auth()->check() ? auth()->id() : null,
-
-            'Message' => $request->motif,
-            'ApplyDate' => now()->toDateString(),
-            'Remark' => null,
-            'Status' => 'En attente',
-
-            // Champs supplémentaires pour l'affichage admin :
-            'doctorSpecialization' => $medecin ? $medecin->Specialization : null,
-            'consultancyFees' => $medecin->consultancy_fees ?? 0,
-            'postingDate' => now(),
-            'userStatus' => 1,
-            'doctorStatus' => 1,
+            'user_id' => $user ? $user->id : null,
+            'doctor_specialization' => $medecin?->Specialization,
+            'consultancy_fees' => $medecin?->consultancy_fees ?? 0,
+            'message' => $request->motif,
+            'apply_date' => now()->toDateString(),
+            'posting_date' => now(),
+            'user_status' => 1,
+            'doctor_status' => 1,
+            'status' => 'En attente',
         ]);
+
+
 
 
         // Envoi du mail (si médecin trouvé et email présent)

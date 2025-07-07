@@ -7,7 +7,7 @@
             </div>
             <ul class="main-navigation-menu">
                 <li>
-                    <a href="{{ route('admin.dashboard') }}">
+                    <a href="{{ route('doctor.dashboard') }}">
                         <div class="item-content">
                             <div class="item-media"><i class="ti-home"></i></div>
                             <div class="item-inner"><span class="title"> Dashboard </span></div>
@@ -22,11 +22,19 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{ route('admin.appointment.history') }}"><span class="title">All appointments </span></a></li>
-                        <li><a href="#"><span class="title">New appointments </span></a></li>
-                        <li><a href="#"><span class="title"> Approved appointments</span></a></li>
-                        <li><a href="#"><span class="title"> cancelled appointments </span></a></li>
+                        <li><a href="{{ route('doctor.appointment.history') }}"><span class="title">All appointments </span></a></li>
+                        <li><a href="{{ route('doctor.new.appointment') }}"><span class="title">New appointments </span></a></li>
+                        <li><a href="{{ route('doctor.approved.appointment') }}"><span class="title"> Approved appointments</span></a></li>
+                        <li><a href="{{ route('doctor.cancelled.appointment') }}"><span class="title"> cancelled appointments </span></a></li>
                     </ul>
+                </li>
+                                <li>
+                    <a href="{{ route('doctor.schedule') }}">
+                        <div class="item-content">
+                            <div class="item-media"><i class="ti-home"></i></div>
+                            <div class="item-inner"><span class="title"> Time table </span></div>
+                        </div>
+                    </a>
                 </li>
                 {{-- <li>
                     <a href="javascript:void(0)">
@@ -36,7 +44,7 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{ route('admin.users.manage') }}"><span class="title"> Manage Users </span></a></li>
+                        <li><a href="{{ route('doctor.users.manage') }}"><span class="title"> Manage Users </span></a></li>
                     </ul>
                 </li> --}}
                 <li>
@@ -47,7 +55,7 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{ route('admin.patients.manage') }}"><span class="title"> Manage Patients </span></a></li>
+                        <li><a href="{{ route('doctor.patients.manage') }}"><span class="title"> Manage Patients </span></a></li>
                     </ul>
                 </li>
 
@@ -60,7 +68,7 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{ route('admin.reports.between_dates') }}"><span class="title">B/w dates reports </span></a></li>
+                        <li><a href="{{ route('doctor.reports.between_dates') }}"><span class="title">B/w dates reports </span></a></li>
                     </ul>
                 </li>
                 {{-- <li>
@@ -71,12 +79,12 @@
                         </div>
                     </a>
                     <ul class="sub-menu">
-                        <li><a href="{{ route('admin.pages.about') }}"><span class="title">About Us </span></a></li>
-                        <li><a href="{{ route('admin.pages.contact') }}"><span class="title">Contact Us </span></a></li>
+                        <li><a href="{{ route('doctor.pages.about') }}"><span class="title">About Us </span></a></li>
+                        <li><a href="{{ route('doctor.pages.contact') }}"><span class="title">Contact Us </span></a></li>
                     </ul>
                 </li> --}}
                 <li>
-                    <a href="{{ route('admin.patient.search') }}">
+                    <a href="{{ route('doctor.patient.search') }}">
                         <div class="item-content">
                             <div class="item-media"><i class="ti-search"></i></div>
                             <div class="item-inner"><span class="title"> Patient Search </span></div>

@@ -32,6 +32,8 @@
             href="{{ asset('assets/assets_admin/vendor/bootstrap-timepicker/bootstrap-timepicker.min.css') }}"
             media="screen">
 
+        <link rel="stylesheet" href="{{asset('assets/assets_medecin/css/mystyle.css')}}">
+
         <style>
             header {
                 position: fixed !important;

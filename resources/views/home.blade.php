@@ -233,13 +233,14 @@
                             {{ __('Receive exclusive updates on our services, health tips, and upcoming events.') }}
                         </div>
                     </div>
-                    <form class="newsletter-form">
+                    <form class="newsletter-form" method="POST" action="{{ route('newsletter.subscribe') }}">
+                        @csrf
                         <div class="newsletter-input-group">
                             <span class="newsletter-input-icon">
                                 <img src="{{ asset('assets/img/email.png') }}" alt="Email" />
                             </span>
-                            <input class="newsletter-input" type="email"
-                                placeholder="{{ __('Your email address...') }}" />
+                            <input class="newsletter-input" type="email" name="email"
+                                placeholder="{{ __('Your email address...') }}" required />
                             <button class="newsletter-btn" type="submit">
                                 <img src="{{ asset('assets/img/send.png') }}" alt="Envoyer" />
                             </button>

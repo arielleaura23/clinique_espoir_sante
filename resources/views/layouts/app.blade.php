@@ -17,6 +17,8 @@
         <div class="page">
             @include('components.header')
             @include('components.navbar')
+            @include('components.success-error-popups')
+
 
             <main>
                 @yield('content')
