@@ -19,40 +19,41 @@
         <div class="container-fluid container-fullw bg-white">
             <div class="row">
                 <div class="col-md-12">
-                    <h5 class="over-title margin-bottom-15">View <span class="text-bold">Patients</span></h5>
+                    <h5 class="over-title margin-bottom-15">Liste des <span class="text-bold">patients</span></h5>
+
                     <table class="table table-hover" id="sample-table-1">
                         <thead>
                             <tr>
                                 <th class="center">#</th>
-                                <th>Patient Name</th>
-                                <th>Patient Contact Number</th>
-                                <th>Patient Gender</th>
-                                <th>Creation Date</th>
-                                <th>Updation Date</th>
+                                <th>Nom du patient</th>
+                                <th>Téléphone</th>
+                                <th>Genre</th>
+                                <th>Date de création</th>
+                                <th>Dernière mise à jour</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($patients as $index => $patient)
+                            @forelse($patients as $index => $patient)
                                 <tr>
                                     <td class="center">{{ $index + 1 }}</td>
-                                    <td class="hidden-xs">{{ $patient->PatientName }}</td>
-                                    <td>{{ $patient->PatientContno }}</td>
-                                    <td>{{ $patient->PatientGender }}</td>
-                                    <td>{{ $patient->CreationDate ? \Carbon\Carbon::parse($patient->CreationDate)->format('d/m/Y H:i') : '' }}</td>
-                                    <td>{{ $patient->UpdationDate ? \Carbon\Carbon::parse($patient->UpdationDate)->format('d/m/Y H:i') : '' }}</td>
+                                    <td>{{ $patient->name }}</td>
+                                    <td>{{ $patient->phone ?? '-' }}</td>
+                                    <td>{{ ucfirst($patient->gender ?? 'Non spécifié') }}</td>
+                                    <td>{{ $patient->created_at ? $patient->created_at->format('d/m/Y H:i') : '-' }}</td>
+                                    <td>{{ $patient->updated_at ? $patient->updated_at->format('d/m/Y H:i') : '-' }}</td>
                                     <td>
-                                        <a href="{{ route('admin.patient.view', $patient->id) }}" class="btn btn-primary btn-xs" target="_blank">View</a>
+                                        <a href="{{ route('admin.patient.view', $patient->id) }}" class="btn btn-primary btn-xs" target="_blank">Voir</a>
                                     </td>
                                 </tr>
-                            @endforeach
-                            @if($patients->isEmpty())
+                            @empty
                                 <tr>
-                                    <td colspan="7" class="text-center">No patients found.</td>
+                                    <td colspan="7" class="text-center">Aucun patient trouvé.</td>
                                 </tr>
-                            @endif
+                            @endforelse
                         </tbody>
                     </table>
+
                 </div>
             </div>
         </div>

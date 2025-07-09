@@ -6,8 +6,10 @@
     <div class="main-content">
         <div class="calendar-header">
             <button id="prevMonth" class="nav-btn">‹</button>
-            <h1 id="monthTitle">{{ \Carbon\Carbon::now()->translatedFormat('F') }} <span
-                    id="yearTitle">{{ \Carbon\Carbon::now()->year }}</span></h1>
+            <div class="calendar-title">
+                <span id="monthTitle">{{ \Carbon\Carbon::now()->translatedFormat('F') }}</span>
+                <span id="yearTitle">{{ \Carbon\Carbon::now()->year }}</span>
+            </div>
             <button id="nextMonth" class="nav-btn">›</button>
         </div>
         <div class="calendar" id="calendarGrid">
@@ -72,8 +74,8 @@
             }
 
             // Update header
-            document.getElementById('monthTitle').innerHTML =
-                `${current.format('MMMM')} <span id="yearTitle">${current.format('YYYY')}</span>`;
+            document.getElementById('monthTitle').textContent = current.format('MMMM');
+            document.getElementById('yearTitle').textContent = current.format('YYYY');
 
         }
 
@@ -91,94 +93,153 @@
     </script>
 
     <style>
-        .calendar-container {
-            max-width: 1000px;
-            margin: 30px auto;
-            background: #fff;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+        body {
+            background: #f5f7fa;
+            font-family: 'Segoe UI', Roboto, sans-serif;
         }
+
 
         .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            background: #f1f4f8;
-            border-bottom: 1px solid #ddd;
+            background: #1d77fe;
+            color: #fff;
+            padding: 20px 30px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+
+        .calendar-header h1 {
+            margin: 0;
+            text-transform: capitalize;
         }
 
         .nav-btn {
-            background: none;
+            background: #ffffff;
             border: none;
-            font-size: 24px;
+            color: #1d77fe;
+            font-size: 28px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: #e0f0ff;
+            transform: scale(1.1);
         }
 
         .calendar {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            grid-auto-rows: minmax(120px, auto);
+            border-top: 1px solid #ddd;
         }
 
         .day-name {
-            background: #f7f9fc;
-            padding: 10px;
+            background: #f0f4f8;
+            padding: 15px;
             text-align: center;
-            font-weight: bold;
+            font-weight: 600;
             border-bottom: 1px solid #ddd;
+            color: #333;
+            text-transform: uppercase;
+            font-size: 13px;
         }
 
         .day-cell {
-            border: 1px solid #eee;
-            padding: 5px;
-            position: relative;
+            border: 1px solid #f1f1f1;
+            padding: 10px;
+            min-height: 120px;
+            background: #ffffff;
             display: flex;
             flex-direction: column;
+            justify-content: flex-start;
+            transition: background 0.2s ease;
+            position: relative;
+            height: 150px;
+            width: 150px;
+            overflow: hidden;
+        }
+
+        .day-cell:hover {
+            background: #f8fbff;
         }
 
         .disabled {
-            background: #fafafa;
-            color: #ccc;
+            background: #f8f8f8;
+            color: #b5b5b5;
         }
 
         .today {
-            background: #e7f5ff;
-            border: 2px solid #339af0;
+            border: 2px solid #1d77fe;
+            background: #e8f1ff;
         }
 
         .day-number {
             font-weight: bold;
-            margin-bottom: 5px;
+            font-size: 15px;
+            color: #222;
         }
 
         .events-list {
-            flex: 1;
-            overflow-y: auto;
+            flex-grow: 1;
             display: flex;
-            gap: 7px;
             flex-direction: column;
+            max-height: 100px;
+            gap: 6px;
+            overflow-y: auto;
+            padding-right: 5px;
+            margin-top: 6px;
+            scrollbar-width: thin;
+            scrollbar-color: #1d77fe #f1f1f1;
         }
+/* Chrome, Safari, Edge (basés sur Chromium) */
+.events-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.events-list::-webkit-scrollbar-thumb {
+    background-color: #1d77fe;
+    border-radius: 4px;
+}
+
+.events-list::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+
 
         .event {
-            background: #e0f6ff;
-            border-left: 4px solid #339af0;
-            margin-bottom: 4px;
-            padding: 4px 6px;
-            border-radius: 3px;
-            font-size: 12px;
+            background: #d8edff;
+            border-left: 4px solid #1d77fe;
+            padding: 6px 8px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #1a1a1a;
+            transition: background 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .event:hover {
+            background-color: #cde6ff;
         }
 
         .event-time {
-            font-weight: bold;
+            font-weight: 600;
+            color: #1d77fe;
         }
 
-        #yearTitle,
-        #monthTitle {
-            font-weight: normal;
-            font-size: 20px;
-            margin-left: 6px;
-            color: #339af0;
+        #monthTitle,
+        #yearTitle {
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff;
         }
     </style>
+
 @endsection

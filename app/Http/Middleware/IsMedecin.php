@@ -16,10 +16,9 @@ class IsMedecin
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->isMedecin()) {
+        if (auth()->check() && auth()->user()->role === 'medecin') {
             return $next($request);
         }
-
-        abort(403);
+        abort(403, 'Accès refusé');
     }
 }

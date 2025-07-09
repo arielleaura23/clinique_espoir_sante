@@ -15,10 +15,9 @@ class IsPatient
      */
     public function handle($request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->isPatient()) {
+        if (auth()->check() && auth()->user()->role === 'patient') {
             return $next($request);
         }
-
-        abort(403);
+        abort(403, 'Accès refusé');
     }
 }

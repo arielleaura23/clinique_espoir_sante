@@ -12,18 +12,35 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
+
+            // Champs généraux
             $table->string('name');
-            // $table->string('nickname')->unique();
             $table->string('email')->unique();
-            $table->string('dob')->nullable();
-            $table->string('sexe')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
+            // Champs communs ou optionnels
+            $table->string('sexe')->nullable();
+            $table->string('dob')->nullable();
+            $table->integer('age')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+
+            // Champs spécifiques aux rôles
+            $table->string('specialization')->nullable();
+            $table->float('consultancy_fees')->nullable();
+            $table->text('medical_history')->nullable();
+
+            $table->unsignedBigInteger('doctor_id')->nullable(); // le médecin du patient (si rôle = patient)
+            $table->foreign('doctor_id')->references('id')->on('users')->onDelete('set null');
+
+            $table->string('role')->default('patient');
+
+            $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
-
     }
 
     /**

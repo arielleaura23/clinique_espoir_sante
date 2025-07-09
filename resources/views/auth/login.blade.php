@@ -57,7 +57,8 @@
                             <label class="remember-label">{{ __('Se souvenir de moi') }}</label>
 
                         </div>
-                        <a href="{{ route('password.request') }}" class="login-link">{{ __('Mot de passe oublié?')}}</a>
+                        <a href="{{ route('password.request') }}"
+                            class="login-link">{{ __('Mot de passe oublié?') }}</a>
 
                     </div>
                 </section>
@@ -88,11 +89,18 @@
                 </div>
 
                 <div class="questions" style="    justify-content: center;
-    margin-top: 20px;">
-                    <p style="color: #757575;font-size:14px;" class="login-link">{{ __('Vous n\'avez pas de compte?') }}<a
-                            style="color: blue" href="{{ route('register') }}">{{ __('Inscription') }}</a>
+                    margin-top: 20px;">
+                    <p style="color: #757575;font-size:14px;margin-bottom: 0;" class="login-link">
+                        {{ __('Vous n\'avez pas de compte?') }}<a style="color: blue"
+                            href="{{ route('register') }}">{{ __('Inscription') }}</a>
                     </p>
                 </div>
+                {{-- <div class="questions" style="    justify-content: center;gap: 25px;
+                    margin-top: 10px;">
+                        <a style="color: blue;text-align: center;font-size: 13px;    text-decoration: underline!important;" href="{{ route('admin.login.form') }}">admin login</a>
+                        <a style="color: blue;text-align: center;font-size: 13px;    text-decoration: underline!important;" href="{{ route('doctor.dashboard') }}">doctor login</a>
+
+                </div> --}}
 
             </div>
 

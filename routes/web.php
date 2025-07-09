@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\AdminAuthController;
 
 
 /*
@@ -30,10 +31,6 @@ Route::get('/events', [HomeController::class, 'events'])->name('events');
 Route::get('/guide_patient', [HomeController::class, 'guide_patient'])->name('guide_patient');
 Route::get('/medecins', [HomeController::class, 'medecins'])->name('medecins');
 Route::get('/pharmacie', [HomeController::class, 'pharmacie'])->name('pharmacie');
-// Route::get('/medecins-by-specialite/{specialite}', function ($specialite) {
-//     $medecins = \App\Models\Medecin::where('Specialization', $specialite)->orderBy('FullName')->get();
-//     return response()->json($medecins);
-// })->name('medecins.by.specialite');
 Route::get('/prise_rdv', [HomeController::class, 'prise_rdv'])->name('prise_rdv');
 Route::post('/prise_rdv', [HomeController::class, 'store'])->name('appointment.store');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
@@ -48,18 +45,7 @@ Route::get('/discussions', [HomeController::class, 'discussions'])->name('discus
 
 
 Route::post('/contact/store', [SiteController::class, 'sendContact'])->name('contact.store');
-
-
 Route::post('/newsletter/subscribe', [SiteController::class, 'subscribeNewsletter'])->name('newsletter.subscribe');
-
-
-
-// Route::get('/register', [AuthController::class, 'register'])->name('show.register');
-// Route::get('/login', [AuthController::class, 'login'])->name('show.login');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::middleware('auth')->group(function () {
@@ -69,6 +55,12 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+
+// routes for redirect to admin doctor or patient
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/doctor/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
+});
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
@@ -108,7 +100,12 @@ Route::get('lang/{locale}', function ($locale) {
 // routes for dashboard admin
 
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+
+
+    // Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login.form');
+    // Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+    // Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
     // Doctors
     Route::get('/doctor-specialization', [AdminController::class, 'doctorSpecialization'])->name('admin.doctor.specialization');
@@ -117,10 +114,12 @@ Route::prefix('admin')->group(function () {
     Route::get('/manage-doctors', [AdminController::class, 'manageDoctors'])->name('admin.doctor.manage');
     Route::post('/doctor-specialization', [AdminController::class, 'store'])->name('admin.doctor.specialization.store');
     Route::get('/doctor-specialization/{id}/edit', [AdminController::class, 'editDoctorSpecialization'])->name('admin.doctor.specialization.edit');
-    Route::put('/admin/doctor-specialization/{id}', [AdminController::class, 'updateDoctorSpecialization'])->name('admin.doctor.specialization.update');
+    Route::put('/doctor-specialization/{id}', [AdminController::class, 'updateDoctorSpecialization'])->name('admin.doctor.specialization.update');
     Route::delete('/doctor-specialization/{id}', [AdminController::class, 'destroy'])->name('admin.doctor.specialization.delete');
-    Route::delete('/admin/manage-doctors/{id}', [AdminController::class, 'deleteDoctor'])->name('admin.doctor.delete');
-    Route::get('/admin/edit-doctor/{id}', [AdminController::class, 'editDoctor'])->name('admin.doctor.edit'); // à créer si besoin
+    Route::delete('/manage-doctors/{id}', [AdminController::class, 'deleteDoctor'])->name('admin.doctor.delete');
+    Route::get('/edit-doctor/{id}', [AdminController::class, 'editDoctor'])->name('admin.doctor.edit');
+    Route::put('/doctors/update/{id}', [AdminController::class, 'updateDoctor'])->name('admin.doctor.update');
+
 
 
     // Users
@@ -163,7 +162,6 @@ Route::prefix('admin')->group(function () {
 // routes for dashboard doctor
 
 Route::prefix('doctor')->group(function () {
-    Route::get('/dashboard', [DoctorController::class, 'dashboard'])->name('doctor.dashboard');
 
     // Doctors
     Route::get('/doctor-specialization', [DoctorController::class, 'doctorSpecialization'])->name('doctor.doctor.specialization');

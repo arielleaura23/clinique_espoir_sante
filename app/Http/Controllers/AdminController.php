@@ -18,9 +18,9 @@ class AdminController extends Controller
     public function dashboard()
     {
         $totalUsers = User::count();
-        $totalDoctors = Medecin::count();
+        $totalDoctors = User::where('role', 'medecin')->count();
+        $totalPatients = User::where('role', 'patient')->count();
         $totalAppointments = Appointment::count();
-        $totalPatients = Patient::count();
         $totalNewQueries = ContactUs::whereNull('IsRead')->count();
 
         return view('admin.admin.dashboard', compact(
@@ -74,10 +74,12 @@ class AdminController extends Controller
         return redirect()->route('admin.doctor.specialization')->with('success', 'Doctor Specialization updated successfully!');
     }
 
-
     public function manageDoctors()
     {
-        $doctors = Medecin::orderBy('CreationDate', 'desc')->get();
+        $doctors = User::where('role', 'medecin')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return view('admin.admin.manage-doctors', compact('doctors'));
     }
 
@@ -91,9 +93,48 @@ class AdminController extends Controller
 
     public function editDoctor($id)
     {
-        $spec = Medecin::findOrFail($id);
-        return view('admin.admin.edit-doctor', compact('spec'));
+        $medecin = User::where('id', $id)
+            ->where('role', 'medecin')
+            ->firstOrFail();
+
+        $specializations = DoctorSpecilization::orderBy('specilization')->get();
+
+        return view('admin.admin.edit-doctor', compact('medecin', 'specializations'));
     }
+
+
+    public function updateDoctor(Request $request, $id)
+    {
+        $request->validate([
+            'Doctorspecialization' => 'required|string|max:255',
+            'docname' => 'required|string|max:255',
+            'clinicaddress' => 'required|string|max:500',
+            'docfees' => 'required|numeric|min:0',
+            'doccontact' => 'required|string|max:20',
+            'password' => 'nullable|string|min:8|confirmed',
+            'password_confirmation' => 'nullable|same:password'
+        ]);
+
+
+        $medecin = User::where('id', $id)
+            ->where('role', 'medecin')
+            ->firstOrFail();
+
+
+        $medecin->name = $request->docname;
+        $medecin->address = $request->clinicaddress;
+        $medecin->consultancy_fees = $request->docfees;
+        $medecin->phone = $request->doccontact;
+        $medecin->specialization = $request->Doctorspecialization;
+        $medecin->password = Hash::make($request->password);
+
+
+        $medecin->save();
+
+        return redirect()->back()->with('success', 'Le profil du médecin a été mis à jour avec succès.');
+    }
+
+
 
     public function destroy($id)
     {
@@ -119,63 +160,94 @@ class AdminController extends Controller
             'clinicaddress' => 'required|string|max:255',
             'docfees' => 'required|numeric',
             'doccontact' => 'required|string|max:20',
-            'docemail' => 'required|email|unique:medecins,Email',
-            'npass' => 'required|string|min:6|confirmed',
+            'docemail' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-        Medecin::create([
-            'FullName' => $request->docname,
-            'MobileNumber' => $request->doccontact,
-            'Email' => $request->docemail,
+        User::create([
+            'name' => $request->docname,
+            'phone' => $request->doccontact,
+            'email' => $request->docemail,
             'consultancy_fees' => $request->docfees,
-            'Specialization' => $request->Doctorspecialization,
-            'Password' => Hash::make($request->npass),
-            'CreationDate' => now(),
+            'specialization' => $request->Doctorspecialization,
+            'password' => ('11111111'),
+            'role' => 'medecin',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         return redirect()->route('admin.doctor.add')->with('success', 'Doctor info added Successfully');
     }
 
 
+
     // patients
 
-    public function managePatients()
+    public function managePatients(Request $request)
     {
-        $patients = Patient::orderBy('CreationDate', 'desc')->get();
+        $query = User::where('role', 'patient');
+
+        // Si recherche par nom, email ou téléphone
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%")
+                    ->orWhere('phone', 'like', "%$search%");
+            });
+        }
+
+        $patients = $query->orderBy('created_at', 'desc')->paginate(10);
+
         return view('admin.admin.manage-patient', compact('patients'));
     }
 
 
 
+
     public function viewPatient($id)
     {
-        $patient = Patient::findOrFail($id);
-        $medicalHistory = MedicalHistory::where('PatientID', $id)->orderBy('CreationDate', 'desc')->get();
+        $patient = User::where('id', $id)
+            ->where('role', 'patient')
+            ->firstOrFail();
+
+        $medicalHistory = MedicalHistory::where('user_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         return view('admin.admin.view-patient', compact('patient', 'medicalHistory'));
     }
 
-    public function addMedicalHistory(Request $request, $id)
-    {
-        $request->validate([
-            'bp' => 'required|string|max:255',
-            'bs' => 'required|string|max:255',
-            'weight' => 'required|string|max:255',
-            'temp' => 'required|string|max:255',
-            'pres' => 'required|string',
-        ]);
 
-        MedicalHistory::create([
-            'PatientID' => $id,
-            'BloodPressure' => $request->bp,
-            'BloodSugar' => $request->bs,
-            'Weight' => $request->weight,
-            'Temperature' => $request->temp,
-            'MedicalPres' => $request->pres,
-            'CreationDate' => now(),
-        ]);
+public function addMedicalHistory(Request $request, $id)
+{
+    $request->validate([
+        'bp' => 'required|string|max:255',
+        'bs' => 'required|string|max:255',
+        'weight' => 'required|string|max:255',
+        'temp' => 'required|string|max:255',
+        'pres' => 'required|string',
+    ]);
 
-        return redirect()->route('admin.patient.view', $id)->with('success', 'Medical history has been added.');
-    }
+
+    $patient = User::where('id', $id)->where('role', 'patient')->firstOrFail();
+
+MedicalHistory::create([
+    'user_id' => $id, 
+    'BloodPressure' => $request->bp,
+    'BloodSugar' => $request->bs,
+    'Weight' => $request->weight,
+    'Temperature' => $request->temp,
+    'MedicalPres' => $request->pres,
+    'created_at' => now(),
+]);
+
+
+    return redirect()
+        ->route('admin.patient.view', $id)
+        ->with('success', 'L\'historique médical a bien été ajouté.');
+}
+
 
 
     // appointment history

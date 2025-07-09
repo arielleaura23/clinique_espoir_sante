@@ -25,16 +25,15 @@
                                     <i class="fa fa-square fa-stack-2x text-primary"></i>
                                     <i class="fa fa-smile-o fa-stack-1x fa-inverse"></i>
                                 </span>
-                                <h2 class="StepTitle" style="white-space: nowrap;">My profile</h2>
+                                <h2 class="StepTitle" style="white-space: nowrap;">Manage Users</h2>
                                 <p class="links cl-effect-1">
                                     <a href="#">
-                                        Update profile
+                                        My profile
                                     </a>
                                 </p>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-sm-4">
                         <div class="panel panel-white no-radius text-center">
                             <div class="panel-body">
@@ -42,16 +41,15 @@
                                     <i class="fa fa-square fa-stack-2x text-primary"></i>
                                     <i class="fa fa-terminal fa-stack-1x fa-inverse"></i>
                                 </span>
-                                <h2 class="StepTitle" style="white-space: nowrap;">My Appointments</h2>
+                                <h2 class="StepTitle" style="white-space: nowrap;">Appointments</h2>
                                 <p class="links cl-effect-1">
                                     <a href="#">
-                                        Total Appointments : {{ $totalAppointments }}
+                                        My appointments : 0
                                     </a>
                                 </p>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

@@ -31,14 +31,14 @@ class Appointment extends Model
         'updation_date',
     ];
 
-public function doctor()
-{
-    return $this->belongsTo(Medecin::class, 'doctor_id');
-}
+    public function doctor()
+    {
+        return $this->belongsTo(User::class, 'doctor_id')->where('role', 'medecin');
+    }
 
-public function patient()
-{
-    return $this->belongsTo(User::class, 'user_id');
-}
+    public function patient()
+    {
+        return $this->belongsTo(User::class, 'user_id')->where('role', 'patient');
+    }
 
 }

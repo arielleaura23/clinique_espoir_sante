@@ -22,13 +22,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        Admin::create([
-            'fullname' => 'admin',
-            'address' => 'Yaoundé',
-            'city' => 'Yaoundé',
-            'gender' => 'female',
-            'email' => 'admin@espoir.com',
-            'password' => Hash::make('admin2025'),
+        $this->call([
+            AdminSeeder::class,
         ]);
     }
 }

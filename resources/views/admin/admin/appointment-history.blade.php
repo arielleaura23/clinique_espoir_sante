@@ -40,7 +40,7 @@
                                 @foreach ($appointments as $index => $appointment)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td>{{ $appointment->doctor->FullName ?? '-' }}</td>
+                                        <td>{{ $appointment->doctor->name ?? '-' }}</td>
                                         <td>{{ $appointment->name ?? '-' }}</td>
                                         <td>{{ $appointment->specialization }}</td>
                                         <td>{{ $appointment->consultancy_fees }}</td>

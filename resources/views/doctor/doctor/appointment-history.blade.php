@@ -40,7 +40,7 @@
                                 @foreach ($appointments as $index => $appointment)
                                     <tr>
                                         <td>{{ $index + 1 }}</td>
-                                        <td>{{ $appointment->doctor->FullName ?? '-' }}</td>
+                                        <td>{{ $appointment->doctor->name ?? '-' }}</td>
                                         <td>{{ $appointment->name ?? '-' }}</td>
                                         <td>{{ $appointment->specialization }}</td>
                                         <td>{{ $appointment->consultancy_fees }}</td>
@@ -60,70 +60,75 @@
                                         </td>
                                         <td>
                                             @if ($appointment->doctor_status == 1)
-                                            <div class="actions-btn" style="display: flex;gap: 10px;align-items: center;">
-                                                                                                <!-- Bouton Approuver -->
-                                                <button class="btn btn-success btn-sm" data-toggle="modal"
-                                                    data-target="#approveModal{{ $appointment->id }}">Approuver</button>
+                                                <div class="actions-btn"
+                                                    style="display: flex;gap: 10px;align-items: center;">
+                                                    <!-- Bouton Approuver -->
+                                                    <button class="btn btn-success btn-sm" data-toggle="modal"
+                                                        data-target="#approveModal{{ $appointment->id }}">Approuver</button>
 
-                                                <!-- Bouton Rejeter -->
-                                                <button class="btn btn-danger btn-sm" data-toggle="modal"
-                                                    data-target="#rejectModal{{ $appointment->id }}">Rejeter</button>
+                                                    <!-- Bouton Rejeter -->
+                                                    <button class="btn btn-danger btn-sm" data-toggle="modal"
+                                                        data-target="#rejectModal{{ $appointment->id }}">Rejeter</button>
 
-                                                {{-- Modal Approuver --}}
-                                                <div class="modal fade" id="approveModal{{ $appointment->id }}"
-                                                    tabindex="-1" role="dialog">
-                                                    <div class="modal-dialog" role="document">
-                                                        <form
-                                                            action="{{ route('appointments.approve', $appointment->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <div class="modal-content" style="background-color: white;">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Remarque pour approbation</h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal">&times;</button>
+                                                    {{-- Modal Approuver --}}
+                                                    <div class="modal fade" id="approveModal{{ $appointment->id }}"
+                                                        tabindex="-1" role="dialog">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form
+                                                                action="{{ route('appointments.approve', $appointment->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <div class="modal-content" style="background-color: white;">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Remarque pour approbation
+                                                                        </h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal">&times;</button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <textarea name="remark" class="form-control" required placeholder="Entrez la remarque pour le patient..."></textarea>
+                                                                    </div>
+                                                                    <div class="modal-footer" style="border: none">
+                                                                        <button type="submit"
+                                                                            class="btn btn-success">Confirmer
+                                                                            l'approbation</button>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="modal-body">
-                                                                    <textarea name="remark" class="form-control" required placeholder="Entrez la remarque pour le patient..."></textarea>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                    {{-- Modal Rejeter --}}
+                                                    <div class="modal fade" id="rejectModal{{ $appointment->id }}"
+                                                        tabindex="-1" role="dialog">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form
+                                                                action="{{ route('appointments.reject', $appointment->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <div class="modal-content" style="background-color: white;">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">Remarque pour rejet</h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal">&times;</button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <textarea name="remark" class="form-control" required placeholder="Expliquez pourquoi vous rejetez ce rendez-vous..."></textarea>
+                                                                    </div>
+                                                                    <div class="modal-footer" style="border: none">
+                                                                        <button type="submit"
+                                                                            class="btn btn-danger">Confirmer
+                                                                            le rejet</button>
+                                                                    </div>
                                                                 </div>
-                                                                <div class="modal-footer" style="border: none">
-                                                                    <button type="submit" class="btn btn-success">Confirmer
-                                                                        l'approbation</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
+                                                            </form>
+                                                        </div>
                                                     </div>
                                                 </div>
-
-                                                {{-- Modal Rejeter --}}
-                                                <div class="modal fade" id="rejectModal{{ $appointment->id }}"
-                                                    tabindex="-1" role="dialog">
-                                                    <div class="modal-dialog" role="document">
-                                                        <form action="{{ route('appointments.reject', $appointment->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            <div class="modal-content" style="background-color: white;">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title">Remarque pour rejet</h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal">&times;</button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <textarea name="remark" class="form-control" required placeholder="Expliquez pourquoi vous rejetez ce rendez-vous..."></textarea>
-                                                                </div>
-                                                                <div class="modal-footer" style="border: none">
-                                                                    <button type="submit" class="btn btn-danger">Confirmer
-                                                                        le rejet</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             @elseif($appointment->doctor_status == 2)
-                                                <span class="badge badge-success">Approuvé</span>
+                                                <span style="padding: 7px;    width: 70px;" class="badge badge-success">Approuvé</span>
                                             @elseif($appointment->doctor_status == 0)
-                                                <span class="badge badge-danger">Rejeté</span>
+                                                <span style="padding: 7px;    width: 70px;" class="badge badge-danger">Rejeté</span>
                                             @endif
                                         </td>
 

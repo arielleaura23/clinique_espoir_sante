@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -9,14 +10,15 @@ class CreateMedicalHistoriesTable extends Migration
     {
         Schema::create('medical_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('PatientID');
+            $table->unsignedBigInteger('user_id');
             $table->string('BloodPressure');
             $table->string('BloodSugar');
             $table->string('Weight');
             $table->string('Temperature');
             $table->text('MedicalPres');
-            $table->timestamp('CreationDate')->nullable();
-            $table->foreign('PatientID')->references('id')->on('patients')->onDelete('cascade');
+            $table->timestamps(); 
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

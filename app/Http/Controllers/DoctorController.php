@@ -19,21 +19,11 @@ use Carbon\Carbon;
 
 class DoctorController extends Controller
 {
+
     public function dashboard()
     {
-        $totalUsers = User::count();
-        $totalDoctors = Medecin::count();
-        $totalAppointments = Appointment::count();
-        $totalPatients = Patient::count();
-        $totalNewQueries = ContactUs::whereNull('IsRead')->count();
 
-        return view('doctor.doctor.dashboard', compact(
-            'totalUsers',
-            'totalDoctors',
-            'totalAppointments',
-            'totalPatients',
-            'totalNewQueries'
-        ));
+        return view('doctor.doctor.dashboard');
     }
 
 
@@ -95,8 +85,9 @@ class DoctorController extends Controller
 
     public function editDoctor($id)
     {
-        $spec = Medecin::findOrFail($id);
-        return view('doctor.doctor.edit-doctor', compact('spec'));
+        $spec = User::where('role', 'medecin')->findOrFail($id);
+
+        return view('admin.admin.edit-doctor', compact('spec'));
     }
 
     public function destroy($id)
@@ -240,19 +231,94 @@ class DoctorController extends Controller
                 $mail->Password = env('MAIL_PASSWORD');
                 $mail->SMTPSecure = env('MAIL_ENCRYPTION');
                 $mail->Port = env('MAIL_PORT');
+                $mail->CharSet = 'UTF-8';
 
                 $mail->setFrom(env('MAIL_FROM_ADDRESS'), 'Clinique Espoir Santé');
                 $mail->addAddress($appointment->email, $appointment->name);
                 $mail->isHTML(true);
                 $mail->Subject = 'Votre rendez-vous est approuvé';
                 $mail->Body = '
-                <h2 style="color: green;">Rendez-vous confirmé</h2>
-                <p>Bonjour ' . htmlspecialchars($appointment->name) . ',</p>
-                <p>Votre rendez-vous du <strong>' . $appointment->appointment_date . '</strong> à <strong>' . $appointment->appointment_time . '</strong> avec le Dr <strong>' . ($appointment->doctor->FullName ?? '-') . '</strong> a été <strong>approuvé</strong>.</p>
-                <p><strong>Remarque du médecin :</strong> ' . nl2br(htmlspecialchars($appointment->remark)) . '</p>
-                <p>Merci de vous présenter à l’heure.</p>
-                <br><p>— Clinique Espoir Santé</p>
-            ';
+                    <!DOCTYPE html>
+                    <html lang="fr">
+                    <head>
+                        <meta charset="UTF-8" />
+                        <title>Confirmation de rendez-vous</title>
+                        <style>
+                        body {
+                            background-color: #f6f8fa;
+                            margin: 0;
+                            padding: 40px 0;
+                            font-size: 14px;
+                            font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Oxygen, Ubuntu, sans-serif;
+                        }
+                        .email-container {
+                            max-width: 600px;
+                            margin: auto;
+                            background-color: #ffffff;
+                            border: 1px solid #e1e4e8;
+                            border-radius: 6px;
+                            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                            overflow: hidden;
+                        }
+                        .email-header {
+                            background-color: #ffffff;
+                            text-align: center;
+                            border-bottom: 1px solid #e1e4e8;
+                            padding-bottom: 20px!important;
+                        }
+                        .email-header img {
+                            height: 80px;
+                            width: 100%;
+                            margin-bottom: 10px;
+                        }
+                        .email-title {
+                            font-size: 22px;
+                            color: #1d77fe;
+                            margin: 0;
+                            font-weight: 600;
+                        }
+                        .email-body {
+                            padding: 30px;
+                            color: #2c2c2c;
+                            font-size: 15px;
+                            line-height: 1.7;
+                        }
+                        .email-footer {
+                            padding: 20px 30px;
+                            font-size: 12px;
+                            text-align: center;
+                            color: #888;
+                            background-color: #f9f9f9;
+                            border-top: 1px solid #e1e4e8;
+                        }
+                        .signature {
+                            margin-top: 30px;
+                            font-weight: 500;
+                        }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="email-container">
+                            <div class="email-header">
+                                <img src="https://ik.imagekit.io/6behazkytv/logo%20ligne%20fond%20bleu.png?updatedAt=1751769593981" alt="Clinique Espoir Santé" />
+                                <h1 class="email-title">Rendez-vous confirmé</h1>
+                            </div>
+                            <div class="email-body">
+                                <p>Bonjour ' . htmlspecialchars($appointment->name) . ',</p>
+                                <p>Votre rendez-vous du <strong>' . htmlspecialchars($appointment->appointment_date) . '</strong> à <strong>' . htmlspecialchars($appointment->appointment_time) . '</strong> avec le Dr <strong>' . htmlspecialchars($appointment->doctor->name ?? '-') . '</strong> a été <strong>approuvé</strong>.</p>
+                                <p><strong>Remarque du médecin :</strong> ' . nl2br(htmlspecialchars($appointment->remark ?? "Aucune remarque")) . '</p>
+                                <p>Merci de vous présenter à l’heure.</p>
+                                <p class="signature">Cordialement,<br />Clinique Espoir Santé</p>
+                            </div>
+                            <div class="email-footer">
+                                Clinique Espoir Santé – Yaoundé, Cameroun<br />
+                                📞 +237 6 55 41 88 41 | ✉️ cliniqueespoirsante2@gmail.com | 🌐 www.cliniquesante.cm<br />
+                                © 2025 Tous droits réservés.
+                            </div>
+                        </div>
+                    </body>
+                    </html>';
+
                 $mail->send();
             } catch (Exception $e) {
                 // log error si tu veux
@@ -294,24 +360,112 @@ class DoctorController extends Controller
                 $mail->Password = env('MAIL_PASSWORD');
                 $mail->SMTPSecure = env('MAIL_ENCRYPTION');
                 $mail->Port = env('MAIL_PORT');
+                $mail->CharSet = 'UTF-8';
 
                 $mail->setFrom(env('MAIL_FROM_ADDRESS'), 'Clinique Espoir Santé');
                 $mail->addAddress($appointment->email, $appointment->name);
                 $mail->isHTML(true);
-                $mail->Subject = 'Votre rendez-vous a été rejeté';
+                $mail->Subject = 'Rendez-vous rejeté - Clinique Espoir Santé';
+
                 $mail->Body = '
-                <h2 style="color: red;">Rendez-vous rejeté</h2>
-                <p>Bonjour ' . htmlspecialchars($appointment->name) . ',</p>
-                <p>Malheureusement, votre rendez-vous du <strong>' . $appointment->appointment_date . '</strong> à <strong>' . $appointment->appointment_time . '</strong> a été <strong>rejeté</strong>.</p>
-                <p><strong>Raison :</strong> ' . nl2br(htmlspecialchars($appointment->remark)) . '</p>
-                <p>Merci de reprendre un rendez-vous ou de contacter la clinique.</p>
-                <br><p>— Clinique Espoir Santé</p>
-            ';
+        <!DOCTYPE html>
+        <html lang="fr">
+        <head>
+            <meta charset="UTF-8" />
+            <title>Rendez-vous rejeté</title>
+            <style>
+            body {
+                background-color: #f6f8fa;
+                margin: 0;
+                padding: 40px 0;
+                font-size: 14px;
+                font-family: -apple-system, BlinkMacSystemFont, \'Segoe UI\', Roboto, Oxygen, Ubuntu, sans-serif;
+            }
+            .email-container {
+                max-width: 600px;
+                margin: auto;
+                background-color: #ffffff;
+                border: 1px solid #e1e4e8;
+                border-radius: 6px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+                overflow: hidden;
+            }
+            .email-header {
+                background-color: #ffffff;
+                text-align: center;
+                border-bottom: 1px solid #e1e4e8;
+                padding-bottom: 20px!important;
+            }
+            .email-header img {
+                height: 80px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            .email-title {
+                font-size: 22px;
+                color: #1d77fe;
+                margin: 0;
+                font-weight: 600;
+            }
+            .email-body {
+                padding: 30px;
+                color: #2c2c2c;
+                font-size: 15px;
+                line-height: 1.7;
+            }
+            .email-body ul {
+                padding-left: 20px;
+            }
+            .email-footer {
+                padding: 20px 30px;
+                font-size: 12px;
+                text-align: center;
+                color: #888;
+                background-color: #f9f9f9;
+                border-top: 1px solid #e1e4e8;
+            }
+            .signature {
+                margin-top: 30px;
+                font-weight: 500;
+            }
+            </style>
+        </head>
+        <body>
+            <div class="email-container">
+                <div class="email-header">
+                    <img src="https://ik.imagekit.io/6behazkytv/logo%20ligne%20fond%20bleu.png?updatedAt=1751769593981" alt="Clinique Espoir Santé" />
+                    <h1 class="email-title">Rendez-vous rejeté</h1>
+                </div>
+
+                <div class="email-body">
+                    <p>Bonjour ' . htmlspecialchars($appointment->name) . ',</p>
+                    <p>Nous sommes désolés de vous informer que votre rendez-vous prévu le <strong>' . htmlspecialchars($appointment->appointment_date) . '</strong> à <strong>' . htmlspecialchars($appointment->appointment_time) . '</strong> a été <strong>rejeté</strong>.</p>
+
+                    <p><strong>Motif du rejet :</strong><br>' . nl2br(htmlspecialchars($appointment->remark)) . '</p>
+
+                    <p>Nous vous invitons à reprendre un rendez-vous via notre plateforme ou à contacter notre service d’accueil pour plus d’assistance.</p>
+
+                    <p class="signature">
+                        Cordialement,<br />
+                        Clinique Espoir Santé
+                    </p>
+                </div>
+
+                <div class="email-footer">
+                    Clinique Espoir Santé – Yaoundé, Cameroun<br />
+                    📞 +237 6 55 41 88 41 | ✉️ cliniqueespoirsante2@gmail.com | 🌐 www.cliniquesante.cm<br />
+                    © 2025 Tous droits réservés.
+                </div>
+            </div>
+        </body>
+        </html>';
+
                 $mail->send();
             } catch (Exception $e) {
-                // log error
+                // Log the error if necessary
             }
         }
+
 
         return back()->with('success', 'Rendez-vous rejeté et e-mail envoyé.');
     }
@@ -319,19 +473,19 @@ class DoctorController extends Controller
 
 
 
-public function schedule()
-{
+    public function schedule()
+    {
 
-    $doctorId =1;
+        $doctorId = 1;
 
-    $appointments = Appointment::where('doctor_id', $doctorId)
-        ->where('doctor_status', 1) 
-        ->orderBy('appointment_date')
-        ->orderBy('appointment_time')
-        ->get();
+        $appointments = Appointment::where('doctor_id', $doctorId)
+            ->where('doctor_status', 1)
+            ->orderBy('appointment_date')
+            ->orderBy('appointment_time')
+            ->get();
 
-    return view('doctor.doctor.schedule', compact('appointments'));
-}
+        return view('doctor.doctor.schedule', compact('appointments'));
+    }
 
 
 

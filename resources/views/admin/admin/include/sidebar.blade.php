@@ -27,7 +27,7 @@
                         <li><a href="{{ route('admin.doctor.manage') }}"><span class="title"> Manage Doctors </span></a></li>
                     </ul>
                 </li>
-                <li>
+                {{-- <li>
                     <a href="javascript:void(0)">
                         <div class="item-content">
                             <div class="item-media"><i class="ti-user"></i></div>
@@ -37,7 +37,7 @@
                     <ul class="sub-menu">
                         <li><a href="{{ route('admin.users.manage') }}"><span class="title"> Manage Users </span></a></li>
                     </ul>
-                </li>
+                </li> --}}
                 <li>
                     <a href="javascript:void(0)">
                         <div class="item-content">

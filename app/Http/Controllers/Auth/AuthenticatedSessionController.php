@@ -29,12 +29,18 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $user = Auth::user();
 
-        return redirect(RouteServiceProvider::HOME)->with('connexion_success', true);
+        if ($user->role === 'admin') {
+            return redirect()->intended('/admin/dashboard');
+        } elseif ($user->role === 'medecin') {
+            return redirect()->intended('/doctor/dashboard');
+        } else {
+        return redirect()->intended('/')->with('connexion_success', true);
+        }
 
-        // return redirect()->intended(RouteServiceProvider::HOME);
     }
-    
+
 
     /**
      * Destroy an authenticated session.

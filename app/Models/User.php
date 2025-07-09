@@ -2,56 +2,39 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
+     * Les attributs que l'on peut remplir massivement.
      */
     protected $fillable = [
         'name',
         'email',
-        'dob',
-        'sexe',
         'password',
+        'gender',
+        'sexe',
+        'dob',
+        'age',
+        'phone',
+        'address',
+        'city',
+        'specialization',
+        'consultancy_fees',
+        'medical_history',
+        'doctor_id',
+        'role',
+        'email_verified_at',
     ];
 
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
-
-    public function isMedecin()
-    {
-        return $this->role === 'medecin';
-    }
-
-    public function isPatient()
-    {
-        return $this->role === 'patient';
-    }
-
-    public function isAdmin()
-    {
-        return $this->role === 'admin';
-    }
-
-
-
-
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * Les attributs masqués dans les tableaux ou JSON.
      */
     protected $hidden = [
         'password',
@@ -59,12 +42,38 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
+     * Les attributs convertis automatiquement à des types natifs.
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'dob' => 'date',
+        'age' => 'integer',
+        'consultancy_fees' => 'float',
     ];
+
+    /**
+     * Hacher automatiquement le mot de passe à la création.
+     */
+    public function setPasswordAttribute($value)
+    {
+        if (!empty($value)) {
+            $this->attributes['password'] = bcrypt($value);
+        }
+    }
+
+    /**
+     * Relation : Un patient peut être suivi par un médecin.
+     */
+    public function doctor()
+    {
+        return $this->belongsTo(User::class, 'doctor_id');
+    }
+
+    /**
+     * Relation : Un médecin peut avoir plusieurs patients.
+     */
+    public function patients()
+    {
+        return $this->hasMany(User::class, 'doctor_id');
+    }
 }

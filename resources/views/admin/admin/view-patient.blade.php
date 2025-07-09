@@ -19,6 +19,7 @@
         <div class="container-fluid container-fullw bg-white">
             <div class="row">
                 <div class="col-md-12">
+
                     @if(session('success'))
                         <div class="alert alert-success">{{ session('success') }}</div>
                     @endif
@@ -30,85 +31,85 @@
                         </div>
                     @endif
 
-                    {{-- Patient Details --}}
+                    {{-- Infos Patient --}}
                     <table class="table table-bordered">
                         <tr align="center">
                             <td colspan="4" style="font-size:20px;color:blue">Patient Details</td>
                         </tr>
                         <tr>
                             <th>Patient Name</th>
-                            <td>{{ $patient->PatientName }}</td>
+                            <td>{{ $patient->name }}</td>
                             <th>Patient Email</th>
-                            <td>{{ $patient->PatientEmail }}</td>
+                            <td>{{ $patient->email }}</td>
                         </tr>
                         <tr>
-                            <th>Patient Mobile Number</th>
-                            <td>{{ $patient->PatientContno }}</td>
+                            <th>Patient Contact</th>
+                            <td>{{ $patient->phone }}</td>
                             <th>Patient Address</th>
-                            <td>{{ $patient->PatientAdd }}</td>
+                            <td>{{ $patient->address }}</td>
                         </tr>
                         <tr>
                             <th>Patient Gender</th>
-                            <td>{{ $patient->PatientGender }}</td>
+                            <td>{{ ucfirst($patient->gender) }}</td>
                             <th>Patient Age</th>
-                            <td>{{ $patient->PatientAge }}</td>
+                            <td>{{ $patient->age ?? '-' }}</td>
                         </tr>
                         <tr>
-                            <th>Patient Medical History (if any)</th>
-                            <td>{{ $patient->PatientMedhis }}</td>
-                            <th>Patient Reg Date</th>
-                            <td>{{ $patient->CreationDate ? \Carbon\Carbon::parse($patient->CreationDate)->format('d/m/Y H:i') : '' }}</td>
+                            <th>Date d’inscription</th>
+                            <td>{{ $patient->created_at->format('d/m/Y H:i') }}</td>
+                            <th>Dernière mise à jour</th>
+                            <td>{{ $patient->updated_at->format('d/m/Y H:i') }}</td>
                         </tr>
                     </table>
 
-                    {{-- Add Medical History --}}
+                    {{-- Ajouter une visite médicale --}}
                     <div class="panel panel-white">
                         <div class="panel-heading">
-                            <h5 class="panel-title">Add Medical History</h5>
+                            <h5 class="panel-title">Ajouter un historique médical</h5>
                         </div>
                         <div class="panel-body">
                             <form method="POST" action="{{ route('admin.patient.medicalhistory.add', $patient->id) }}">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Blood Pressure</label>
+                                    <label>Tension artérielle</label>
                                     <input type="text" name="bp" class="form-control" required value="{{ old('bp') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Blood Sugar</label>
+                                    <label>Glycémie</label>
                                     <input type="text" name="bs" class="form-control" required value="{{ old('bs') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Weight</label>
+                                    <label>Poids</label>
                                     <input type="text" name="weight" class="form-control" required value="{{ old('weight') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Temperature</label>
+                                    <label>Température</label>
                                     <input type="text" name="temp" class="form-control" required value="{{ old('temp') }}">
                                 </div>
                                 <div class="form-group">
-                                    <label>Medical Prescription</label>
+                                    <label>Prescription médicale</label>
                                     <textarea name="pres" class="form-control" required>{{ old('pres') }}</textarea>
                                 </div>
-                                <button type="submit" class="btn btn-o btn-primary">Add</button>
+                                <button type="submit" class="btn btn-o btn-primary">Ajouter</button>
                             </form>
                         </div>
                     </div>
 
-                    {{-- Medical History Table --}}
+                    {{-- Historique médical --}}
                     <table class="table table-bordered">
                         <tr align="center">
-                            <th colspan="8">Medical History</th>
+                            <th colspan="8">Historique Médical</th>
                         </tr>
                         <tr>
                             <th>#</th>
-                            <th>Blood Pressure</th>
-                            <th>Weight</th>
-                            <th>Blood Sugar</th>
-                            <th>Body Temperature</th>
-                            <th>Medical Prescription</th>
-                            <th>Visit Date</th>
+                            <th>Tension</th>
+                            <th>Poids</th>
+                            <th>Glycémie</th>
+                            <th>Température</th>
+                            <th>Prescription</th>
+                            <th>Date</th>
                         </tr>
-                        @foreach($medicalHistory as $index => $history)
+                        @forelse($medicalHistory as $index => $history)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
                                 <td>{{ $history->BloodPressure }}</td>
@@ -117,14 +118,15 @@
                                 <td>{{ $history->Temperature }}</td>
                                 <td>{{ $history->MedicalPres }}</td>
                                 <td>{{ $history->CreationDate ? \Carbon\Carbon::parse($history->CreationDate)->format('d/m/Y H:i') : '' }}</td>
+
                             </tr>
-                        @endforeach
-                        @if($medicalHistory->isEmpty())
+                        @empty
                             <tr>
-                                <td colspan="7" class="text-center">No medical history found.</td>
+                                <td colspan="7" class="text-center">Aucun historique médical trouvé.</td>
                             </tr>
-                        @endif
+                        @endforelse
                     </table>
+
                 </div>
             </div>
         </div>

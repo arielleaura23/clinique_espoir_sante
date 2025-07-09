@@ -2,13 +2,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class MedicalHistory extends Model
 {
-    public $timestamps = false; 
+    public $timestamps = false;
 
     protected $fillable = [
-        'PatientID',
+        'user_id', 
         'BloodPressure',
         'BloodSugar',
         'Weight',
@@ -17,13 +18,8 @@ class MedicalHistory extends Model
         'CreationDate',
     ];
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     public function patient()
     {
-        return $this->belongsTo(Patient::class, 'PatientID');
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

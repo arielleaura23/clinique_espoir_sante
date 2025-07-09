@@ -27,25 +27,27 @@
                             <label class="form-label" for="date">Date du rdv <span class="required">*</span></label>
                             <div class="form-input-icon">
                                 <input type="date" id="date" name="date" class="form-input" required>
-                                {{-- <img class="input-icon" src="uiw-date0.svg" alt="Date"> --}}
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label class="form-label" for="heure">Heure du rdv <span
                                     class="required">*</span></label>
                             <div class="form-input-icon">
                                 <input type="time" id="heure" name="heure" class="form-input" required>
-                                {{-- <img class="input-icon" src="group0.svg" alt="Heure"> --}}
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label class="form-label" for="nom">Nom <span class="required">*</span></label>
                             <input type="text" id="nom" name="nom" class="form-input" required>
                         </div>
+
                         <div class="form-group">
                             <label class="form-label" for="prenom">Prénom <span class="required">*</span></label>
                             <input type="text" id="prenom" name="prenom" class="form-input" required>
                         </div>
+
                         <div class="form-group">
                             <label class="form-label" for="sexe">Sexe <span class="required">*</span></label>
                             <select id="sexe" name="sexe" class="form-input" required>
@@ -61,10 +63,12 @@
                             <label class="form-label" for="telephone">Téléphone <span class="required">*</span></label>
                             <input type="tel" id="telephone" name="telephone" class="form-input" required>
                         </div>
+
                         <div class="form-group">
                             <label class="form-label" for="email">Email <span class="required">*</span></label>
                             <input type="email" id="email" name="email" class="form-input" required>
                         </div>
+
                         <div class="form-group">
                             <label class="form-label" for="specialite">Spécialité médicale <span
                                     class="required">*</span></label>
@@ -75,18 +79,20 @@
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label class="form-label" for="medecin">Médecin souhaité <span
                                     class="required">*</span></label>
                             <select id="medecin" name="medecin" class="form-input" required>
                                 <option value="">Sélectionner</option>
                                 @foreach ($medecins as $medecin)
-                                    <option value="{{ $medecin->FullName }}">{{ $medecin->FullName }}
-                                        ({{ $medecin->Specialization }})
+                                    <option value="{{ $medecin->name }}">
+                                        {{ $medecin->name }} ({{ $medecin->specialization ?? 'Non spécifiée' }})
                                     </option>
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label class="form-label" for="motif">Motif du rdv <span
                                     class="required">*</span></label>
@@ -96,6 +102,7 @@
                 </div>
                 <button type="submit" class="form-submit-btn">Envoyer</button>
             </form>
+
             <img class="appointment-form-bg" src="unsplash-t-nj-uk-pnl-00-removebg-preview0.png" alt="Décor" />
         </div>
 
