@@ -9,7 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\AdminAuthController;
-
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +41,14 @@ Route::get('/product_details', [HomeController::class, 'product_details'])->name
 Route::get('/checkout_page', [HomeController::class, 'checkout_page'])->name('checkout_page');
 Route::get('/recents_posts', [HomeController::class, 'recents_posts'])->name('recents_posts');
 Route::get('/visio_consulting', [HomeController::class, 'visio_consulting'])->name('visio_consulting');
-Route::get('/discussions', [HomeController::class, 'discussions'])->name('discussions');
+
+// chat humain
+Route::middleware('auth')->group(function () {
+    Route::get('/discussions', [ChatController::class, 'index'])->name('discussions');
+    Route::get('/messages/{chat_id}', [ChatController::class, 'messages']);
+    Route::post('/messages', [ChatController::class, 'message'])->name('chat.message');
+    Route::post('/discussions', [ChatController::class, 'store'])->middleware('auth');
+});
 
 
 Route::post('/contact/store', [SiteController::class, 'sendContact'])->name('contact.store');
@@ -114,7 +121,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/manage-doctors', [AdminController::class, 'manageDoctors'])->name('admin.doctor.manage');
     Route::post('/doctor-specialization', [AdminController::class, 'store'])->name('admin.doctor.specialization.store');
     Route::get('/doctor-specialization/{id}/edit', [AdminController::class, 'editDoctorSpecialization'])->name('admin.doctor.specialization.edit');
-    Route::put('/doctor-specialization/{id}', [AdminController::class, 'updateDoctorSpecialization'])->name('admin.doctor.specialization.update');
+    Route::put('/admin/doctor-specialization/{id}', [AdminController::class, 'updateDoctorSpecialization'])->name('admin.doctor.specialization.update');
     Route::delete('/doctor-specialization/{id}', [AdminController::class, 'destroy'])->name('admin.doctor.specialization.delete');
     Route::delete('/manage-doctors/{id}', [AdminController::class, 'deleteDoctor'])->name('admin.doctor.delete');
     Route::get('/edit-doctor/{id}', [AdminController::class, 'editDoctor'])->name('admin.doctor.edit');
@@ -129,6 +136,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/manage-patient', [AdminController::class, 'managePatients'])->name('admin.patients.manage');
     Route::get('/view-patient/{id}', [AdminController::class, 'viewPatient'])->name('admin.patient.view');
     Route::post('/view-patient/{id}/add-medicalhistory', [AdminController::class, 'addMedicalHistory'])->name('admin.patient.medicalhistory.add');
+    Route::get('/patients/search', [AdminController::class, 'searchPatients'])->name('admin.patients.search');
 
     // Appointment History
     Route::get('/appointment-history', [AdminController::class, 'appointmentHistory'])->name('admin.appointment.history');
@@ -154,7 +162,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/contact', [AdminController::class, 'contactUs'])->name('admin.pages.contact');
 
     // Patient Search
-    Route::get('/patient-search', [AdminController::class, 'patientSearch'])->name('admin.patient.search');
+    Route::get('/patient-search', [AdminController::class, 'searchPatients'])->name('admin.patient.search');
+    Route::get('/admin/patients/search-form', [AdminController::class, 'showSearchForm'])->name('admin.patients.searchForm');
 });
 
 
@@ -212,6 +221,12 @@ Route::prefix('doctor')->group(function () {
     Route::get('/about-us', [DoctorController::class, 'aboutUs'])->name('doctor.pages.about');
     Route::get('/contact', [DoctorController::class, 'contactUs'])->name('doctor.pages.contact');
 
-    // Patient Search
-    Route::get('/patient-search', [DoctorController::class, 'patientSearch'])->name('doctor.patient.search');
+
+
+    // route pour le chat
+    Route::get('/chat', function () {
+        return view('chat');
+    });
+
+    Route::post('/messages', [ChatController::class, 'message'])->name('chat.message');
 });

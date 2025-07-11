@@ -73,12 +73,12 @@
                                             <span id="email-availability-status"></span>
                                         </div>
                                         <div class="form-group">
-                                            <label for="npass">Password</label>
-                                            <input type="password" name="npass" class="form-control" placeholder="New Password" required>
+                                            <label for="password">Password</label>
+                                            <input type="password" id="password" name="password" class="form-control" placeholder="New Password" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="npass_confirmation">Confirm Password</label>
-                                            <input type="password" name="npass_confirmation" class="form-control" placeholder="Confirm Password" required>
+                                            <label for="password_confirmation">Confirm Password</label>
+                                            <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" placeholder="Confirm Password" required>
                                         </div>
                                         <button type="submit" class="btn btn-o btn-primary">Submit</button>
                                     </form>

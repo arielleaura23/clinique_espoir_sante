@@ -52,16 +52,6 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Hacher automatiquement le mot de passe à la création.
-     */
-    public function setPasswordAttribute($value)
-    {
-        if (!empty($value)) {
-            $this->attributes['password'] = bcrypt($value);
-        }
-    }
-
-    /**
      * Relation : Un patient peut être suivi par un médecin.
      */
     public function doctor()

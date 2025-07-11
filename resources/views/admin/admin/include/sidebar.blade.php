@@ -85,7 +85,7 @@
                         </div>
                     </a>
                 </li> --}}
-                <li>
+                {{-- <li>
                     <a href="javascript:void(0)">
                         <div class="item-content">
                             <div class="item-media"><i class="ti-files"></i></div>
@@ -95,7 +95,7 @@
                     <ul class="sub-menu">
                         <li><a href="{{ route('admin.reports.between_dates') }}"><span class="title">B/w dates reports </span></a></li>
                     </ul>
-                </li>
+                </li> --}}
                 {{-- <li>
                     <a href="javascript:void(0)">
                         <div class="item-content">
@@ -108,6 +108,7 @@
                         <li><a href="{{ route('admin.pages.contact') }}"><span class="title">Contact Us </span></a></li>
                     </ul>
                 </li> --}}
+                
                 <li>
                     <a href="{{ route('admin.patient.search') }}">
                         <div class="item-content">

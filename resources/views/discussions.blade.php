@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Discussions</title>
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/laravel-echo/dist/echo.iife.js"></script>
         {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
         <style>
@@ -725,6 +727,14 @@
                     }
                 }
             }
+
+            .user-list-item {
+                transition: background 0.18s;
+            }
+
+            .user-list-item:hover {
+                background: #f5f8ff;
+            }
         </style>
 
     </head>
@@ -766,6 +776,32 @@
                                     <img src="{{ asset('assets/img/edit.png') }}" width="18" alt="edit">
                                 </button>
                             </div>
+
+                            <!-- Modal Nouvelle Discussion -->
+                            <div id="newDiscussionModal"
+                                style="display:none; position:fixed; z-index:9999; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.15); align-items:center; justify-content:center;">
+                                <div
+                                    style="background:#fff; border-radius:12px; padding:32px 24px; min-width:500px; max-width:90vw; box-shadow:0 4px 24px rgba(0,0,0,0.12); position:relative;">
+                                    <button onclick="document.getElementById('newDiscussionModal').style.display='none'"
+                                        style="position:absolute;top:12px;right:18px;background:none;border:none;font-size:1.5rem;cursor:pointer;">&times;</button>
+                                    <h3 style="margin-bottom:18px;">Nouvelle discussion</h3>
+                                    <input type="text" id="userSearchInput" placeholder="Rechercher un contact..."
+                                        style="width:100%;padding:8px 12px;margin-bottom:12px;border-radius:6px;border:1px solid #ddd;">
+                                    <div id="userList" style="max-height:300px;overflow-y:auto;">
+                                        @foreach ($allUsers->where('id', '!=', Auth::id())->sortBy('name') as $user)
+                                            <div class="user-list-item" data-user-id="{{ $user->id }}"
+                                                style="display:flex;align-items:center;gap:12px;padding:8px 0;cursor:pointer;border-bottom:1px solid #f2f2f2;">
+                                                <img src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar"
+                                                    style="width:32px;height:32px;border-radius:50%;">
+                                                <span style="font-size:16px;">{{ $user->name }}</span>
+                                                <span style="color:#888;font-size:13px;">{{ $user->email }}</span>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div id="newDiscussionError" style="color:red;margin-top:10px;display:none;"></div>
+                                </div>
+                            </div>
+
                             <div class="chat-app-main__search chat-app-page__search chat-app-unique__search">
                                 <input type="text" placeholder="Rechercher un chat"
                                     class="chat-app-main__search-input chat-app-page__search-input chat-app-unique__search-input" />
@@ -774,91 +810,31 @@
                                     src="{{ asset('assets/img/search_blue.png') }}" />
                             </div>
                             <ul class="chat-app-main__list chat-app-page__list chat-app-unique__list">
-                                <li
-                                    class="chat-app-main__list-item chat-app-page__list-item chat-app-unique__list-item active">
-                                    <img src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar"
-                                        class="chat-app-main__list-avatar chat-app-page__list-avatar chat-app-unique__list-avatar" />
-                                    <div
-                                        class="chat-app-main__list-info chat-app-page__list-info chat-app-unique__list-info">
+                                @forelse($conversations as $conv)
+                                    <li class="chat-app-main__list-item chat-app-page__list-item chat-app-unique__list-item"
+                                        data-chat-id="{{ $conv->id }}" data-to-id="{{ $conv->other_user_id }}">
+                                        <img src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar"
+                                            class="chat-app-main__list-avatar chat-app-page__list-avatar chat-app-unique__list-avatar" />
+                                        <div
+                                            class="chat-app-main__list-info chat-app-page__list-info chat-app-unique__list-info">
+                                            <span
+                                                class="chat-app-main__list-name chat-app-page__list-name chat-app-unique__list-name">
+                                                {{ $conv->other_user_name }}
+                                            </span>
+                                            <span
+                                                class="chat-app-main__list-last chat-app-page__list-last chat-app-unique__list-last">
+                                                {{ $conv->last_message ?? 'Aucun message' }}
+                                            </span>
+                                        </div>
                                         <span
-                                            class="chat-app-main__list-name chat-app-page__list-name chat-app-unique__list-name">Marina
-                                            Maliutina
+                                            class="chat-app-main__list-time chat-app-page__list-time chat-app-unique__list-time">
+                                            {{ $conv->last_time ?? '' }}
                                         </span>
-                                        <span
-                                            class="chat-app-main__list-last chat-app-page__list-last chat-app-unique__list-last">Bonjour
-                                            monsieur</span>
-                                    </div>
-                                    <span
-                                        class="chat-app-main__list-time chat-app-page__list-time chat-app-unique__list-time">00:31</span>
-                                </li>
-                                <li
-                                    class="chat-app-main__list-item chat-app-page__list-item chat-app-unique__list-item ">
-                                    <img src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar"
-                                        class="chat-app-main__list-avatar chat-app-page__list-avatar chat-app-unique__list-avatar" />
-                                    <div
-                                        class="chat-app-main__list-info chat-app-page__list-info chat-app-unique__list-info">
-                                        <span
-                                            class="chat-app-main__list-name chat-app-page__list-name chat-app-unique__list-name">Marina
-                                            Maliutina
-                                        </span>
-                                        <span
-                                            class="chat-app-main__list-last chat-app-page__list-last chat-app-unique__list-last">Bonjour
-                                            monsieur</span>
-                                    </div>
-                                    <span
-                                        class="chat-app-main__list-time chat-app-page__list-time chat-app-unique__list-time">00:31</span>
-                                </li>
-                                <li
-                                    class="chat-app-main__list-item chat-app-page__list-item chat-app-unique__list-item ">
-                                    <img src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar"
-                                        class="chat-app-main__list-avatar chat-app-page__list-avatar chat-app-unique__list-avatar" />
-                                    <div
-                                        class="chat-app-main__list-info chat-app-page__list-info chat-app-unique__list-info">
-                                        <span
-                                            class="chat-app-main__list-name chat-app-page__list-name chat-app-unique__list-name">Marina
-                                            Maliutina
-                                        </span>
-                                        <span
-                                            class="chat-app-main__list-last chat-app-page__list-last chat-app-unique__list-last">Bonjour
-                                            monsieur</span>
-                                    </div>
-                                    <span
-                                        class="chat-app-main__list-time chat-app-page__list-time chat-app-unique__list-time">00:31</span>
-                                </li>
-                                <li
-                                    class="chat-app-main__list-item chat-app-page__list-item chat-app-unique__list-item ">
-                                    <img src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar"
-                                        class="chat-app-main__list-avatar chat-app-page__list-avatar chat-app-unique__list-avatar" />
-                                    <div
-                                        class="chat-app-main__list-info chat-app-page__list-info chat-app-unique__list-info">
-                                        <span
-                                            class="chat-app-main__list-name chat-app-page__list-name chat-app-unique__list-name">Marina
-                                            Maliutina
-                                        </span>
-                                        <span
-                                            class="chat-app-main__list-last chat-app-page__list-last chat-app-unique__list-last">Bonjour
-                                            monsieur</span>
-                                    </div>
-                                    <span
-                                        class="chat-app-main__list-time chat-app-page__list-time chat-app-unique__list-time">00:31</span>
-                                </li>
-                                <li
-                                    class="chat-app-main__list-item chat-app-page__list-item chat-app-unique__list-item ">
-                                    <img src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar"
-                                        class="chat-app-main__list-avatar chat-app-page__list-avatar chat-app-unique__list-avatar" />
-                                    <div
-                                        class="chat-app-main__list-info chat-app-page__list-info chat-app-unique__list-info">
-                                        <span
-                                            class="chat-app-main__list-name chat-app-page__list-name chat-app-unique__list-name">Marina
-                                            Maliutina
-                                        </span>
-                                        <span
-                                            class="chat-app-main__list-last chat-app-page__list-last chat-app-unique__list-last">Bonjour
-                                            monsieur</span>
-                                    </div>
-                                    <span
-                                        class="chat-app-main__list-time chat-app-page__list-time chat-app-unique__list-time">00:31</span>
-                                </li>
+                                    </li>
+                                @empty
+                                    <li style="color: #aaa; text-align:center; margin-top:30px;">Aucune conversation
+                                    </li>
+                                @endforelse
                             </ul>
 
                             <div class="chat-sidebar-footer chat-sidebar-footer-page chat-sidebar-footer-unique">
@@ -868,14 +844,18 @@
                                     <img width="18" src="{{ asset('assets/img/chat_blue.png') }}"
                                         alt="Discussions" />
                                     <span
-                                        class="chat-sidebar-footer__badge chat-sidebar-footer-page__badge chat-sidebar-footer-unique__badge">3</span>
+                                        class="chat-sidebar-footer__badge chat-sidebar-footer-page__badge chat-sidebar-footer-unique__badge">
+                                        {{ $totalDiscussions ?? 0 }}
+                                    </span>
                                 </button>
                                 <button
                                     class="chat-sidebar-footer__btn chat-sidebar-footer-page__btn chat-sidebar-footer-unique__btn"
                                     title="Appels">
                                     <img src="{{ asset('assets/img/appel.png') }}" alt="Appels" />
                                     <span
-                                        class="chat-sidebar-footer__badge chat-sidebar-footer-page__badge chat-sidebar-footer-unique__badge">1</span>
+                                        class="chat-sidebar-footer__badge chat-sidebar-footer-page__badge chat-sidebar-footer-unique__badge">
+                                        {{ $totalAppels ?? 0 }}
+                                    </span>
                                 </button>
                             </div>
                         </aside>
@@ -883,116 +863,20 @@
                         <section class="chat-app-main__content chat-app-page__content chat-app-unique__content">
                             <div class="chat-panel" id="chatPanel">
                                 <div class="chat-panel-bg">
-                                    <!-- Chat input area -->
-                                    <form action="#" class="chat-input-area" id="chat-form">
-                                        <div class="input-bg">
-                                            <input type="hidden" id="chat_id" value="1">
-                                            <input type="text" class="message-input" id="messageInput"
-                                                placeholder="Message..." />
-                                            <button class="input-button send-button_sms" id="sendBtn"
-                                                title="Envoyer">
-                                                <img src="{{ asset('assets/img/send_sms.png') }}"
-                                                    alt="Send message" />
-                                            </button>
-                                            <button class="input-button emoticon-button" id="emoticonBtn"
-                                                title="Ajouter un emoji">
-                                                <img src="{{ asset('assets/img/Emoticon.png') }}"
-                                                    alt="Add emoticon" />
-                                            </button>
-                                            <button class="input-button attach-button" id="attachBtn"
-                                                title="Joindre un fichier">
-                                                <img src="{{ asset('assets/img/Attach.png') }}" alt="Attach file" />
-                                            </button>
-                                            <!-- Emoticon popup -->
-                                            <div class="emoticon-popup" id="emoticonPopup">
-                                                <button type="button">😀</button>
-                                                <button type="button">😂</button>
-                                                <button type="button">😍</button>
-                                                <button type="button">😰</button>
-                                                <button type="button">👍</button>
-                                                <button type="button">🙏</button>
-                                                <button type="button">🎉</button>
-                                                <button type="button">😎</button>
-                                                <button type="button">😢</button>
-                                                <button type="button">❤️</button>
-                                            </div>
-                                        </div>
-                                    </form>
-
+                                    <!-- Profile header -->
                                     <div class="profile-header-main profile-header-page profile-header-unique">
-                                        <div
-                                            class="profile-header-main__container profile-header-page__container profile-header-unique__container">
-                                            <img src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar"
-                                                class="profile-header-main__avatar profile-header-page__avatar profile-header-unique__avatar" />
-                                            <div
-                                                class="profile-header-main__info profile-header-page__info profile-header-unique__info">
-
-                                                <span
-                                                    class="profile-header-main__name profile-header-page__name profile-header-unique__name">Marina
-                                                    Maliutina
-                                                </span>
-
-                                                <span
-                                                    class="profile-header-main__id profile-header-page__id profile-header-unique__id">En
-                                                    ligne</span>
-                                            </div>
-                                            <div
-                                                class="profile-header-main__actions profile-header-page__actions profile-header-unique__actions">
-                                                <a href="{{ route('visio_consulting') }}">
-                                                    <img src="{{ asset('assets/img/appel.png') }}" alt="Appel"
-                                                        class="profile-header-main__icon profile-header-page__icon profile-header-unique__icon" />
-                                                </a>
-                                                <a href="{{ route('visio_consulting') }}">
-                                                    <img src="{{ asset('assets/img/videocam.png') }}" alt="Visio"
-                                                        class="profile-header-main__icon profile-header-page__icon profile-header-unique__icon" />
-                                                </a>
-                                                <a href="#">
-                                                    <img src="{{ asset('assets/img/info.png') }}" alt="Info"
-                                                        class="profile-header-main__icon profile-header-page__icon profile-header-unique__icon" />
-                                                </a>
-
-                                            </div>
-                                        </div>
+                                        <!-- ...avatar, nom, boutons... -->
                                     </div>
                                     <!-- Chat messages -->
                                     <div class="chat-messages" id="chatMessages">
-                                        <!-- Messages dynamiques ici -->
-                                        <div class="message-container received-message">
-                                            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}"
-                                                alt="Marina's avatar" />
-                                            <div class="message-content">
-                                                <div class="sender-name">Marina Maliutina</div>
-                                                <div class="message-bubble">
-                                                    <div class="message-text">Thank you for participating</div>
-                                                </div>
-                                                <div class="message-time">14:32:34</div>
-                                            </div>
-                                        </div>
-                                        <div class="message-container sent-message">
-                                            <div class="message-content">
-                                                <div class="sender-name">Vous</div>
-                                                <div class="message-bubble sent-bubble">
-                                                    <div class="message-text sent-text">Thank you</div>
-                                                </div>
-                                                <div class="message-time sent-time">14:32:34</div>
-                                            </div>
-                                            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}"
-                                                alt="Your avatar" />
-                                        </div>
-                                        <div class="message-container received-message">
-                                            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}"
-                                                alt="Devon's avatar" />
-                                            <div class="message-content">
-                                                <div class="sender-name">Devon Hawkins</div>
-                                                <div class="message-bubble">
-                                                    <div class="message-text">
-                                                        I can't hear it well<br />😰
-                                                    </div>
-                                                </div>
-                                                <div class="message-time">14:32:34</div>
-                                            </div>
+                                        <div id="chatWelcome" style="color:#aaa;text-align:center;margin-top:40px;">
+                                            Sélectionnez une conversation pour commencer à discuter
                                         </div>
                                     </div>
+                                    <!-- Chat input area -->
+                                    <form action="#" class="chat-input-area" id="chat-form">
+                                        <!-- ...input, boutons... -->
+                                    </form>
                                 </div>
                             </div>
                         </section>
@@ -1106,25 +990,138 @@
                 const msg = document.createElement('div');
                 msg.className = 'message-container sent-message';
                 msg.innerHTML = `
-        <div class="message-content">
-            <div class="sender-name">Vous</div>
-            <div class="message-bubble sent-bubble">
-                <div class="message-text sent-text">${escapeHtml(text)}</div>
+            <div class="message-content">
+                <div class="sender-name">Vous</div>
+                <div class="message-bubble sent-bubble">
+                    <div class="message-text sent-text">${escapeHtml(text)}</div>
+                </div>
+                <div class="message-time sent-time">${time}</div>
             </div>
-            <div class="message-time sent-time">${time}</div>
-        </div>
-        <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
-    `;
-                chat.appendChild(msg);
-                input.value = '';
-                chat.scrollTop = chat.scrollHeight;
-            }
+            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
+            `;
+                    chat.appendChild(msg);
+                    input.value = '';
+                    chat.scrollTop = chat.scrollHeight;
+                }
 
+
+            // Utilitaire pour échapper le HTML
             function escapeHtml(text) {
                 var div = document.createElement('div');
                 div.textContent = text;
                 return div.innerHTML;
             }
+
+            // Variables globales pour la conversation courante
+            let currentChatId = null;
+            let currentToId = null;
+
+            // Quand on clique sur un contact, on charge dynamiquement les messages
+            document.querySelectorAll('.chat-app-main__list-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    // Gère l'état actif
+                    document.querySelectorAll('.chat-app-main__list-item').forEach(li => li.classList.remove(
+                        'active'));
+                    this.classList.add('active');
+
+                    // Récupère les infos
+                    currentChatId = this.getAttribute('data-chat-id');
+                    currentToId = this.getAttribute('data-to-id');
+                    document.getElementById('chat_id').value = currentChatId;
+
+                    // Affiche le nom et l'état dans le header de profil
+                    let name = this.querySelector('.chat-app-main__list-name').textContent.trim();
+                    document.querySelector('.profile-header-main__name').textContent = name;
+                    document.querySelector('.profile-header-main__id').textContent = 'En ligne';
+
+                    // Charge les messages de la conversation
+                    fetch('/messages/' + currentChatId)
+                        .then(res => res.json())
+                        .then(messages => {
+                            const chat = document.getElementById('chatMessages');
+                            chat.innerHTML = '';
+                            if (messages.length === 0) {
+                                chat.innerHTML =
+                                    `<div style="color:#aaa;text-align:center;margin-top:40px;">Aucun message</div>`;
+                            }
+                            messages.forEach(m => {
+                                const msg = document.createElement('div');
+                                msg.className = 'message-container ' + (m.from_id ==
+                                    {{ Auth::id() ?? 0 }} ? 'sent-message' : 'received-message'
+                                );
+                                msg.innerHTML =
+                                    (m.from_id == {{ Auth::id() ?? 0 }} ?
+                                        `<div class="message-content">
+                                        <div class="sender-name">Vous</div>
+                                        <div class="message-bubble sent-bubble">
+                                            <div class="message-text sent-text">${escapeHtml(m.message)}</div>
+                                        </div>
+                                        <div class="message-time sent-time">${(new Date(m.created_at)).toLocaleTimeString()}</div>
+                                    </div>
+                                    <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />` :
+                                        `<img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar" />
+                                    <div class="message-content">
+                                        <div class="sender-name">${name}</div>
+                                        <div class="message-bubble">
+                                            <div class="message-text">${escapeHtml(m.message)}</div>
+                                        </div>
+                                        <div class="message-time">${(new Date(m.created_at)).toLocaleTimeString()}</div>
+                                    </div>`
+                                    );
+                                chat.appendChild(msg);
+                            });
+                            chat.scrollTop = chat.scrollHeight;
+                        });
+                });
+            });
+
+
+            function sendMessage() {
+                const input = document.getElementById('messageInput');
+                const text = input.value.trim();
+                if (!text || !currentChatId) return;
+
+                const username = '{{ Auth::user()->name ?? 'Patient' }}';
+                const from_id = {{ Auth::id() ?? 0 }};
+                const to_id = currentToId;
+                const chat_id = currentChatId;
+
+                fetch('{{ route('chat.message') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        message: text,
+                        from_id: from_id,
+                        to_id: to_id,
+                        chat_id: chat_id
+                    })
+                });
+
+                // Affiche le message côté sender immédiatement
+                const chat = document.getElementById('chatMessages');
+                const now = new Date();
+                const time = now.toLocaleTimeString();
+                const msg = document.createElement('div');
+                msg.className = 'message-container sent-message';
+                msg.innerHTML = `
+            <div class="message-content">
+                <div class="sender-name">Vous</div>
+                <div class="message-bubble sent-bubble">
+                    <div class="message-text sent-text">${escapeHtml(text)}</div>
+                </div>
+                <div class="message-time sent-time">${time}</div>
+            </div>
+            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
+            `;
+                chat.appendChild(msg);
+                input.value = '';
+                chat.scrollTop = chat.scrollHeight;
+            }
+
 
             // Supprimer la conversation
             document.querySelectorAll('#chatOptionsMenu button')[0].onclick = function(e) {
@@ -1187,25 +1184,124 @@
 
 
         <script>
+            let currentChatId = null;
+            let currentToId = null;
+
+            // Quand on clique sur un contact
+            document.querySelectorAll('.chat-app-main__list-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    // Récupère les infos
+                    currentChatId = this.getAttribute('data-chat-id');
+                    currentToId = this.getAttribute('data-to-id');
+                    document.getElementById('chat_id').value = currentChatId;
+
+                    // Met à jour le header du profil
+                    let name = this.querySelector('.chat-app-main__list-name').textContent.trim();
+                    document.querySelector('.profile-header-main__name').textContent = name;
+                    document.querySelector('.profile-header-main__id').textContent = 'En ligne';
+
+                    // Charge dynamiquement les messages
+                    fetch('/messages/' + currentChatId)
+                        .then(res => res.json())
+                        .then(messages => {
+                            const chat = document.getElementById('chatMessages');
+                            chat.innerHTML = '';
+                            if (messages.length === 0) {
+                                chat.innerHTML =
+                                    `<div style="color:#aaa;text-align:center;margin-top:40px;">Aucun message</div>`;
+                            }
+                            messages.forEach(m => {
+                                const msg = document.createElement('div');
+                                msg.className = 'message-container ' + (m.from_id ==
+                                    {{ Auth::id() ?? 0 }} ? 'sent-message' : 'received-message'
+                                );
+                                msg.innerHTML =
+                                    (m.from_id == {{ Auth::id() ?? 0 }} ?
+                                        `<div class="message-content">
+                                <div class="sender-name">Vous</div>
+                                <div class="message-bubble sent-bubble">
+                                    <div class="message-text sent-text">${escapeHtml(m.message)}</div>
+                                </div>
+                                <div class="message-time sent-time">${(new Date(m.created_at)).toLocaleTimeString()}</div>
+                            </div>
+                            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />` :
+                                        `<img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar" />
+                            <div class="message-content">
+                                <div class="sender-name">${name}</div>
+                                <div class="message-bubble">
+                                    <div class="message-text">${escapeHtml(m.message)}</div>
+                                </div>
+                                <div class="message-time">${(new Date(m.created_at)).toLocaleTimeString()}</div>
+                            </div>`
+                                    );
+                                chat.appendChild(msg);
+                            });
+                            chat.scrollTop = chat.scrollHeight;
+                        });
+                });
+            });
+
+
+
+            function sendMessage() {
+                const input = document.getElementById('messageInput');
+                const text = input.value.trim();
+                if (!text || !currentChatId) return;
+
+                const username = '{{ Auth::user()->name ?? 'Patient' }}';
+                const from_id = {{ Auth::id() ?? 0 }};
+                const to_id = currentToId;
+                const chat_id = currentChatId;
+
+                fetch('{{ route('chat.message') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        message: text,
+                        from_id: from_id,
+                        to_id: to_id,
+                        chat_id: chat_id
+                    })
+                });
+
+                // Affiche le message côté sender immédiatement
+                const chat = document.getElementById('chatMessages');
+                const now = new Date();
+                const time = now.toLocaleTimeString();
+                const msg = document.createElement('div');
+                msg.className = 'message-container sent-message';
+                msg.innerHTML = `
+            <div class="message-content">
+                <div class="sender-name">Vous</div>
+                <div class="message-bubble sent-bubble">
+                    <div class="message-text sent-text">${escapeHtml(text)}</div>
+                </div>
+                <div class="message-time sent-time">${time}</div>
+            </div>
+            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
+                `;
+                    chat.appendChild(msg);
+                    input.value = '';
+                    chat.scrollTop = chat.scrollHeight;
+                }
+
+            // Utilitaire pour échapper le HTML
+            function escapeHtml(text) {
+                var div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+        </script>
+
+        <script>
             function isMobile() {
                 return window.innerWidth <= 900;
             }
 
-            // Quand on clique sur un contact (li)
-            document.querySelectorAll('.chat-app-main__list-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    if (isMobile()) {
-                        // Masquer le aside, afficher la discussion
-                        document.querySelector('.chat-app-main__sidebar').style.display = 'none';
-                        document.querySelector('.chat-app-main__content').style.display = 'block';
-                        // Afficher le header de profil et l'input si besoin
-                        let profileHeader = document.querySelector('.profile-header-main');
-                        if (profileHeader) profileHeader.style.display = 'flex';
-                        let inputArea = document.querySelector('.chat-input-area');
-                        if (inputArea) inputArea.style.display = 'block';
-                    }
-                });
-            });
 
             // Optionnel : bouton retour pour revenir à la liste sur mobile
             document.querySelectorAll('.chat-direction').forEach(btn => {
@@ -1283,42 +1379,76 @@
                     recallCall(name, type);
                 });
             });
+
+
+            // Ouvre le modal quand on clique sur le bouton crayon
+            document.querySelector('.chat-app-main__new').onclick = function(e) {
+                e.preventDefault();
+                document.getElementById('newDiscussionModal').style.display = 'flex';
+                document.getElementById('userSearchInput').value = '';
+                filterUserList('');
+            };
+
+            // Barre de recherche dynamique
+            document.getElementById('userSearchInput').addEventListener('input', function() {
+                filterUserList(this.value);
+            });
+
+            function filterUserList(query) {
+                query = query.toLowerCase();
+                document.querySelectorAll('#userList .user-list-item').forEach(function(item) {
+                    const name = item.querySelector('span').textContent.toLowerCase();
+                    const email = item.querySelectorAll('span')[1].textContent.toLowerCase();
+                    if (name.includes(query) || email.includes(query)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            }
+
+            // Création de la discussion au clic sur un contact
+            document.getElementById('userList').onclick = function(e) {
+                e.preventDefault();
+                let item = e.target.closest('.user-list-item');
+                if (!item) return;
+                const userId = item.getAttribute('data-user-id');
+                const errorDiv = document.getElementById('newDiscussionError');
+                errorDiv.style.display = 'none';
+                fetch('/discussions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            user_id: userId
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success && data.conversation_id) {
+                            document.getElementById('newDiscussionModal').style.display = 'none';
+                            // Trouve le li correspondant dans la liste des conversations
+                            const convLi = document.querySelector('.chat-app-main__list-item[data-chat-id="' + data
+                                .conversation_id + '"]');
+                            if (convLi) {
+                                convLi.click();
+                                convLi.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'center'
+                                });
+                            } else {
+                                location.reload();
+                            }
+                        } else {
+                            errorDiv.textContent = data.message || "Erreur lors de la création.";
+                            errorDiv.style.display = 'block';
+                        }
+                    });
+            };
         </script>
 
-        <script>
-            // script js pusher pour le chat
-
-            // const chatId = document.getElementById('chat_id').value;
-            // window.Echo.private(`chat.${chatId}`)
-            //     .listen('MessageSent', (e) => {
-            //         console.log('Nouveau message:', e.message);
-            //         // Ajoute ici le code pour afficher le message dans ta page
-            //     });
-
-            // document.getElementById('chat-form').addEventListener('submit', function(e) {
-            //     e.preventDefault();
-
-            //     const content = document.getElementById('message-input').value;
-
-            //     fetch('/send-message', {
-            //             method: 'POST',
-            //             headers: {
-            //                 'Content-Type': 'application/json',
-            //                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
-            //                     'content')
-            //             },
-            //             body: JSON.stringify({
-            //                 chat_id: chatId,
-            //                 content: content
-            //             })
-            //         }).then(response => response.json())
-            //         .then(data => {
-            //             console.log(data.status);
-            //             document.getElementById('message-input').value = '';
-            //         });
-            // });
-        </script>
-        </script>
 
         <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
         {{-- @vite('resources/js/app.js') --}}

@@ -25,10 +25,14 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (!Auth::attempt($this->only(['email', 'password']))) {
+        // Vérifie si l'utilisateur existe d'abord
+        $credentials = $this->only('email', 'password');
+
+        if (!Auth::attempt($credentials)) {
             RateLimiter::hit($this->throttleKey());
+
             throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
+                'email' => __('Les informations fournies sont incorrectes.'),
             ]);
         }
 

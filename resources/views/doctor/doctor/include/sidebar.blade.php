@@ -60,7 +60,7 @@
                 </li>
 
 
-                <li>
+                {{-- <li>
                     <a href="javascript:void(0)">
                         <div class="item-content">
                             <div class="item-media"><i class="ti-files"></i></div>
@@ -70,7 +70,7 @@
                     <ul class="sub-menu">
                         <li><a href="{{ route('doctor.reports.between_dates') }}"><span class="title">B/w dates reports </span></a></li>
                     </ul>
-                </li>
+                </li> --}}
                 {{-- <li>
                     <a href="javascript:void(0)">
                         <div class="item-content">
@@ -84,7 +84,7 @@
                     </ul>
                 </li> --}}
                 <li>
-                    <a href="{{ route('doctor.patient.search') }}">
+                    <a href="{{ route('admin.patient.search') }}">
                         <div class="item-content">
                             <div class="item-media"><i class="ti-search"></i></div>
                             <div class="item-inner"><span class="title"> Patient Search </span></div>

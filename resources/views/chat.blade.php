@@ -6,6 +6,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Chat Clinique Espoir sante</title>
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <!-- Echo & Pusher -->
+        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/laravel-echo/dist/echo.iife.js"></script>
 
         <style>
             .chat-panel {
@@ -83,8 +86,6 @@
             .options-menu button:hover {
                 background: #f0f8ff;
             }
-
-            
         </style>
 
     </head>
@@ -228,21 +229,38 @@
                 const input = document.getElementById('messageInput');
                 const text = input.value.trim();
                 if (!text) return;
+
+                // Récupère le nom de l'utilisateur connecté (à adapter selon ton auth)
+                const username = '{{ Auth::user()->name ?? 'Patient' }}';
+
+                fetch('{{ route('chat.message') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        message: text
+                    })
+                });
+
+                // Affiche le message côté sender immédiatement
                 const chat = document.getElementById('chatMessages');
                 const now = new Date();
                 const time = now.toLocaleTimeString();
                 const msg = document.createElement('div');
                 msg.className = 'message-container sent-message';
                 msg.innerHTML = `
-            <div class="message-content">
-                <div class="sender-name">Vous</div>
-                <div class="message-bubble sent-bubble">
-                    <div class="message-text sent-text">${escapeHtml(text)}</div>
+                <div class="message-content">
+                    <div class="sender-name">Vous</div>
+                    <div class="message-bubble sent-bubble">
+                        <div class="message-text sent-text">${escapeHtml(text)}</div>
+                    </div>
+                    <div class="message-time sent-time">${time}</div>
                 </div>
-                <div class="message-time sent-time">${time}</div>
-            </div>
-            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
-        `;
+                <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
+            `;
                 chat.appendChild(msg);
                 input.value = '';
                 chat.scrollTop = chat.scrollHeight;
@@ -311,6 +329,38 @@
             document.querySelector('.chat-direction').onclick = function() {
                 window.history.back();
             };
+
+
+            // Configuration Echo/Pusher
+            window.Pusher = Pusher;
+            window.Echo = new Echo({
+                broadcaster: 'pusher',
+                key: '{{ env('PUSHER_APP_KEY') }}',
+                cluster: '{{ env('PUSHER_APP_CLUSTER') }}',
+                forceTLS: true
+            });
+
+            // Écoute les nouveaux messages sur le canal 'chat'
+            window.Echo.channel('chat')
+                .listen('.message', (e) => {
+                    const chat = document.getElementById('chatMessages');
+                    const now = new Date();
+                    const time = now.toLocaleTimeString();
+                    const msg = document.createElement('div');
+                    msg.className = 'message-container received-message';
+                    msg.innerHTML = `
+                <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar" />
+                <div class="message-content">
+                    <div class="sender-name">${e.username}</div>
+                    <div class="message-bubble">
+                        <div class="message-text">${e.message}</div>
+                    </div>
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+                    chat.appendChild(msg);
+                    chat.scrollTop = chat.scrollHeight;
+                });
         </script>
 
 

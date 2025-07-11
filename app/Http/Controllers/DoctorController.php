@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Medecin;
 use App\Models\Appointment;
-use App\Models\Patient;
 use App\Models\ContactUs;
 use App\Models\DoctorSpecilization;
 use Illuminate\Support\Facades\Hash;
@@ -27,124 +25,23 @@ class DoctorController extends Controller
     }
 
 
-    public function doctorSpecialization()
-    {
-        $specializations = DoctorSpecilization::orderBy('creationDate', 'desc')->get();
-        return view('doctor.doctor.doctor-specilization', compact('specializations'));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'doctorspecilization' => 'required|string|max:255|unique:doctor_specilizations,specilization',
-        ]);
-
-        DoctorSpecilization::create([
-            'specilization' => $request->doctorspecilization,
-            'creationDate' => now(),
-        ]);
-
-        return redirect()->route('admin.doctor.specialization')
-            ->with('success', 'Doctor Specialization added successfully!');
-    }
-
-    public function editDoctorSpecialization($id)
-    {
-        $spec = DoctorSpecilization::findOrFail($id);
-        return view('doctor.doctor.edit-doctor-specialization', compact('spec'));
-    }
-
-    public function updateDoctorSpecialization(Request $request, $id)
-    {
-        $request->validate([
-            'doctorspecilization' => 'required|string|max:255|unique:doctor_specilizations,specilization,' . $id,
-        ]);
-
-        $spec = DoctorSpecilization::findOrFail($id);
-        $spec->specilization = $request->doctorspecilization;
-        $spec->updationDate = now();
-        $spec->save();
-
-        return redirect()->route('admin.doctor.specialization')->with('success', 'Doctor Specialization updated successfully!');
-    }
-
-
-    public function manageDoctors()
-    {
-        $doctors = Medecin::orderBy('CreationDate', 'desc')->get();
-        return view('doctor.doctor.manage-doctors', compact('doctors'));
-    }
-
-    public function deleteDoctor($id)
-    {
-        $doctor = Medecin::findOrFail($id);
-        $doctor->delete();
-
-        return redirect()->route('admin.doctor.manage')->with('success', 'Doctor deleted successfully!');
-    }
-
-    public function editDoctor($id)
-    {
-        $spec = User::where('role', 'medecin')->findOrFail($id);
-
-        return view('admin.admin.edit-doctor', compact('spec'));
-    }
-
-    public function destroy($id)
-    {
-        $spec = DoctorSpecilization::findOrFail($id);
-        $spec->delete();
-
-        return redirect()->route('admin.doctor.specialization')
-            ->with('success', 'Doctor Specialization deleted!');
-    }
-
-
-    public function addDoctorForm()
-    {
-        $specializations = DoctorSpecilization::orderBy('specilization')->get();
-        return view('doctor.doctor.add-doctor', compact('specializations'));
-    }
-
-    public function addDoctor(Request $request)
-    {
-        $request->validate([
-            'Doctorspecialization' => 'required|exists:doctor_specilizations,specilization',
-            'docname' => 'required|string|max:255',
-            'clinicaddress' => 'required|string|max:255',
-            'docfees' => 'required|numeric',
-            'doccontact' => 'required|string|max:20',
-            'docemail' => 'required|email|unique:medecins,Email',
-            'npass' => 'required|string|min:6|confirmed',
-        ]);
-
-        Medecin::create([
-            'FullName' => $request->docname,
-            'MobileNumber' => $request->doccontact,
-            'Email' => $request->docemail,
-            'consultancy_fees' => $request->docfees,
-            'Specialization' => $request->Doctorspecialization,
-            'Password' => Hash::make($request->npass),
-            'CreationDate' => now(),
-        ]);
-
-        return redirect()->route('admin.doctor.add')->with('success', 'Doctor info added Successfully');
-    }
 
 
     // patients
 
-    public function managePatients()
+    public function managePatients(Request $request)
     {
-        $patients = Patient::orderBy('CreationDate', 'desc')->get();
-        return view('doctor.doctor.manage-patient', compact('patients'));
+        $query = User::where('role', 'patient');
+
+        $patients = $query->orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.admin.manage-patient', compact('patients'));
     }
 
 
 
     public function viewPatient($id)
     {
-        $patient = Patient::findOrFail($id);
+        $patient = User::findOrFail($id);
         $medicalHistory = MedicalHistory::where('PatientID', $id)->orderBy('CreationDate', 'desc')->get();
         return view('doctor.doctor.view-patient', compact('patient', 'medicalHistory'));
     }
@@ -185,24 +82,34 @@ class DoctorController extends Controller
     public function newAppointment()
     {
         $appointments = Appointment::with(['doctor', 'patient'])
+            ->whereNull('doctor_status') // non encore traité
+            ->orWhere('doctor_status', 1)
             ->orderBy('created_at', 'desc')
             ->get();
+
         return view('doctor.doctor.new_appointment', compact('appointments'));
     }
+
     public function approvedAppointment()
     {
         $appointments = Appointment::with(['doctor', 'patient'])
+            ->where('doctor_status', 2)
             ->orderBy('created_at', 'desc')
             ->get();
+
         return view('doctor.doctor.approved_appointment', compact('appointments'));
     }
+
     public function cancelledAppointment()
     {
         $appointments = Appointment::with(['doctor', 'patient'])
+            ->where('doctor_status', 0)
             ->orderBy('created_at', 'desc')
             ->get();
+
         return view('doctor.doctor.cancelled_appointment', compact('appointments'));
     }
+
 
 
 

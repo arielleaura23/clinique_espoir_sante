@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
             'name' => 'admin',
             'address' => 'Yaoundé',
             'city' => 'Yaoundé',
-            'gender' => 'female',
+            'sexe' => 'female',
             'email' => 'admin@espoir.com',
             'password' => Hash::make('admin2025'),
             'role' => 'admin',
