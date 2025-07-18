@@ -15,7 +15,7 @@
                     display: none !important;
                 }
 
-                .control-button.chat-button{
+                .control-button.chat-button {
                     display: none !important;
                 }
 
@@ -24,7 +24,7 @@
     </head>
 
     <body>
-        <div class="video-conference">
+        {{-- <div class="video-conference">
 
             <!-- Participants sidebar -->
             <div class="participants-sidebar">
@@ -180,7 +180,8 @@
             <div class="control-toolbar">
                 <button class="control-button audio-button" title="Activer/Désactiver le micro">
                     <div class="button-bg"></div>
-                    <img class="button-icon audioOff" src="{{ asset('assets/img/AudioOff.png') }}" alt="Toggle audio" />
+                    <img class="button-icon audioOff" src="{{ asset('assets/img/AudioOff.png') }}"
+                        alt="Toggle audio" />
                 </button>
                 <button class="control-button video-button" title="Activer/Désactiver la caméra">
                     <div class="button-bg video-bg"></div>
@@ -199,6 +200,32 @@
                     <div class="button-bg exit-bg"></div>
                     <img class="button-icon" src="{{ asset('assets/img/out.png') }}" alt="Exit call" />
                 </button>
+            </div>
+
+        </div> --}}
+
+        <!-- Ajout modale appel WebRTC -->
+        <div id="callModal"
+            style=" position:fixed; inset:0; background:rgba(0,0,0,0.7); z-index:9999; align-items:center; justify-content:center;">
+
+            <div
+                style="background:#fff; border-radius:10px; width:90%; max-width:900px; height:600px; display:flex; flex-direction:column;">
+
+                <div style="flex:1; display:flex; gap:10px; padding:10px;">
+                    <video id="localVideo" autoplay muted playsinline
+                        style="width:50%; background:#000; border-radius:5px;"></video>
+                    <video id="remoteVideo" autoplay playsinline
+                        style="width:50%; background:#000; border-radius:5px;"></video>
+                </div>
+
+                <div
+                    style="padding:10px; display:flex; justify-content:center; gap:15px; background:#eee; border-bottom-left-radius:10px; border-bottom-right-radius:10px;">
+                    <button id="toggleAudioBtn" title="Activer/Désactiver Micro" style="padding:10px 15px;">🎤</button>
+                    <button id="toggleVideoBtn" title="Activer/Désactiver Caméra" style="padding:10px 15px;">📹</button>
+                    <button id="hangupBtn" title="Raccrocher"
+                        style="padding:10px 15px; background:#d33; color:#fff; border:none; border-radius:5px;">❌</button>
+                </div>
+
             </div>
 
         </div>
@@ -224,9 +251,149 @@
         </div>
 
 
+        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+        <script>
+            (() => {
+                // Variables
+                const callModal = document.getElementById('callModal');
+                const localVideo = document.getElementById('localVideo');
+                const remoteVideo = document.getElementById('remoteVideo');
+                const toggleAudioBtn = document.getElementById('toggleAudioBtn');
+                const toggleVideoBtn = document.getElementById('toggleVideoBtn');
+                const hangupBtn = document.getElementById('hangupBtn');
+
+                let localStream = null;
+                let peerConnection = null;
+
+                const pusherAppKey = "{{ env('PUSHER_APP_KEY') }}";
+                const pusherCluster = "{{ env('PUSHER_APP_CLUSTER') }}";
+
+                const pusher = new Pusher(pusherAppKey, {
+                    cluster: pusherCluster,
+                    authEndpoint: '/broadcasting/auth',
+                    auth: {
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    }
+                });
+
+                const channel = pusher.subscribe('private-call-channel');
+
+                // Configuration STUN
+                const rtcConfig = {
+                    iceServers: [{
+                        urls: 'stun:stun.l.google.com:19302'
+                    }]
+                };
+
+                function openCallModal(isVideo = true) {
+                    callModal.style.display = 'flex';
+
+                    navigator.mediaDevices.getUserMedia({
+                        video: isVideo,
+                        audio: true
+                    }).then(stream => {
+                        localStream = stream;
+                        localVideo.srcObject = stream;
+
+                        startPeerConnection();
+                    }).catch(err => {
+                        alert('Impossible d\'accéder à la caméra/microphone: ' + err.message);
+                        closeCallModal();
+                    });
+                }
+
+                function closeCallModal() {
+                    if (peerConnection) {
+                        peerConnection.close();
+                        peerConnection = null;
+                    }
+                    if (localStream) {
+                        localStream.getTracks().forEach(t => t.stop());
+                        localStream = null;
+                    }
+                    localVideo.srcObject = null;
+                    remoteVideo.srcObject = null;
+                    callModal.style.display = 'none';
+                }
+
+                function startPeerConnection() {
+                    peerConnection = new RTCPeerConnection(rtcConfig);
+
+                    localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+                    peerConnection.ontrack = e => {
+                        remoteVideo.srcObject = e.streams[0];
+                    };
+
+                    peerConnection.onicecandidate = e => {
+                        if (e.candidate) {
+                            channel.trigger('client-ice-candidate', {
+                                candidate: e.candidate
+                            });
+                        }
+                    };
+                }
+
+                async function createOffer() {
+                    const offer = await peerConnection.createOffer();
+                    await peerConnection.setLocalDescription(offer);
+                    channel.trigger('client-offer', {
+                        offer
+                    });
+                }
+
+                channel.bind('client-offer', async data => {
+                    if (!peerConnection) startPeerConnection();
+                    await peerConnection.setRemoteDescription(new RTCSessionDescription(data.offer));
+                    const answer = await peerConnection.createAnswer();
+                    await peerConnection.setLocalDescription(answer);
+                    channel.trigger('client-answer', {
+                        answer
+                    });
+                });
+
+                channel.bind('client-answer', async data => {
+                    await peerConnection.setRemoteDescription(new RTCSessionDescription(data.answer));
+                });
+
+                channel.bind('client-ice-candidate', data => {
+                    if (peerConnection) {
+                        peerConnection.addIceCandidate(new RTCIceCandidate(data.candidate));
+                    }
+                });
+
+                // Boutons contrôle
+                toggleAudioBtn.onclick = () => {
+                    if (!localStream) return;
+                    localStream.getAudioTracks().forEach(track => track.enabled = !track.enabled);
+                    toggleAudioBtn.textContent = localStream.getAudioTracks()[0].enabled ? '🎤' : '🔇';
+                };
+
+                toggleVideoBtn.onclick = () => {
+                    if (!localStream) return;
+                    localStream.getVideoTracks().forEach(track => track.enabled = !track.enabled);
+                    toggleVideoBtn.textContent = localStream.getVideoTracks()[0].enabled ? '📹' : '🚫';
+                };
+
+                hangupBtn.onclick = () => {
+                    closeCallModal();
+                };
+
+                // Cette fonction sera appelée depuis chat-box pour démarrer un appel
+                window.showCallModal = function(type, name) {
+                    openCallModal(type === 'video');
+                    setTimeout(() => {
+                        createOffer();
+                    }, 500); // petit délai pour s'assurer que tout est prêt
+                };
+
+            })();
+        </script>
 
 
-        <!-- JS pour interactions -->
+        {{-- <!-- JS pour interactions -->
         <script>
             // Redimensionnement du chat-panel
             (function() {
@@ -450,8 +617,8 @@
                 showInfoModal(
                     'Partager la consultation',
                     `<div>Voici le lien à partager pour rejoindre la consultation :</div>
- <div style="margin:10px 0;word-break:break-all;"><strong>${link}</strong></div>
- <button onclick="navigator.clipboard.writeText('${link}');this.textContent='Lien copié !';return false;" class="btn-primary" style="margin-top:8px;">Copier le lien</button>`
+            <div style="margin:10px 0;word-break:break-all;"><strong>${link}</strong></div>
+            <button onclick="navigator.clipboard.writeText('${link}');this.textContent='Lien copié !';return false;" class="btn-primary" style="margin-top:8px;">Copier le lien</button>`
                 );
             };
 
@@ -497,7 +664,9 @@
             // Boutons de fermeture du modal
             document.getElementById('closeModalBtn').onclick = closeInfoModal;
             document.getElementById('closeModalBtn2').onclick = closeInfoModal;
-        </script>
+        </script> --}}
+
+
 
 
     </body>

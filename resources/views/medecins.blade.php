@@ -26,43 +26,18 @@
                     </div>
                 </div>
                 <div class="doctors">
-
-                    <div class="doctor-card">
-                        <img src="{{ asset('assets/img/doctor7.png') }}" alt="Dr Tetio">
-                        <h3>Dr Tetio</h3>
-                        <p class="specialty">Pédiatre</p>
-                    </div>
-
-                    <div class="doctor-card">
-                        <img src="{{ asset('assets/img/doctor7.png') }}" alt="Dr Tankeu">
-                        <h3>Dr Tankeu</h3>
-                        <p class="specialty">Cardiologue</p>
-                    </div>
-
-                    <div class="doctor-card">
-                        <img src="{{ asset('assets/img/doctor7.png') }}" alt="Dr Tchienkoua">
-                        <h3>Dr Tchienkoua</h3>
-                        <p class="specialty">Généraliste</p>
-                    </div>
-                    <div class="doctor-card">
-                        <img src="{{ asset('assets/img/doctor7.png') }}" alt="Dr Tetio">
-                        <h3>Dr Tetio</h3>
-                        <p class="specialty">Pédiatre</p>
-                    </div>
-
-                    <div class="doctor-card">
-                        <img src="{{ asset('assets/img/doctor7.png') }}" alt="Dr Tankeu">
-                        <h3>Dr Tankeu</h3>
-                        <p class="specialty">Cardiologue</p>
-                    </div>
-
-                    <div class="doctor-card">
-                        <img src="{{ asset('assets/img/doctor7.png') }}" alt="Dr Tchienkoua">
-                        <h3>Dr Tchienkoua</h3>
-                        <p class="specialty">Généraliste</p>
-                    </div>
-
+                    @forelse ($medecins as $medecin)
+                        <div class="doctor-card">
+                            <img src="{{ $medecin->avatar ? asset('storage/' . $medecin->avatar) : asset('assets/img/doctor7.png') }}"
+                                alt="{{ $medecin->name }}">
+                            <h3>{{ $medecin->name }}</h3>
+                            <p class="specialty">{{ $medecin->specialization }}</p>
+                        </div>
+                    @empty
+                        <p>Aucun médecin trouvé pour le moment.</p>
+                    @endforelse
                 </div>
+
             </div>
 
         </div>
@@ -157,7 +132,8 @@
 
                 <!-- Carte Adresse -->
                 <div class="contact-card">
-                    <div class="card-bg-blue card-bg-darkblue" data-aos="zoom-in-up" data-aos-easing="linear" data-aos-duration="700">
+                    <div class="card-bg-blue card-bg-darkblue" data-aos="zoom-in-up" data-aos-easing="linear"
+                        data-aos-duration="700">
                         <div class="contact-info">
                             <img class="contact-icon" src="{{ asset('assets/img/location_blue.png') }}" />
                             <div class="contact-label">Address</div>

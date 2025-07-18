@@ -39,21 +39,37 @@ class ChatController extends Controller
     }
 
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required|exists:users,id|not_in:' . auth()->id(),
-        ]);
-        $user = auth()->user();
-        $other_id = $request->user_id;
+public function store(Request $request)
+{
+    // Vérifie si l'utilisateur est bien connecté
+    if (!auth()->check()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Utilisateur non authentifié.'
+        ], 401);
+    }
 
-        // Vérifie si la conversation existe déjà
+    // Récupère l'utilisateur connecté
+    $user = auth()->user();
+
+    try {
+        // Validation sécurisée avec retour JSON si échoue
+        $validated = $request->validate([
+            'user_id' => 'required|exists:users,id|not_in:' . $user->id,
+        ]);
+
+        $other_id = $validated['user_id'];
+
+        // Recherche d'une conversation existante
         $conv = \App\Models\Conversation::where(function ($q) use ($user, $other_id) {
-            $q->where('user_one_id', $user->id)->where('user_two_id', $other_id);
+            $q->where('user_one_id', $user->id)
+              ->where('user_two_id', $other_id);
         })->orWhere(function ($q) use ($user, $other_id) {
-            $q->where('user_one_id', $other_id)->where('user_two_id', $user->id);
+            $q->where('user_one_id', $other_id)
+              ->where('user_two_id', $user->id);
         })->first();
 
+        // Création si elle n'existe pas
         if (!$conv) {
             $conv = \App\Models\Conversation::create([
                 'user_one_id' => $user->id,
@@ -61,8 +77,24 @@ class ChatController extends Controller
             ]);
         }
 
-        return response()->json(['success' => true, 'conversation_id' => $conv->id]);
+        return response()->json([
+            'success' => true,
+            'conversation_id' => $conv->id
+        ]);
+
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Erreur de validation : ' . $e->getMessage()
+        ], 422);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Erreur serveur : ' . $e->getMessage()
+        ], 500);
     }
+}
+
 
     public function messages($chat_id)
     {

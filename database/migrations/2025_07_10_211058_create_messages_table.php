@@ -13,15 +13,25 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('conversation_id');
-            $table->unsignedBigInteger('from_id');
-            $table->unsignedBigInteger('to_id');
-            $table->text('message');
-            $table->timestamps();
+            $table->foreignId('conversation_id')->constrained()->cascadeOnDelete();
 
-            $table->foreign('conversation_id')->references('id')->on('conversations')->onDelete('cascade');
-            $table->foreign('from_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('to_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('sender_id')->nullable();// or uuid()
+            $table->foreign('sender_id')->references('id')->on('users')->nullOnDelete();
+
+            $table->unsignedBigInteger('receiver_id')->nullable();// or uuid()
+            $table->foreign('receiver_id')->references('id')->on('users')->nullOnDelete();
+
+
+            $table->timestamp('read_at')->nullable();
+
+            //delete actions
+            $table->timestamp('receiver_deleted_at')->nullable();
+            $table->timestamp('sender_deleted_at')->nullable();
+
+            $table->text('body')->nullable();
+
+            $table->timestamps();
+            
         });
     }
 

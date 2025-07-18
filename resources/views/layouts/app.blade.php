@@ -10,6 +10,8 @@
         {{-- <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"> --}}
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="user-id" content="{{ auth()->id() }}">
+
 
     </head>
 

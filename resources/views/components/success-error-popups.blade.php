@@ -32,11 +32,11 @@
             </div>
             <img class="icon-close" src="{{ asset('assets/img/fermer.png') }}" alt="Fermer" id="closeModal" />
         </div>
-        <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;" />
+        {{-- <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;" /> --}}
         <div class="modal-body">
             <p>{{ session('success') }}</p>
         </div>
-        <div class="modal-footer">
+        <div class="modal-footer" >
             <button class="btn-primary" id="okButton">Okay</button>
         </div>
     </div>
@@ -52,7 +52,7 @@
             </div>
             <img class="icon-close" src="{{ asset('assets/img/croix_rouge.png') }}" alt="Fermer" id="closeModal" />
         </div>
-        <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;" />
+        {{-- <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;" /> --}}
         <div class="modal-body">
             <p>{{ session('error') }}</p>
         </div>

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Conversation;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -58,6 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(User::class, 'doctor_id');
     }
+    
 
     /**
      * Relation : Un médecin peut avoir plusieurs patients.
@@ -65,5 +67,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function patients()
     {
         return $this->hasMany(User::class, 'doctor_id');
+    }
+    public function conversations()
+    {
+        return Conversation::where(function ($query) {
+            $query->where('sender_id', $this->id)
+                ->orWhere('receiver_id', $this->id);
+        })->whereNotDeleted();
     }
 }

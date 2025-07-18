@@ -8,8 +8,14 @@ use App\Http\Controllers\Auth\FacebookController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\CallController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\ChatController;
+use App\Livewire\Chat\Index;
+use App\Livewire\Chat\ChatList;
+use App\Livewire\Chat\Chat;
+use App\Livewire\Users;
+use App\Models\Conversation;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +27,10 @@ use App\Http\Controllers\ChatController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+use Illuminate\Support\Facades\Broadcast;
+
+// Broadcast::routes(['middleware' => ['auth']]);
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -36,13 +46,41 @@ Route::post('/prise_rdv', [HomeController::class, 'store'])->name('appointment.s
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/blog_details', [HomeController::class, 'blog_details'])->name('blog_details');
 Route::get('/events', [HomeController::class, 'events'])->name('events');
-Route::get('/chat', [HomeController::class, 'chat'])->name('chat');
+Route::get('/chat', [HomeController::class, 'chat'])->name('chat.robot');
 Route::get('/product_details', [HomeController::class, 'product_details'])->name('product_details');
 Route::get('/checkout_page', [HomeController::class, 'checkout_page'])->name('checkout_page');
 Route::get('/recents_posts', [HomeController::class, 'recents_posts'])->name('recents_posts');
 Route::get('/visio_consulting', [HomeController::class, 'visio_consulting'])->name('visio_consulting');
 
+Route::get('/call', [CallController::class, 'index'])->name('call');
+Route::post('/initiate-call', [CallController::class, 'initiateCall']);
+Route::post('/send-answer', [CallController::class, 'sendAnswer']);
+
+// Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
+
 // chat humain
+
+Route::middleware(['auth'])->group(function () {
+
+    // Accueil du chat
+    Route::get('/chat/human', Index::class)->name('chat.index');
+
+    // Affiche une conversation précise (avec un paramètre)
+    Route::get('/chat/{query}', Chat::class)->name('chat');
+
+    // Liste des utilisateurs (pour démarrer une discussion)
+    Route::get('/users', Users::class)->name('users');
+
+    Route::get('/call/{conversation}/demo', function (\App\Models\Conversation $conversation) {
+        $type = request()->query('type', 'audio');
+        return view('visio_consulting', compact('type', 'conversation'));
+    })->name('call.demo');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
 Route::middleware('auth')->group(function () {
     Route::get('/discussions', [ChatController::class, 'index'])->name('discussions');
     Route::get('/messages/{chat_id}', [ChatController::class, 'messages']);
@@ -55,10 +93,16 @@ Route::post('/contact/store', [SiteController::class, 'sendContact'])->name('con
 Route::post('/newsletter/subscribe', [SiteController::class, 'subscribeNewsletter'])->name('newsletter.subscribe');
 
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/profile/password/update', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+    Route::delete('/profile/avatar/reset', [ProfileController::class, 'resetAvatar'])->name('profile.avatar.reset');
+    Route::post('/profile/info', [ProfileController::class, 'updateInfo'])->name('profile.update.info');
+    // (optionnel) Préférences de notification
+    Route::post('/profile/notifications', [ProfileController::class, 'updateNotifications'])->name('profile.update.notifications');
 });
 
 require __DIR__ . '/auth.php';
@@ -220,13 +264,6 @@ Route::prefix('doctor')->group(function () {
     // Pages
     Route::get('/about-us', [DoctorController::class, 'aboutUs'])->name('doctor.pages.about');
     Route::get('/contact', [DoctorController::class, 'contactUs'])->name('doctor.pages.contact');
-
-
-
-    // route pour le chat
-    Route::get('/chat', function () {
-        return view('chat');
-    });
 
     Route::post('/messages', [ChatController::class, 'message'])->name('chat.message');
 });

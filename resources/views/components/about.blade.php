@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <a href="{{ route('chat') }}" class="chat">
+        <a href="{{ route('chat.robot') }}" class="chat">
             <div class="chat-bg"></div>
             <div class="chat-icon">
                 <img src="{{ asset('assets/img/chat.png') }}" alt="Chat" />

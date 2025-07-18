@@ -206,7 +206,7 @@
                             <div class="cot-step-text">{{ __('Schedule the appointment') }}</div>
                         </div>
                     </a>
-                    <a href="{{ route('discussions') }}" class="cot-step">
+                    <a href="{{ route('chat.index') }}" class="cot-step">
                         <div class="cot-step-bg">
                             <img class="cot-step-icon" src="{{ asset('assets/img/consult.png') }}"
                                 alt="{{ __('Get yourself consulted') }}" />
@@ -223,7 +223,7 @@
 
     <div class="newsletter-section section" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="1000">
         <div class="newsletter-bg">
-            <div class="container">
+            <div class="container" style="display: flex;justify-content: space-between;">
                 <div class="news">
                     <div class="news-info">
                         <div class="newsletter-title">{{ __('Subscribe to our newsletter') }}</div>

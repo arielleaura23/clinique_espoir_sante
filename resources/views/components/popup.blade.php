@@ -19,7 +19,7 @@
         @isset($buttonText)
             <div class="modal-footer">
                 @if (isset($buttonLink))
-                    <a href="{{ $buttonLink }}" class="btn-primary">{{ $buttonText }}</a>
+                <a href="{{ $buttonLink }}" class="btn-primary" id="{{ $buttonId ?? '' }}">{{ $buttonText }}</a>
                 @else
                     <button class="btn-primary close-button" data-close="{{ $id ?? 'modal' }}">{{ $buttonText }}</button>
                 @endif

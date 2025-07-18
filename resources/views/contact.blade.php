@@ -54,15 +54,40 @@
     </div>
 
     <x-popup id="callClinicModal" title="Contactez la Clinique" icon="assets/img/phone_blue.png"
-        buttonText="Appeler maintenant" buttonLink="tel:+2376XXXXXXXX">
+        buttonText="Appeler maintenant" buttonLink="tel:+237655418841" buttonId="callClinicBtn">
         <p>
             Pour toute information ou assistance, veuillez appeler la clinique au :
             <br />
-            <strong class="clinic-phone" style="color: #1d77fe">(+237) 6 XX XX XX XX</strong>
+            <strong class="clinic-phone" style="color: #1d77fe">(+237) 6 55 41 88 41</strong>
             <br />
             Nous sommes disponibles du lundi au dimanche, de 8h à 20h.
         </p>
+        <div id="callErrorMsg" style="color:red;display:none;margin-top:10px;"></div>
     </x-popup>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const callBtn = document.getElementById('callClinicBtn');
+            if (callBtn) {
+                callBtn.addEventListener('click', function(e) {
+                    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+                        navigator.userAgent);
+                    if (!isMobile) {
+                        e.preventDefault();
+                        const errorMsg = document.getElementById('callErrorMsg');
+                        if (errorMsg) {
+                            errorMsg.textContent =
+                                "❌ L'appel téléphonique n'est pas disponible sur ordinateur. Veuillez utiliser un téléphone.";
+                            errorMsg.style.display = "block";
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
+
 
 
 

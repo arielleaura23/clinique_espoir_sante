@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('conversations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_one_id');
-            $table->unsignedBigInteger('user_two_id');
-            $table->timestamps();
+            $table->unsignedBigInteger('sender_id');
+            $table->foreign('sender_id')->references('id')->on('users');
 
-            $table->foreign('user_one_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('user_two_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('receiver_id');
+            $table->foreign('receiver_id')->references('id')->on('users');
+
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

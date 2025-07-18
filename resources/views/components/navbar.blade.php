@@ -47,15 +47,24 @@
                         </form>
                     </div> --}}
 
-                    <div class="dropdown ">
-                        <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('Profile') }}</a>
-                        <a href="{{ route('discussions') }}" class="dropdown-item">{{ __('Messages') }}</a>
-                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            class="dropdown-item">{{ __('Logout') }}</a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    </div>
+<div class="dropdown ">
+    <a href="{{ route('profile.edit') }}" class="dropdown-item">{{ __('Profile') }}</a>
+    <a href="{{ route('chat.index') }}" class="dropdown-item">{{ __('Messages') }}</a>
+
+    @if (Auth::user()->role === 'admin')
+        <a href="{{ route('admin.dashboard') }}" class="dropdown-item">{{ __('Dashboard') }}</a>
+    @elseif (Auth::user()->role === 'medecin')
+        <a href="{{ route('doctor.dashboard') }}" class="dropdown-item">{{ __('Dashboard') }}</a>
+    @endif
+
+    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+        class="dropdown-item">{{ __('Logout') }}</a>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+</div>
+
                 </div>
 
 

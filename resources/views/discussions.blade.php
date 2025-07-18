@@ -875,6 +875,7 @@
                                     </div>
                                     <!-- Chat input area -->
                                     <form action="#" class="chat-input-area" id="chat-form">
+                                            <input type="hidden" id="chat_id" name="chat_id" value="">
                                         <!-- ...input, boutons... -->
                                     </form>
                                 </div>
@@ -999,10 +1000,10 @@
             </div>
             <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
             `;
-                    chat.appendChild(msg);
-                    input.value = '';
-                    chat.scrollTop = chat.scrollHeight;
-                }
+                chat.appendChild(msg);
+                input.value = '';
+                chat.scrollTop = chat.scrollHeight;
+            }
 
 
             // Utilitaire pour échapper le HTML
@@ -1013,177 +1014,6 @@
             }
 
             // Variables globales pour la conversation courante
-            let currentChatId = null;
-            let currentToId = null;
-
-            // Quand on clique sur un contact, on charge dynamiquement les messages
-            document.querySelectorAll('.chat-app-main__list-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    // Gère l'état actif
-                    document.querySelectorAll('.chat-app-main__list-item').forEach(li => li.classList.remove(
-                        'active'));
-                    this.classList.add('active');
-
-                    // Récupère les infos
-                    currentChatId = this.getAttribute('data-chat-id');
-                    currentToId = this.getAttribute('data-to-id');
-                    document.getElementById('chat_id').value = currentChatId;
-
-                    // Affiche le nom et l'état dans le header de profil
-                    let name = this.querySelector('.chat-app-main__list-name').textContent.trim();
-                    document.querySelector('.profile-header-main__name').textContent = name;
-                    document.querySelector('.profile-header-main__id').textContent = 'En ligne';
-
-                    // Charge les messages de la conversation
-                    fetch('/messages/' + currentChatId)
-                        .then(res => res.json())
-                        .then(messages => {
-                            const chat = document.getElementById('chatMessages');
-                            chat.innerHTML = '';
-                            if (messages.length === 0) {
-                                chat.innerHTML =
-                                    `<div style="color:#aaa;text-align:center;margin-top:40px;">Aucun message</div>`;
-                            }
-                            messages.forEach(m => {
-                                const msg = document.createElement('div');
-                                msg.className = 'message-container ' + (m.from_id ==
-                                    {{ Auth::id() ?? 0 }} ? 'sent-message' : 'received-message'
-                                );
-                                msg.innerHTML =
-                                    (m.from_id == {{ Auth::id() ?? 0 }} ?
-                                        `<div class="message-content">
-                                        <div class="sender-name">Vous</div>
-                                        <div class="message-bubble sent-bubble">
-                                            <div class="message-text sent-text">${escapeHtml(m.message)}</div>
-                                        </div>
-                                        <div class="message-time sent-time">${(new Date(m.created_at)).toLocaleTimeString()}</div>
-                                    </div>
-                                    <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />` :
-                                        `<img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Avatar" />
-                                    <div class="message-content">
-                                        <div class="sender-name">${name}</div>
-                                        <div class="message-bubble">
-                                            <div class="message-text">${escapeHtml(m.message)}</div>
-                                        </div>
-                                        <div class="message-time">${(new Date(m.created_at)).toLocaleTimeString()}</div>
-                                    </div>`
-                                    );
-                                chat.appendChild(msg);
-                            });
-                            chat.scrollTop = chat.scrollHeight;
-                        });
-                });
-            });
-
-
-            function sendMessage() {
-                const input = document.getElementById('messageInput');
-                const text = input.value.trim();
-                if (!text || !currentChatId) return;
-
-                const username = '{{ Auth::user()->name ?? 'Patient' }}';
-                const from_id = {{ Auth::id() ?? 0 }};
-                const to_id = currentToId;
-                const chat_id = currentChatId;
-
-                fetch('{{ route('chat.message') }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        username: username,
-                        message: text,
-                        from_id: from_id,
-                        to_id: to_id,
-                        chat_id: chat_id
-                    })
-                });
-
-                // Affiche le message côté sender immédiatement
-                const chat = document.getElementById('chatMessages');
-                const now = new Date();
-                const time = now.toLocaleTimeString();
-                const msg = document.createElement('div');
-                msg.className = 'message-container sent-message';
-                msg.innerHTML = `
-            <div class="message-content">
-                <div class="sender-name">Vous</div>
-                <div class="message-bubble sent-bubble">
-                    <div class="message-text sent-text">${escapeHtml(text)}</div>
-                </div>
-                <div class="message-time sent-time">${time}</div>
-            </div>
-            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
-            `;
-                chat.appendChild(msg);
-                input.value = '';
-                chat.scrollTop = chat.scrollHeight;
-            }
-
-
-            // Supprimer la conversation
-            document.querySelectorAll('#chatOptionsMenu button')[0].onclick = function(e) {
-                e.stopPropagation();
-                if (confirm('Voulez-vous vraiment supprimer la conversation ?')) {
-                    document.getElementById('chatMessages').innerHTML = '';
-                    alert('La conversation a été supprimée.');
-                }
-            };
-
-            // Signaler un abus
-            document.querySelectorAll('#chatOptionsMenu button')[1].onclick = function(e) {
-                e.stopPropagation();
-                alert('Votre signalement a bien été pris en compte. Merci.');
-            };
-
-            // Ajout de pièce jointe
-            document.getElementById('attachBtn').onclick = function(e) {
-                e.preventDefault();
-                let fileInput = document.getElementById('hiddenFileInput');
-                if (!fileInput) {
-                    fileInput = document.createElement('input');
-                    fileInput.type = 'file';
-                    fileInput.id = 'hiddenFileInput';
-                    fileInput.style.display = 'none';
-                    document.body.appendChild(fileInput);
-                    fileInput.onchange = function() {
-                        if (fileInput.files.length > 0) {
-                            const file = fileInput.files[0];
-                            const chat = document.getElementById('chatMessages');
-                            const now = new Date();
-                            const time = now.toLocaleTimeString();
-                            const msg = document.createElement('div');
-                            msg.className = 'message-container sent-message';
-                            msg.innerHTML = `
-                        <div class="message-content">
-                            <div class="sender-name">Vous</div>
-                            <div class="message-bubble sent-bubble">
-                                <div class="message-text sent-text">
-                                    <span class="file-attachment">📎 ${escapeHtml(file.name)}</span>
-                                </div>
-                            </div>
-                            <div class="message-time sent-time">${time}</div>
-                        </div>
-                        <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
-                    `;
-                            chat.appendChild(msg);
-                            chat.scrollTop = chat.scrollHeight;
-                        }
-                    };
-                }
-                fileInput.click();
-            };
-
-            // Retour arrière
-            document.querySelector('.chat-direction').onclick = function() {
-                window.history.back();
-            };
-        </script>
-
-
-        <script>
             let currentChatId = null;
             let currentToId = null;
 
@@ -1275,15 +1105,15 @@
                 const msg = document.createElement('div');
                 msg.className = 'message-container sent-message';
                 msg.innerHTML = `
-            <div class="message-content">
-                <div class="sender-name">Vous</div>
-                <div class="message-bubble sent-bubble">
-                    <div class="message-text sent-text">${escapeHtml(text)}</div>
+                <div class="message-content">
+                    <div class="sender-name">Vous</div>
+                    <div class="message-bubble sent-bubble">
+                        <div class="message-text sent-text">${escapeHtml(text)}</div>
+                    </div>
+                    <div class="message-time sent-time">${time}</div>
                 </div>
-                <div class="message-time sent-time">${time}</div>
-            </div>
-            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
-                `;
+                <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
+                    `;
                     chat.appendChild(msg);
                     input.value = '';
                     chat.scrollTop = chat.scrollHeight;
@@ -1295,7 +1125,115 @@
                 div.textContent = text;
                 return div.innerHTML;
             }
+
+
+            function sendMessage() {
+                const input = document.getElementById('messageInput');
+                const text = input.value.trim();
+                if (!text || !currentChatId) return;
+
+                const username = '{{ Auth::user()->name ?? 'Patient' }}';
+                const from_id = {{ Auth::id() ?? 0 }};
+                const to_id = currentToId;
+                const chat_id = currentChatId;
+
+                fetch('{{ route('chat.message') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        message: text,
+                        from_id: from_id,
+                        to_id: to_id,
+                        chat_id: chat_id
+                    })
+                });
+
+                // Affiche le message côté sender immédiatement
+                const chat = document.getElementById('chatMessages');
+                const now = new Date();
+                const time = now.toLocaleTimeString();
+                const msg = document.createElement('div');
+                msg.className = 'message-container sent-message';
+                msg.innerHTML = `
+            <div class="message-content">
+                <div class="sender-name">Vous</div>
+                <div class="message-bubble sent-bubble">
+                    <div class="message-text sent-text">${escapeHtml(text)}</div>
+                </div>
+                <div class="message-time sent-time">${time}</div>
+            </div>
+            <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
+                `;
+                chat.appendChild(msg);
+                input.value = '';
+                chat.scrollTop = chat.scrollHeight;
+            }
+
+
+            // Supprimer la conversation
+            document.querySelectorAll('#chatOptionsMenu button')[0].onclick = function(e) {
+                e.stopPropagation();
+                if (confirm('Voulez-vous vraiment supprimer la conversation ?')) {
+                    document.getElementById('chatMessages').innerHTML = '';
+                    alert('La conversation a été supprimée.');
+                }
+            };
+
+            // Signaler un abus
+            document.querySelectorAll('#chatOptionsMenu button')[1].onclick = function(e) {
+                e.stopPropagation();
+                alert('Votre signalement a bien été pris en compte. Merci.');
+            };
+
+            // Ajout de pièce jointe
+            document.getElementById('attachBtn').onclick = function(e) {
+                e.preventDefault();
+                let fileInput = document.getElementById('hiddenFileInput');
+                if (!fileInput) {
+                    fileInput = document.createElement('input');
+                    fileInput.type = 'file';
+                    fileInput.id = 'hiddenFileInput';
+                    fileInput.style.display = 'none';
+                    document.body.appendChild(fileInput);
+                    fileInput.onchange = function() {
+                        if (fileInput.files.length > 0) {
+                            const file = fileInput.files[0];
+                            const chat = document.getElementById('chatMessages');
+                            const now = new Date();
+                            const time = now.toLocaleTimeString();
+                            const msg = document.createElement('div');
+                            msg.className = 'message-container sent-message';
+                            msg.innerHTML = `
+                        <div class="message-content">
+                            <div class="sender-name">Vous</div>
+                            <div class="message-bubble sent-bubble">
+                                <div class="message-text sent-text">
+                                    <span class="file-attachment">📎 ${escapeHtml(file.name)}</span>
+                                </div>
+                            </div>
+                            <div class="message-time sent-time">${time}</div>
+                        </div>
+                        <img class="avatar" src="{{ asset('assets/img/chat-contact.png') }}" alt="Your avatar" />
+                    `;
+                            chat.appendChild(msg);
+                            chat.scrollTop = chat.scrollHeight;
+                        }
+                    };
+                }
+                fileInput.click();
+            };
+
+            // Retour arrière
+            document.querySelector('.chat-direction').onclick = function() {
+                window.history.back();
+            };
         </script>
+
+
 
         <script>
             function isMobile() {
@@ -1429,30 +1367,44 @@
                     .then(data => {
                         if (data.success && data.conversation_id) {
                             document.getElementById('newDiscussionModal').style.display = 'none';
-                            // Trouve le li correspondant dans la liste des conversations
-                            const convLi = document.querySelector('.chat-app-main__list-item[data-chat-id="' + data
-                                .conversation_id + '"]');
+                            // Cherche le li correspondant
+                            const convLi = document.querySelector('.chat-app-main__list-item[data-chat-id="' + data.conversation_id + '"]');
                             if (convLi) {
                                 convLi.click();
-                                convLi.scrollIntoView({
-                                    behavior: 'smooth',
-                                    block: 'center'
-                                });
+                                convLi.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             } else {
-                                location.reload();
+                                // Recharge la page avec le bon paramètre
+                                window.location.href = '/discussions?open=' + data.conversation_id;
                             }
                         } else {
                             errorDiv.textContent = data.message || "Erreur lors de la création.";
                             errorDiv.style.display = 'block';
                         }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        errorDiv.textContent = 'Erreur réseau. Veuillez réessayer.';
+                        errorDiv.style.display = 'block';
                     });
             };
         </script>
 
-
-        <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
-        {{-- @vite('resources/js/app.js') --}}
-
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const params = new URLSearchParams(window.location.search);
+                const openId = params.get('open');
+                if (openId) {
+                    const convLi = document.querySelector('.chat-app-main__list-item[data-chat-id="' + openId + '"]');
+                    if (convLi) {
+                        convLi.click();
+                        convLi.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
+                }
+            });
+        </script>
     </body>
 
 </html>

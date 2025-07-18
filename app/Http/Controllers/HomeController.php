@@ -44,7 +44,9 @@ class HomeController extends Controller
     }
     public function medecins()
     {
-        return view('medecins');
+        $medecins = User::where('role', 'medecin')->get();
+
+        return view('medecins', compact('medecins'));
     }
     public function pharmacie()
     {
