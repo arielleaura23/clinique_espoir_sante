@@ -59,7 +59,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(User::class, 'doctor_id');
     }
-    
+
 
     /**
      * Relation : Un médecin peut avoir plusieurs patients.
@@ -74,5 +74,10 @@ class User extends Authenticatable implements MustVerifyEmail
             $query->where('sender_id', $this->id)
                 ->orWhere('receiver_id', $this->id);
         })->whereNotDeleted();
+    }
+
+    public function medicineOrders()
+    {
+        return $this->hasMany(MedicineOrder::class);
     }
 }

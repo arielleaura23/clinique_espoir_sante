@@ -269,65 +269,7 @@
 
     </div>
 
-    <x-popup id="successModal" title="Succès " icon="assets/img/check-circle.png" buttonText="Okay">
-        <p>
-        <h2>Félicitations !</h2>
-        <br />
-        Vous avez bien été enregistré<br />
-        </p>
-    </x-popup>
-
-    <x-popup id="success_deconnexion_Modal" title="Deconnexion " icon="assets/img/check-circle.png" buttonText="Okay">
-        <p>
-            <br />
-            A très bientot !<br />
-        </p>
-    </x-popup>
 
 
-    <x-popup id="success_connexion_Modal" title="Succès" icon="assets/img/check-circle.png" buttonText="Okay">
-        <p>
-        <h2>Félicitations !</h2>
-        <br />
-        Vous venez de vous connecter<br />
-        </p>
-    </x-popup>
-
-
-    @if (session('registration_success'))
-        <script>
-            window.addEventListener('DOMContentLoaded', function() {
-                const modal = document.getElementById('successModal');
-                if (modal) {
-                    modal.style.display = 'flex';
-                }
-            });
-        </script>
-    @endif
-
-    {{-- Affichage du modal de succès de déconnexion --}}
-    @if (session('deconnexion_success'))
-        <script>
-            window.addEventListener('DOMContentLoaded', function() {
-                const modal = document.getElementById('success_deconnexion_Modal');
-                if (modal) {
-                    modal.style.display = 'flex';
-                }
-            });
-        </script>
-    @endif
-
-    {{-- Affichage du modal de succès de connexion --}}
-
-    @if (session('connexion_success'))
-        <script>
-            window.addEventListener('DOMContentLoaded', function() {
-                const modal = document.getElementById('success_connexion_Modal');
-                if (modal) {
-                    modal.style.display = 'flex';
-                }
-            });
-        </script>
-    @endif
 
 @endsection

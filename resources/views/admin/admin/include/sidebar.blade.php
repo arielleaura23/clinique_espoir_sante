@@ -42,6 +42,19 @@
                     <a href="javascript:void(0)">
                         <div class="item-content">
                             <div class="item-media"><i class="ti-user"></i></div>
+                            <div class="item-inner"><span class="title"> Pharmacy </span><i class="icon-arrow"></i></div>
+                        </div>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a href="{{ route('medicine.category.manage') }}"><span class="title"> Add medicine Category</span></a></li>
+                        <li><a href="{{ route('medicine.add') }}"><span class="title"> Add medicine </span></a></li>
+                        <li><a href="{{ route('medicine.manage') }}"><span class="title"> Manage medicine </span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <div class="item-content">
+                            <div class="item-media"><i class="ti-user"></i></div>
                             <div class="item-inner"><span class="title"> Patients </span><i class="icon-arrow"></i></div>
                         </div>
                     </a>

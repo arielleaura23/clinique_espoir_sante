@@ -929,14 +929,14 @@ body {
 }
 
 /* animation all pages when redirect */
-.page {
+/* .page {
     opacity: 1;
     transition: opacity 0.3s ease;
 }
 
 .page.fade-out {
     opacity: 0.8;
-}
+} */
 
 /* Header principal */
 .header {

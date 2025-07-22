@@ -51,7 +51,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME)->with('registration_success', true);
+        return redirect(RouteServiceProvider::HOME)->with('success', 'Inscription réussie ! Bienvenue sur Clinique Espoir Santé.');
 
         // return redirect(RouteServiceProvider::HOME);
     }

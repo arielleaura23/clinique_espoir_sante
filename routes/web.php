@@ -29,6 +29,7 @@ use App\Models\Conversation;
 */
 
 use Illuminate\Support\Facades\Broadcast;
+use ParagonIE\Sodium\Core\Curve25519\H;
 
 // Broadcast::routes(['middleware' => ['auth']]);
 
@@ -52,9 +53,7 @@ Route::get('/checkout_page', [HomeController::class, 'checkout_page'])->name('ch
 Route::get('/recents_posts', [HomeController::class, 'recents_posts'])->name('recents_posts');
 Route::get('/visio_consulting', [HomeController::class, 'visio_consulting'])->name('visio_consulting');
 
-Route::get('/call', [CallController::class, 'index'])->name('call');
-Route::post('/initiate-call', [CallController::class, 'initiateCall']);
-Route::post('/send-answer', [CallController::class, 'sendAnswer']);
+
 
 // Route::get('/profile/{id}', [ProfileController::class, 'show'])->name('profile.show');
 
@@ -135,28 +134,10 @@ Route::get('lang/{locale}', function ($locale) {
 
 
 
-// Protéger les routes des médecins avec le middleware 'auth'
-// Route::middleware(['auth'])->group(function () {
-//     // Route pour la liste des rendez-vous approuvés
-//     Route::get('/dashboard/doctor/approved-appointments', [DoctorAppointmentController::class, 'approvedAppointments'])
-//         ->name('doctor.approved_appointments');
-
-//     // Route pour le détail d'un rendez-vous
-//     Route::get('/dashboard/doctor/view-appointment-detail/{id}/{aptid}', [DoctorAppointmentController::class, 'viewAppointmentDetail'])
-//         ->name('doctor.view_appointment_detail');
-// });
-
-
-
 // routes for dashboard admin
 
 Route::prefix('admin')->group(function () {
 
-
-
-    // Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login.form');
-    // Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
-    // Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
     // Doctors
     Route::get('/doctor-specialization', [AdminController::class, 'doctorSpecialization'])->name('admin.doctor.specialization');
@@ -170,6 +151,24 @@ Route::prefix('admin')->group(function () {
     Route::delete('/manage-doctors/{id}', [AdminController::class, 'deleteDoctor'])->name('admin.doctor.delete');
     Route::get('/edit-doctor/{id}', [AdminController::class, 'editDoctor'])->name('admin.doctor.edit');
     Route::put('/doctors/update/{id}', [AdminController::class, 'updateDoctor'])->name('admin.doctor.update');
+
+    // medicines
+    Route::get('/medicine/add', [AdminController::class, 'create_medicine'])->name('medicine.add');
+    Route::post('/medicine/store', [AdminController::class, 'store_medicine'])->name('medicine.add.store');
+    Route::get('/medicine', [AdminController::class, 'manage_medicine'])->name('medicine.manage');
+    Route::get('/medicine/{id}/edit', [AdminController::class, 'edit_medicine'])->name('medicine.edit');
+    Route::put('/medicine/{id}', [AdminController::class, 'update_medicine'])->name('medicine.update');
+    Route::delete('/medicine/{id}', [AdminController::class, 'destroy_medicine'])->name('medicine.delete');
+
+    Route::get('/medicine-category', [AdminController::class, 'manageMedicineCategory'])->name('medicine.category.manage');
+    Route::post('/medicine-category', [AdminController::class, 'storeMedicineCategory'])->name('medicine.category.store');
+    Route::get('/medicine-category/{id}/edit', [AdminController::class, 'editMedicineCategory'])->name('medicine.category.edit');
+    Route::put('/medicine-category/{id}', [AdminController::class, 'updateMedicineCategory'])->name('medicine.category.update');
+    Route::delete('/medicine-category/{id}', [AdminController::class, 'deleteMedicineCategory'])->name('medicine.category.delete');
+
+    Route::get('cart/medicine/{id}', [HomeController::class, 'show']);
+
+
 
 
 

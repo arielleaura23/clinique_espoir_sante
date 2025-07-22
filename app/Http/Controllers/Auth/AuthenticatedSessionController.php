@@ -37,7 +37,7 @@ class AuthenticatedSessionController extends Controller
         } elseif ($user->role === 'medecin') {
             return redirect()->intended('/');
         } else {
-        return redirect()->intended('/')->with('connexion_success', true);
+        return redirect()->intended('/')->with('success', 'Connexion réussie ! Bienvenue sur Clinique Espoir Santé.');
         }
 
     }
@@ -54,7 +54,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect(RouteServiceProvider::HOME)->with('deconnexion_success', true);
+        return redirect(RouteServiceProvider::HOME)->with('success', 'A très bientot !');
 
         // return redirect('/');
     }

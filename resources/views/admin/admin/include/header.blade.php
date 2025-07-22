@@ -31,20 +31,21 @@
     display: flex
 ;"
                     class="dropdown-toggle" data-toggle="dropdown">
-                    <img src="{{ asset('assets/assets_admin/images/images.jpg') }}" alt="Admin" />
-                    <span class="username">
-                        Admin
+                    <img src="{{ asset('assets/img/user.png') }}" alt="Admin" />
+                    <span class="username"
+                        style="font-size: 18px;    display: flex
+;
+    align-items: center;
+    gap: 5px;
+">
+                        {{ Auth::user()->name }}
                         <i class="ti-angle-down"></i>
                     </span>
+
                 </a>
                 <ul class="dropdown-menu dropdown-dark">
                     <li>
-                        <a href="#">
-                            Change Password
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
+                        <a href="{{route('profile.destroy')}}">
                             Log Out
                         </a>
                     </li>

@@ -8,6 +8,7 @@ use App\Models\DoctorSpecilization;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use App\Models\User;
+use App\Models\Medicine;
 
 
 use Illuminate\Http\Request;
@@ -50,8 +51,16 @@ class HomeController extends Controller
     }
     public function pharmacie()
     {
-        return view('pharmacie');
+        $medicines = Medicine::all();
+        return view('pharmacie', compact('medicines'));
     }
+
+    public function show($id)
+    {
+        $medicine = Medicine::findOrFail($id);
+        return response()->json($medicine);
+    }
+
 
     public function prise_rdv()
     {

@@ -18,132 +18,61 @@
                     Nous vous offrons une large gamme de médicaments
                 </div>
                 <div class="pharmacy-search-bar">
-                    <input type="text" id="pharmacy-search-input" class="pharmacy-search-input" placeholder="Rechercher un médicament">
+                    <input type="text" id="pharmacy-search-input" class="pharmacy-search-input"
+                        placeholder="Rechercher un médicament">
                     <button class="pharmacy-search-btn">
                         <img src="{{ asset('assets/img/search.png') }}" alt="Rechercher" />
                     </button>
                 </div>
             </div>
             <div class="pharmacy-products-grid" id="pharmacy-products-grid">
-                <div class="pharmacy-product-card">
-                    <div class="pharmacy-product-img-wrapper">
-                        <a href="{{ route('product_details') }}" class="pharmacy-img-link">
-                            <img class="pharmacy-product-img" src="{{ asset('assets/img/medoc3.png') }}"
-                                alt="Amoxicilin 500 mg" />
-                            <div class="pharmacy-overlay">
-                                <span>Voir produit</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="pharmacy-product-info">
-                        <div class="pharmacy-product-title">dexa 500 mg</div>
-                        <div class="pharmacy-product-status in-stock">En stock</div>
-                        <div class="pharmacy-product-price">2000 FCFA</div>
-                        <x-bouton icon="{{asset('assets/img/cart-add.png')}}">Ajouter</x-bouton>
-                    </div>
-                </div>
-
-                <div class="pharmacy-product-card">
-                                        <div class="pharmacy-product-img-wrapper">
-                        <a href="{{ route('product_details') }}" class="pharmacy-img-link">
-                            <img class="pharmacy-product-img" src="{{ asset('assets/img/medoc4.png') }}"
-                                alt="Amoxicilin 500 mg" />
-                            <div class="pharmacy-overlay">
-                                <span>Voir produit</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="pharmacy-product-info">
-                        <div class="pharmacy-product-title">Amoxicilin 500 mg</div>
-                        <div class="stock">
-                            <div class="pharmacy-product-status out-of-stock">
-                                En rupture
-                            </div>
-                            <img src="{{ asset('assets/img/bell.png') }}" alt="Prévenir du restockage"
-                                class="pharmacy-bell-icon" title="Prévenir du restockage" />
+                @foreach ($medicines as $medicine)
+                    <div class="pharmacy-product-card">
+                        <div class="pharmacy-product-img-wrapper">
+                            <a href="{{ route('product_details', $medicine->id) }}" class="pharmacy-img-link">
+                                <img class="pharmacy-product-img" src="{{ asset('storage/' . $medicine->image) }}"
+                                    alt="{{ $medicine->name }}" />
+                                <div class="pharmacy-overlay">
+                                    <span>Voir produit</span>
+                                </div>
+                            </a>
                         </div>
-                        <div class="pharmacy-product-price">2000 FCFA</div>
-                        <x-bouton icon="{{asset('assets/img/cart-add.png')}}">Ajouter</x-bouton>
-                    </div>
-                </div>
-                <div class="pharmacy-product-card">
-                    <div class="pharmacy-product-img-wrapper">
-                        <a href="{{ route('product_details') }}" class="pharmacy-img-link">
-                            <img class="pharmacy-product-img" src="{{ asset('assets/img/medoc5.png') }}"
-                                alt="Amoxicilin 500 mg" />
-                            <div class="pharmacy-overlay">
-                                <span>Voir produit</span>
+                        <div class="pharmacy-product-info">
+                            <div class="pharmacy-product-title">
+                                {{ $medicine->name }} @if ($medicine->dosage)
+                                    {{ $medicine->dosage }}
+                                @endif
                             </div>
-                        </a>
-                    </div>
-                    <div class="pharmacy-product-info">
-                        <div class="pharmacy-product-title">Amoxicilin 500 mg</div>
-                        <div class="pharmacy-product-status in-stock">En stock</div>
-                        <div class="pharmacy-product-price">2000 FCFA</div>
-                        <x-bouton icon="{{asset('assets/img/cart-add.png')}}">Ajouter</x-bouton>
-                    </div>
-                </div>
-                <div class="pharmacy-product-card">
-                    <div class="pharmacy-product-img-wrapper">
-                        <a href="{{ route('product_details') }}" class="pharmacy-img-link">
-                            <img class="pharmacy-product-img" src="{{ asset('assets/img/medoc3.png') }}"
-                                alt="Amoxicilin 500 mg" />
-                            <div class="pharmacy-overlay">
-                                <span>Voir produit</span>
+                            <div class="stock">
+                                @if ($medicine->quantity > 0)
+                                    <div class="pharmacy-product-status in-stock">En stock</div>
+                                @else
+                                    <div class="pharmacy-product-status out-of-stock">En rupture</div>
+                                    <img src="{{ asset('assets/img/bell.png') }}" alt="Prévenir du restockage"
+                                        class="pharmacy-bell-icon" title="Prévenir du restockage" />
+                                @endif
                             </div>
-                        </a>
-                    </div>
-                    <div class="pharmacy-product-info">
-                        <div class="pharmacy-product-title">Amoxicilin 500 mg</div>
-                        <div class="pharmacy-product-status in-stock">En stock</div>
-                        <div class="pharmacy-product-price">2000 FCFA</div>
-                        <x-bouton icon="{{asset('assets/img/cart-add.png')}}">Ajouter</x-bouton>
-                    </div>
-                </div>
-                <div class="pharmacy-product-card">
-                    <div class="pharmacy-product-img-wrapper">
-                        <a href="{{ route('product_details') }}" class="pharmacy-img-link">
-                            <img class="pharmacy-product-img" src="{{ asset('assets/img/medoc4.png') }}"
-                                alt="Amoxicilin 500 mg" />
-                            <div class="pharmacy-overlay">
-                                <span>Voir produit</span>
+                            <div class="pharmacy-product-price">
+                                {{ number_format($medicine->price, 0, ',', ' ') }} FCFA
                             </div>
-                        </a>
-                    </div>
-                    <div class="pharmacy-product-info">
-                        <div class="pharmacy-product-title">Amoxicilin 500 mg</div>
-                        <div class="stock">
-                            <div class="pharmacy-product-status out-of-stock">
-                                En rupture
-                            </div>
-                            <img src="{{ asset('assets/img/bell.png') }}" alt="Prévenir du restockage"
-                                class="pharmacy-bell-icon" title="Prévenir du restockage" />
-                        </div>
-                        <div class="pharmacy-product-price">2000 FCFA</div>
-                        <x-bouton icon="{{asset('assets/img/cart-add.png')}}">Ajouter</x-bouton>
-                    </div>
-                </div>
-                <div class="pharmacy-product-card">
-                    <div class="pharmacy-product-img-wrapper">
-                        <a href="{{ route('product_details') }}" class="pharmacy-img-link">
-                            <img class="pharmacy-product-img" src="{{ asset('assets/img/medoc5.png') }}"
-                                alt="Amoxicilin 500 mg" />
-                            <div class="pharmacy-overlay">
-                                <span>Voir produit</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="pharmacy-product-info">
-                        <div class="pharmacy-product-title">Amoxicilin 500 mg</div>
-                        <div class="pharmacy-product-status in-stock">En stock</div>
-                        <div class="pharmacy-product-price">2000 FCFA</div>
-                        <x-bouton icon="{{asset('assets/img/cart-add.png')}}">Ajouter</x-bouton>
-                    </div>
-                </div>
+                            <x-bouton icon="{{ asset('assets/img/cart-add.png') }}" class="btn-ajouter-panier" :data-id="$medicine->id">
+                                Ajouter
+                            </x-bouton>
 
+
+                        </div>
+                    </div>
+                @endforeach
+
+                @if ($medicines->isEmpty())
+                    <p class="text-center">Aucun médicament disponible pour le moment.</p>
+                @endif
             </div>
         </div>
     </div>
+
+
+
 
 
 

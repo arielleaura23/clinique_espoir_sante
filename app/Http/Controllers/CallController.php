@@ -24,4 +24,16 @@ class CallController extends Controller
 
 
 
+
+
+    public function startCall($receiverId)
+    {
+        $sender = auth()->user();
+        $receiver = User::findOrFail($receiverId);
+
+        // Génère un identifiant de salle unique basé sur les deux utilisateurs
+        $roomName = 'room-' . md5(min($sender->id, $receiver->id) . '-' . max($sender->id, $receiver->id));
+
+        return view('call', compact('roomName', 'receiver'));
+    }
 }

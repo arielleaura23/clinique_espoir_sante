@@ -32,7 +32,7 @@
             </div>
             <img class="icon-close" src="{{ asset('assets/img/fermer.png') }}" alt="Fermer" id="closeModal" />
         </div>
-        {{-- <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;" /> --}}
+        <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;" />
         <div class="modal-body">
             <p>{{ session('success') }}</p>
         </div>

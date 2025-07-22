@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Medecin;
+use App\Models\Medicine;
 use App\Models\Appointment;
 use App\Models\Patient;
 use App\Models\ContactUs;
@@ -12,6 +12,7 @@ use App\Models\DoctorSpecilization;
 use Illuminate\Support\Facades\Hash;
 use App\Models\MedicalHistory;
 use App\Models\ContactQuery;
+use App\Models\MedicineCategory;
 
 class AdminController extends Controller
 {
@@ -321,5 +322,174 @@ class AdminController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Remarque mise à jour avec succès.');
+    }
+
+
+    // medicines
+
+    // Afficher le formulaire d'ajout de médicament avec catégories
+    public function create_medicine()
+    {
+        $categories = MedicineCategory::all();
+        return view('admin.admin.add-medicine', compact('categories'));
+    }
+
+    // Enregistrer un nouveau médicament avec tous les champs
+    public function store_medicine(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'quantity' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+            'image' => 'required|image|max:2048',
+            'dosage' => 'nullable|string|max:100',
+            'expiration_date' => 'nullable|date',
+            'form' => 'nullable|string|max:100',
+            'manufacturer' => 'nullable|string|max:255',
+            'instructions' => 'nullable|string',
+            'medicine_category_id' => 'nullable|exists:medicine_categories,id',
+        ]);
+
+        $imagePath = $request->file('image')->store('medicines', 'public');
+
+        Medicine::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'quantity' => $request->quantity,
+            'price' => $request->price,
+            'image' => $imagePath,
+            'dosage' => $request->dosage,
+            'expiration_date' => $request->expiration_date,
+            'form' => $request->form,
+            'manufacturer' => $request->manufacturer,
+            'instructions' => $request->instructions,
+            'medicine_category_id' => $request->medicine_category_id,
+        ]);
+
+        return redirect()->route('medicine.add')->with('success', 'Medicine added successfully!');
+    }
+
+    // Afficher la liste des médicaments avec catégorie chargée
+    public function manage_medicine()
+    {
+        $medicines = Medicine::with('category')->get();
+        return view('admin.admin.manage-medicines', compact('medicines'));
+    }
+
+    // Afficher le formulaire d’édition d’un médicament avec catégories
+    public function edit_medicine($id)
+    {
+        $medicine = Medicine::findOrFail($id);
+        $categories = MedicineCategory::all();
+        return view('admin.admin.edit-medicine', compact('medicine', 'categories'));
+    }
+
+    // Mettre à jour un médicament avec tous les champs
+    public function update_medicine(Request $request, $id)
+    {
+        $medicine = Medicine::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'quantity' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+            'image' => 'nullable|image|max:2048',
+            'dosage' => 'nullable|string|max:100',
+            'expiration_date' => 'nullable|date',
+            'form' => 'nullable|string|max:100',
+            'manufacturer' => 'nullable|string|max:255',
+            'instructions' => 'nullable|string',
+            'medicine_category_id' => 'nullable|exists:medicine_categories,id',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('medicines', 'public');
+            $medicine->image = $imagePath;
+        }
+
+        $medicine->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'quantity' => $request->quantity,
+            'price' => $request->price,
+            'dosage' => $request->dosage,
+            'expiration_date' => $request->expiration_date,
+            'form' => $request->form,
+            'manufacturer' => $request->manufacturer,
+            'instructions' => $request->instructions,
+            'medicine_category_id' => $request->medicine_category_id,
+        ]);
+
+        return redirect()->route('medicine.manage')->with('success', 'Medicine updated successfully!');
+    }
+
+    // Supprimer un médicament
+    public function destroy_medicine($id)
+    {
+        $medicine = Medicine::findOrFail($id);
+        $medicine->delete();
+
+        return redirect()->route('medicine.manage')->with('success', 'Medicine deleted successfully.');
+    }
+
+
+
+        // Afficher la liste + formulaire d'ajout
+    public function manageMedicineCategory()
+    {
+        $categories = MedicineCategory::orderBy('created_at', 'desc')->get();
+        return view('admin.admin.add-medicine-category', compact('categories'));
+    }
+
+    // Stocker une nouvelle catégorie
+    public function storeMedicineCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|unique:medicine_categories,name|max:255',
+            'description' => 'nullable|string',
+        ]);
+
+        MedicineCategory::create([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('medicine.category.manage')->with('success', 'Medicine category added successfully.');
+    }
+
+    // Afficher le formulaire d'édition
+    public function editMedicineCategory($id)
+    {
+        $category = MedicineCategory::findOrFail($id);
+        return view('admin.admin.edit-medicine-category', compact('category'));
+    }
+
+    // Mettre à jour la catégorie
+    public function updateMedicineCategory(Request $request, $id)
+    {
+        $category = MedicineCategory::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255|unique:medicine_categories,name,' . $category->id,
+            'description' => 'nullable|string',
+        ]);
+
+        $category->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('medicine.category.manage')->with('success', 'Medicine category updated successfully.');
+    }
+
+    // Supprimer une catégorie de medicament
+    public function deleteMedicineCategory($id)
+    {
+        $category = MedicineCategory::findOrFail($id);
+        $category->delete();
+
+        return redirect()->route('medicine.category.manage')->with('success', 'Medicine category deleted successfully.');
     }
 }
